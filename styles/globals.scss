@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./fonts";
+body, *{
+  font-family: "Sofia Pro";
+  color: white;
+}
+
+.gallery .swiper-wrapper{
+  margin-left: -16%!important;
+  @media(min-width: 768px){
+    margin-left: -2.688%!important;
+  }
+  @media(min-width: 1024px){
+    margin-left: 10.763%!important;
+  }
+  @media(min-width: 1920px){
+    margin-left: 0!important;
+  }
+}
+
+.portableText ul{
+  list-style: disc;
+  padding-left: 22px;
+}
+
+@media(min-width: 1440px){
+  .portableText ul{
+    padding-left: 1.527vw;
+  }
+}
+
+.member-gradient{
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
