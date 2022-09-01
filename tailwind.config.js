@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         white: "#FFFFFF",
-        body: "#0C0A06"
+        body: "#F3EDE2"
       },
       fontFamily: {
         'sofia-pro': ['"Sofia Pro"', 'sans-serif'],

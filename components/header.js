@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import SanityImage from './sanity-image'
 import Link from "next/link";
-import Logo from "@/public/images/logo.png"
 
 export default function Header(props) {
   
@@ -48,13 +47,13 @@ export default function Header(props) {
     <>
 
       <header
-      className={`md:bg-body transition-colors !duration-[300ms] z-[100] 
+      className={`md:bg-transparent transition-colors !duration-[300ms] z-[100] 
       ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
       top-0 px-4 md:px-[3.35%] w-full md:mx-auto flex items-center md:justify-between
       py-6 md:pt-8 vw:pt-[2.22vw] md:pb-10 vw:pb-[2.77vw]`}
       >
 
-        <div className={`cursor-pointer order-3 md:order-1 select-none md:opacity-50 ${openModal && "absolute right-4 md:left-0 md:relative"}`}>
+        <div className={`cursor-pointer order-3 md:order-1 select-none ${openModal && "absolute right-4 md:left-0 md:relative"}`}>
 
           <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.736vw]`}>
             <Image
@@ -69,7 +68,7 @@ export default function Header(props) {
           <div onClick={handleClick} className={`${!openModal && "hidden"} w-[21px] vw:!w-[1.458vw]`}>
             <Image
               src={"/images/close.svg"}
-              alt="burger"
+              alt="close"
               layout="responsive"
               width={21}
               height={20}
@@ -78,12 +77,14 @@ export default function Header(props) {
           
         </div>
 
-        <div className={`order order-1 md:absolute md:inset-0 md:w-max md:top-[-5px] vw:top-[-.347vw] md:m-auto md:h-max select-none md:order-2`}>
+        <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-1.1111vw] md:m-auto md:h-max select-none md:order-2`}>
           
           <Link href="/" passHref>
-            <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[115px] vw:w-[7.98vw]">
+            <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
               <Image
-                src={Logo}
+                src={"/images/logo.svg"}
+                width={226}
+                height={32}
                 alt="logo.png"
                 layout="responsive"
               />
@@ -95,7 +96,7 @@ export default function Header(props) {
         <div className="hidden md:block order-3 select-none">
 
           <a onClick={handleClick} href={reservationsButton.link.url}>
-            <p className="font-medium text-lg vw:text-[1.25vw] leading-[21px] vw:leading-[1.166] tracking-[.05em] uppercase opacity-70">{reservationsButton.title}</p>
+            <p className="font-light text-white text-lg vw:text-[1.25vw] leading-[21px] vw:leading-[1.166] tracking-[.05em] uppercase">{reservationsButton.title}</p>
           </a>
 
         </div>

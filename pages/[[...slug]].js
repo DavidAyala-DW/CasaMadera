@@ -73,7 +73,7 @@ async function fulfillSectionQueries(page) {
 
 export async function getStaticPaths() {
 
-  const routes = await client.fetch(groq`*[_type == 'route']{slug}`);
+  const routes = await client.fetch(groq`*[_type == 'routesCasaMadera']{slug}`);
   const paths = routes.map(({ slug }) => ({
     params: {
       slug: slug.current === '/' ? false : [slug.current],
@@ -88,7 +88,7 @@ export async function getStaticPaths() {
 }
 
 async function getMenus(){
-  const request = await client.fetch(groq`*[_type == "route"] {_id, slug {current}} `);
+  const request = await client.fetch(groq`*[_type == "routesCasaMadera"] {_id, slug {current}} `);
   return request;
 }
 
@@ -101,7 +101,7 @@ async function getPageSections(slug){
 
   const request = await client.fetch(
     groq`
-      *[_type == "route" && slug.current in $possibleSlugs][0]{
+      *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0]{
         page -> {...}
       }
     `,
