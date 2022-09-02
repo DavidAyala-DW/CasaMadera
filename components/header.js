@@ -11,6 +11,8 @@ export default function Header(props) {
     secondHeaderNav,
     facebookHandle,
     instagramHandle,
+    spotifyHandle,
+    soundCloudHandle,
     reservationsButton,
     stickyHeader
   } = props;
@@ -49,7 +51,7 @@ export default function Header(props) {
       <header
       className={`md:bg-transparent transition-colors !duration-[300ms] z-[100] 
       ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
-      top-0 px-4 md:px-[3.35%] w-full md:mx-auto flex items-center md:justify-between
+      top-0 px-4 md:px-[2.8%] w-full md:mx-auto flex items-center md:justify-between
       py-6 md:pt-8 vw:pt-[2.22vw] md:pb-10 vw:pb-[2.77vw]`}
       >
 
@@ -79,25 +81,53 @@ export default function Header(props) {
 
         <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-1.1111vw] md:m-auto md:h-max select-none md:order-2`}>
           
-          <Link href="/" passHref>
-            <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
-              <Image
-                src={"/images/logo.svg"}
-                width={226}
-                height={32}
-                alt="logo.png"
-                layout="responsive"
-              />
-            </a>            
-          </Link>
+          {
+            (!openModal) && (
+              <Link href="/" passHref>
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
+                  <Image
+                    src={"/images/logo.svg"}
+                    width={226}
+                    height={32}
+                    alt="logo.png"
+                    layout="responsive"
+                  />
+                </a>            
+              </Link>
+            )
+          }
+
+          {
+            (openModal) && (
+              <Link href="/" passHref>
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
+                  <Image
+                    src={"/images/logoDark.svg"}
+                    width={226}
+                    height={32}
+                    alt="logo.png"
+                    layout="responsive"
+                  />
+                </a>            
+              </Link>
+            )
+          }
 
         </div>
 
         <div className="hidden md:block order-3 select-none">
 
-          <a onClick={handleClick} href={reservationsButton.link.url}>
-            <p className="font-light text-white text-lg vw:text-[1.25vw] leading-[21px] vw:leading-[1.166] tracking-[.05em] uppercase">{reservationsButton.title}</p>
-          </a>
+          {(reservationsButton && (
+
+            <Link href={reservationsButton?.link?.url}>
+              <a onClick={handleClick}>
+                <p className={`font-light ${openModal ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
+                  {reservationsButton?.title}
+                </p>
+              </a>
+            </Link>
+
+          ))}
 
         </div>
         
@@ -108,11 +138,13 @@ export default function Header(props) {
         min-h-screen z-[90] w-full flex items-start`}
       >
 
-        <div className={`md:pl-[3.35%] w-full h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center md:items-start justify-between pt-[152px] md:pt-[108px] vw:pt-[7.5vw] pb-6 vw:pb-[1.666vw]`}>
+        <div
+        className={`md:pl-[2.8%] w-full h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center
+        md:items-start justify-between pt-[101px] md:pt-[108px] vw:pt-[7.5vw] pb-6 vw:pb-[1.666vw]`}>
 
-          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 items-start md:space-x-16 vw:space-x-[4.44vw]">
+          <div className="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 items-start md:space-x-16 vw:space-x-[4.44vw]">
 
-            <div className="flex flex-col w-full items-center md:items-start space-y-2 vw:space-y-[.5vw]">
+            <div className="w-full md:w-max flex flex-col items-center md:items-start">
 
               { mainNav.map((item,index) => {
 
@@ -122,7 +154,12 @@ export default function Header(props) {
 
                   return (
                     <Link href={link.url} passHref key={index} >
-                      <a onMouseLeave={handleMouseDown} onMouseEnter={() => handleMouseOver(image)} onClick={handleClick} className="block uppercase tracking-[.05em] text-[32px] md:text-[48px] vw:text-[3.33vw] leading-[1.2] font-light opacity-90">
+                      <a
+                        onMouseLeave={handleMouseDown}
+                        onMouseEnter={() => handleMouseOver(image)}
+                        onClick={handleClick}
+                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                      >
                         {title}
                       </a>
                     </Link>
@@ -134,7 +171,7 @@ export default function Header(props) {
 
             </div>
 
-            <div className="flex flex-col w-full items-center md:items-start space-y-2 vw:space-y-[.5vw]">
+            <div className="flex flex-col w-full items-center md:items-start">
 
               {mainNav.map((item,index) => {
 
@@ -144,7 +181,12 @@ export default function Header(props) {
 
                   return (
                     <Link href={link.url} passHref key={index} >
-                      <a onMouseLeave={handleMouseDown} onMouseEnter={() => setActiveMenuImage(image)} onClick={handleClick} className="block uppercase tracking-[.05em] text-[32px] md:text-[48px] vw:text-[3.33vw] leading-[1.2] font-light opacity-90">
+                      <a
+                        onMouseLeave={handleMouseDown}
+                        onMouseEnter={() => handleMouseOver(image)}
+                        onClick={handleClick}
+                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                      >
                         {title}
                       </a>
                     </Link>
@@ -154,22 +196,40 @@ export default function Header(props) {
 
               })}
 
-              <Link href="/" passHref>
-                <a onClick={handleClick} className="md:hidden block uppercase tracking-[.05em] text-[32px] md:text-[48px] vw:text-[3.33vw] leading-[1.2] font-light opacity-90">
-                  RESERVATIONS
-                </a>
-              </Link>
+              {(reservationsButton && (
+
+                <Link href={reservationsButton?.link?.url}>
+                  <a
+                    onClick={handleClick}
+                    className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                  >
+                    {reservationsButton?.title}
+                  </a>
+                </Link>
+
+              ))}
               
               <div className="pt-6 vw:pt-[1.66vw] hidden md:flex flex-col space-y-2 vw:space-y-[.5vw]">
 
-                {secondHeaderNav.map( (item,i)  => {
+                {secondHeaderNav && secondHeaderNav.map( (item,i)  => {
 
                   const {title,link} = item;
+                  if(!link || !title) return;
 
                   return (
-                    <a onClick={handleClick} href={link.url} key={i} className="block uppercase tracking-[.05em] text-[24px] vw:text-[1.66vw] leading-[28px] vw:leading-[1.166] font-light opacity-80">
-                      {title}
-                    </a>
+
+                    <Link
+                      href={link?.url}
+                      passHref key={i}
+                    >
+                      <a
+                        onClick={handleClick}
+                        className="block text-[24px] vw:text-[1.66vw] leading-[1.6] font-light opacity-90"
+                      >
+                        {title}
+                      </a>
+                    </Link>
+
                   )
 
                 })}
@@ -182,26 +242,50 @@ export default function Header(props) {
 
           <div className="flex items-center space-x-6 vw:space-x-[1.666vw]">
 
-            <a onClick={handleClick} href={facebookHandle} className="block w-6 vw:w-[1.666vw]">
+            <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[2.222vw]">
 
               <Image
                 src={"/images/facebook.svg"}
                 alt="facebook logo"
                 layout="responsive"
-                width={24}
-                height={24}
+                width={32}
+                height={32}
               />
 
             </a>
 
-            <a onClick={handleClick} href={instagramHandle} className="block w-6 vw:w-[1.666vw]">
+            <a onClick={handleClick} href={instagramHandle} className="block w-8 vw:w-[2.222vw]">
 
               <Image
                 src={"/images/instagram.svg"}
                 alt="instagram logo"
                 layout="responsive"
-                width={24}
-                height={24}
+                width={32}
+                height={32}
+              />
+
+            </a>
+
+            <a onClick={handleClick} href={spotifyHandle} className="block w-8 vw:w-[2.222vw]">
+
+              <Image
+                src={"/images/spotify.svg"}
+                alt="instagram logo"
+                layout="responsive"
+                width={32}
+                height={32}
+              />
+
+            </a>
+
+            <a onClick={handleClick} href={soundCloudHandle} className="block w-8 vw:w-[2.222vw]">
+
+              <Image
+                src={"/images/soundCloud.svg"}
+                alt="instagram logo"
+                layout="responsive"
+                width={32}
+                height={32}
               />
 
             </a>

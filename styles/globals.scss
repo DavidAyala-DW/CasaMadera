@@ -3,22 +3,17 @@
 @tailwind utilities;
 
 @import "./fonts";
+
 body, *{
-  font-family: "Sofia Pro";
+  font-family: "LibreBaskerville";
   color: #4A3419;
 }
 
-.gallery .swiper-wrapper{
-  margin-left: -16%!important;
-  @media(min-width: 768px){
-    margin-left: -2.688%!important;
+h1,h2,h3,h4,a,input{
+  p{
+    font-family: "Avenir";  
   }
-  @media(min-width: 1024px){
-    margin-left: 10.763%!important;
-  }
-  @media(min-width: 1920px){
-    margin-left: 0!important;
-  }
+  font-family: "Avenir";
 }
 
 .portableText ul{
@@ -30,8 +25,4 @@ body, *{
   .portableText ul{
     padding-left: 1.527vw;
   }
-}
-
-.member-gradient{
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
 }

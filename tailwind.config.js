@@ -9,10 +9,12 @@ module.exports = {
     extend: {
       colors: {
         white: "#FFFFFF",
+        primary: "#4A3419",
         body: "#F3EDE2"
       },
       fontFamily: {
-        'sofia-pro': ['"Sofia Pro"', 'sans-serif'],
+        'libreBaskerville': ['"LibreBaskerville"', 'sans-serif'],
+        'avenir': ['"Avenir"', 'sans-serif']
       },
     },
     screens: {

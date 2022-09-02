@@ -7,7 +7,7 @@ export default function ImageWithText(props) {
 
   return (
 
-    <section className="px-4 md:px-0 md:max-w-[93.3%] w-full mx-auto flex flex-col lg:flex-row  space-y-5 lg:space-y-0 lg:items-center justify-between">
+    <section className="px-4 md:px-0 md:max-w-[94.4%] w-full mx-auto flex flex-col lg:flex-row  space-y-5 lg:space-y-0 lg:items-center justify-between">
 
       <div
         className={`w-full lg:w-1/2 order-1
@@ -32,7 +32,7 @@ export default function ImageWithText(props) {
         ${position == "firstImage" ? "lg:order-2 lg:pl-[9.86%]" : "lg:order-1 lg:pr-[9.86%]" }`
       }>        
 
-        <h2 className="tracking-[.05em] text-[28px] md:text-[24px] lg:text-[32px] leading-[32px] md:leading-[28px] lg:leading-[37px] vw:text-[2.222vw] vw:leading-[1.156] font-extralight">
+        <h2 className="tracking-[.05em] capitalize text-[28px] md:text-[24px] lg:text-[32px] leading-[32px] md:leading-[28px] lg:leading-[37px] vw:text-[2.222vw] vw:leading-[1.156] font-extralight">
           {title}
         </h2>
 

@@ -93,7 +93,7 @@ async function getMenus(){
 }
 
 async function getSiteConfig(){
-  const siteSettings = await client.fetch(groq`*[_type == "siteSettings"][0]{...}`);
+  const siteSettings = await client.fetch(groq`*[_type == "siteSettings" && site == "casaMadera"][0]{...}`);
   return siteSettings;
 }
 

@@ -16,6 +16,8 @@ function Layout(props) {
       instagramHandle,
       privacyPolicyHandle,
       cookiesPreferencesHandle,
+      spotifyHandle,
+      soundCloudHandle,
       reservationsButton
     },
     menus
@@ -35,12 +37,19 @@ function Layout(props) {
 
   setGlobalURL.forEach(menuItem => {
     console.log(menuItem);
-    const slug = false;
-    // const {slug} = menus.find(item => item._id == menuItem.link._ref);
+    if (!menuItem) return;    
+
+    const {slug} = menus.find(item => item._id == menuItem?.link?._ref) ?? false;
     
     if(!slug) {
+
+      if(!menuItem?.link){
+        menuItem.link = {};
+      }
+
       menuItem.link.url = "/";
       return;
+
     }
 
     menuItem.link.url = slug.current != "/" ? `/${slug.current}`: "/"; 
@@ -52,13 +61,24 @@ function Layout(props) {
   })
   
   globalMenus.forEach(menuItem => {
+
+    if(!menuItem) return;
+    
     menuItem.forEach(menu => {
 
-      // const {slug} = menus.find(item => item._id == menu.link._ref);
-      const slug = false;
+      if(!menu) return;
+
+      const {slug} = menus.find(item => item._id == menu?.link?._ref) ?? false;
+
       if(!slug) {
+
+        if(!menu?.link){
+          menu.link = {};
+        }
+
         menu.link.url = "/";
         return;
+
       }
 
       menu.link.url = slug.current != "/" ? `/${slug.current}`: "/"; 
@@ -89,6 +109,8 @@ function Layout(props) {
           secondHeaderNav,
           facebookHandle,
           instagramHandle,
+          spotifyHandle,
+          soundCloudHandle,
           reservationsButton,
           menus,
           stickyHeader
@@ -101,6 +123,8 @@ function Layout(props) {
         <Footer {...{
           facebookHandle,
           instagramHandle,
+          spotifyHandle,
+          soundCloudHandle,
           menus,
           privacyPolicyHandle,
           cookiesPreferencesHandle,
