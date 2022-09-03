@@ -25,7 +25,7 @@ export default function Page({props}) {
   )
 }
 
-async function fulfillSectionQueries(page) {
+async function fulfillSectionQueries(page,internalLinks) {
 
   if (!page.content) {
     return page
@@ -33,6 +33,16 @@ async function fulfillSectionQueries(page) {
 
   const sectionsWithQueryData = await Promise.all(
     page.content.map(async (section) => {
+
+      if(section?.links){
+        const {_type} = section?.links ?? null;
+        if(_type == "links"){
+          const {link} = section?.links ?? null;
+          const selectedLink = internalLinks.find(internalLink => internalLink._id == link._ref);
+          section.links.internalLink = selectedLink.slug.current;
+        }
+        
+      }
 
       if(section.news){
         
@@ -56,7 +66,8 @@ async function fulfillSectionQueries(page) {
 
       }
 
-      console.log(section._type); //Detectar _type-> el nombre de un documento y para cada documento se tendra un objeto desde el server con query groq, revisar que solo se ejecute una vez
+      // console.log(section._type);
+       //Detectar _type-> el nombre de un documento y para cada documento se tendra un objeto desde el server con query groq, revisar que solo se ejecute una vez
       if (section.query) {
         const queryData = await client.fetch(groq`${section.query}`)
 
@@ -115,7 +126,7 @@ export const getStaticProps = async ({ params }) => {
 
   const slug = slugParamToPath(params?.slug)
   let [data, siteSettings, menus] = await Promise.all([getPageSections(slug), getSiteConfig(), getMenus()])
-  data = await fulfillSectionQueries(data)
+  data = await fulfillSectionQueries(data,menus)
   data.slug = slug;
 
   return {

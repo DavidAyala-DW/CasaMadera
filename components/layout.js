@@ -36,7 +36,7 @@ function Layout(props) {
   ]
 
   setGlobalURL.forEach(menuItem => {
-    console.log(menuItem);
+    // console.log(menuItem);
     if (!menuItem) return;    
 
     const {slug} = menus.find(item => item._id == menuItem?.link?._ref) ?? false;
