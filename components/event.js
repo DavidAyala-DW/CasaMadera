@@ -1,0 +1,91 @@
+import SanityImage from "./sanity-image";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+
+export default function Event({event}) {
+
+  const {title, image, description, date, link} = event;
+  const [showDate, setShowDate] = useState(false);
+
+  const handleFormatDate = useCallback((date) => {
+
+    const options = {
+      year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
+      hour: 'numeric', minute: 'numeric',
+      hour12: true,
+    };
+
+    const dateObject = new Date(date);  
+    const formatedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+
+    return formatedDate;
+
+  }, []);
+  
+  
+  useEffect(() => {
+    setShowDate(true)
+  }, []);
+
+
+  return (
+    
+    <div className="flex flex-col space-y-4 md:space-y-0 lg:grid lg:grid-cols-[40.07%_55.48%] lg:gap-x-[53.5px] 3xl:gap-x-[2.78vw] w-full">
+
+      <div className="w-full">
+        <div className="w-full aspect-h-1 aspect-w-[1.435] lg:aspect-w-[1.25]">
+          <div className="w-full">
+            <div className="w-full h-full relative">
+              <SanityImage
+                className="object-cover"
+                src={image}
+                alt="Event image"
+                layout="fill"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:justify-between h-full w-full">
+
+        <div className="flex flex-col w-full mb-11 vw:mb-[3.055vw]">
+
+          <h3 className="text-[24px] lg:text-[32px] vw:text-[2.222vw] leading-[33px] lg:leading-11 vw:leading-[1.375] font-light mb-2 vw:mb-[.555vw]">
+            {title}
+          </h3>
+
+          <p className="font-normal text-base vw:text-[1.111vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.3888]">
+            {showDate && handleFormatDate(date)}
+          </p>
+
+          <div className="font-normal text-base vw:text-[1.111vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
+            {description}
+          </div>
+
+        </div>
+
+        <a href={link.url} className="max-w-max flex items-center space-x-2 vw:space-x-[.5555vw] opacity-80">
+
+          <p className="font-light text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.3889] tracking-[.05em] uppercase underline">
+            {link.title}
+          </p>
+
+          <div className="w-[25px] vw:w-[1.736vw] h-[23px] vw:h-[1.597vw]">
+            <Image
+              src="/images/arrowRightB.svg"
+              alt="Arrow right"
+              width={25}
+              height={23}
+              layout="responsive"
+            />
+          </div>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  )
+}
