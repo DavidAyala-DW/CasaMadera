@@ -53,15 +53,19 @@ export default function TextContentCenter(props) {
 
         </div>
 
-        <a
-          className={`
-            block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
-            max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[1.25vw] vw:leading-[1.3888] font-light underline
-          `}
-          href={learn_more.link}
-        >
-          {learn_more.title}
-        </a>
+        {
+          learn_more && (
+            <a
+            className={`
+              block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
+              max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[1.25vw] vw:leading-[1.3888] font-light underline
+            `}
+            href={learn_more?.link}
+          >
+            {learn_more?.title}
+          </a>
+          )
+        }
 
       </div>
       
