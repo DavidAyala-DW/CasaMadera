@@ -53,17 +53,17 @@ export default function ImageWithText(props) {
       <div
         className={`w-full lg:w-1/2 order-2 flex flex-col 
         ${position == "firstImage" ? "lg:order-2 lg:pl-[9.86%]" : "lg:order-1 lg:pr-[9.86%]" }
-        ${alignment == "top" && "lg:pt-[15px] vw:pt-[1.041vw]"}
+        ${alignment == "top" && "lg:pt-[15px] vw:pt-[.78125vw]"}
         `
       }>        
 
         <h2
-        className="font-light md:tracking-[.05em] capitalize text-[32px] vw:text-[2.222vw] leading-[44px] vw:leading-[1.375] mb-6 vw:mb-[1.666vw]"
+        className="font-light md:tracking-[.05em] capitalize text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] mb-6 vw:mb-[1.25vw]"
         >
           {title}
         </h2>
 
-        <div className="opacity-[.85] text-base vw:text-[1.111vw] leading-[1.5] font-normal md:max-w-[500px] lg:max-w-[507px] vw:max-w-[35.208vw] w-full">
+        <div className="opacity-[.85] text-base vw:text-[.8333vw] leading-[1.5] font-normal md:max-w-[500px] lg:max-w-[507px] vw:max-w-[26.40625vw] w-full">
           <SimpleBlockContent blocks={description} />
         </div>
 
@@ -71,7 +71,7 @@ export default function ImageWithText(props) {
           links && (
             <SanityLink
               {...{links}}
-              className="mt-10 text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.38888] tracking-[.05em] opacity-80 uppercase underline font-light vw:mt-[2.777vw]"
+              className="mt-10 text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.38888] tracking-[.05em] opacity-80 uppercase underline font-light vw:mt-[2.08333vw]"
             >
               {links?.title}
             </SanityLink>
@@ -81,7 +81,7 @@ export default function ImageWithText(props) {
         {
           socialMediasList && (
 
-            <div className="mt-10 vw:mt-[2.777vw] w-full flex items-center space-x-5 vw:space-x-[1.3888vw]">
+            <div className="mt-10 vw:mt-[2.08333vw] w-full flex items-center space-x-5 vw:space-x-[1.0416w]">
 
               {                
                 socialMediasList.map(item => {
@@ -95,7 +95,7 @@ export default function ImageWithText(props) {
                       key={_key}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-8 vw:w-[2.222vw]"
+                      className="block w-8 vw:w-[1.666vw]"
                     >
                       <Image
                         src={socialMediasIcons[SocialMedia].url}

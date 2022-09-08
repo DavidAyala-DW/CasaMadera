@@ -84,12 +84,12 @@ export default function Header(props) {
       className={` ${(heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]" :  "bg-transparent duration-[300ms]"}  transition-colors z-[100] 
       ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
       top-0 px-4 md:px-[2.8%] w-full md:mx-auto flex items-center md:justify-between
-      py-6 md:pt-8 vw:pt-[2.22vw] md:pb-10 vw:pb-[2.77vw]`}
+      py-6 md:pt-8 vw:pt-[1.666vw] md:pb-10 vw:pb-[2.0833vw]`}
       >
 
         <div className={`cursor-pointer order-3 md:order-1 select-none ${openModal && "absolute right-4 md:left-0 md:relative"}`}>
 
-          <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.736vw]`}>
+          <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.302vw]`}>
             <Image
               src={"/images/burguer.svg"}
               alt="burger"
@@ -99,7 +99,7 @@ export default function Header(props) {
             />
           </div>
 
-          <div onClick={handleClick} className={`${!openModal && "hidden"} w-[21px] vw:!w-[1.458vw]`}>
+          <div onClick={handleClick} className={`${!openModal && "hidden"} w-[21px] vw:!w-[1.09375vw]`}>
             <Image
               src={"/images/close.svg"}
               alt="close"
@@ -111,12 +111,12 @@ export default function Header(props) {
           
         </div>
 
-        <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-1.1111vw] md:m-auto md:h-max select-none md:order-2`}>
+        <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-.83333vw] md:m-auto md:h-max select-none md:order-2`}>
           
           {
             (!openModal) && (
               <Link href="/" passHref>
-                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
                   <Image
                     src={"/images/logo.svg"}
                     width={226}
@@ -132,7 +132,7 @@ export default function Header(props) {
           {
             (openModal) && (
               <Link href="/" passHref>
-                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[15.69vw]">
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
                   <Image
                     src={"/images/logoDark.svg"}
                     width={226}
@@ -153,7 +153,7 @@ export default function Header(props) {
 
             <Link href={reservationsButton?.link?.url}>
               <a onClick={handleClick}>
-                <p className={`font-light ${openModal ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
+                <p className={`font-light ${openModal ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
                   {reservationsButton?.title}
                 </p>
               </a>
@@ -172,9 +172,9 @@ export default function Header(props) {
 
         <div
         className={`md:pl-[2.8%] w-full h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center
-        md:items-start justify-between pt-[101px] md:pt-[108px] vw:pt-[7.5vw] pb-6 vw:pb-[1.666vw]`}>
+        md:items-start justify-between pt-[101px] md:pt-[108px] vw:pt-[5.625vw] pb-6 vw:pb-[1.25vw]`}>
 
-          <div className="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 items-start md:space-x-16 vw:space-x-[4.44vw]">
+          <div className="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 items-start md:space-x-16 vw:space-x-[3.333vw]">
 
             <div className="w-full md:w-max flex flex-col items-center md:items-start">
 
@@ -190,7 +190,7 @@ export default function Header(props) {
                         onMouseLeave={handleMouseDown}
                         onMouseEnter={() => handleMouseOver(image)}
                         onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
                       >
                         {title}
                       </a>
@@ -217,7 +217,7 @@ export default function Header(props) {
                         onMouseLeave={handleMouseDown}
                         onMouseEnter={() => handleMouseOver(image)}
                         onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
                       >
                         {title}
                       </a>
@@ -233,7 +233,7 @@ export default function Header(props) {
                 <Link href={reservationsButton?.link?.url}>
                   <a
                     onClick={handleClick}
-                    className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[3.819vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                    className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
                   >
                     {reservationsButton?.title}
                   </a>
@@ -241,7 +241,7 @@ export default function Header(props) {
 
               ))}
               
-              <div className="pt-6 vw:pt-[1.66vw] hidden md:flex flex-col space-y-2 vw:space-y-[.5vw]">
+              <div className="pt-6 vw:pt-[1.25vw] hidden md:flex flex-col space-y-2 vw:space-y-[.416vw]">
 
                 {secondHeaderNav && secondHeaderNav.map( (item,i)  => {
 
@@ -256,7 +256,7 @@ export default function Header(props) {
                     >
                       <a
                         onClick={handleClick}
-                        className="block text-[24px] vw:text-[1.66vw] leading-[1.6] font-light opacity-90"
+                        className="block text-[24px] vw:text-[1.25vw] leading-[1.6] font-light opacity-90"
                       >
                         {title}
                       </a>
@@ -272,9 +272,9 @@ export default function Header(props) {
 
           </div>
 
-          <div className="flex items-center space-x-6 vw:space-x-[1.666vw]">
+          <div className="flex items-center space-x-6 vw:space-x-[1.25vw]">
 
-            <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[2.222vw]">
+            <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
 
               <Image
                 src={"/images/facebook.svg"}
@@ -286,7 +286,7 @@ export default function Header(props) {
 
             </a>
 
-            <a onClick={handleClick} href={instagramHandle} className="block w-8 vw:w-[2.222vw]">
+            <a onClick={handleClick} href={instagramHandle} className="block w-8 vw:w-[1.666vw]">
 
               <Image
                 src={"/images/instagram.svg"}
@@ -298,7 +298,7 @@ export default function Header(props) {
 
             </a>
 
-            <a onClick={handleClick} href={spotifyHandle} className="block w-8 vw:w-[2.222vw]">
+            <a onClick={handleClick} href={spotifyHandle} className="block w-8 vw:w-[1.666vw]">
 
               <Image
                 src={"/images/spotify.svg"}
@@ -310,7 +310,7 @@ export default function Header(props) {
 
             </a>
 
-            <a onClick={handleClick} href={soundCloudHandle} className="block w-8 vw:w-[2.222vw]">
+            <a onClick={handleClick} href={soundCloudHandle} className="block w-8 vw:w-[1.666vw]">
 
               <Image
                 src={"/images/soundCloud.svg"}

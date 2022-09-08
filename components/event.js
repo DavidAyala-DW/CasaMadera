@@ -49,29 +49,29 @@ export default function Event({event}) {
 
       <div className="flex flex-col lg:justify-between h-full w-full">
 
-        <div className="flex flex-col w-full mb-11 vw:mb-[3.055vw]">
+        <div className="flex flex-col w-full mb-11 vw:mb-[2.291vw]">
 
-          <h3 className="text-[24px] lg:text-[32px] vw:text-[2.222vw] leading-[33px] lg:leading-11 vw:leading-[1.375] font-light mb-2 vw:mb-[.555vw]">
+          <h3 className="text-[24px] lg:text-[32px] vw:text-[1.6666vw] leading-[33px] lg:leading-11 vw:leading-[1.375] font-light mb-2 vw:mb-[.41666vw]">
             {title}
           </h3>
 
-          <p className="font-normal text-base vw:text-[1.111vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.3888]">
+          <p className="font-normal text-base vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
             {showDate && handleFormatDate(date)}
           </p>
 
-          <div className="font-normal text-base vw:text-[1.111vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
+          <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
             {description}
           </div>
 
         </div>
 
-        <a href={link.url} className="max-w-max flex items-center space-x-2 vw:space-x-[.5555vw] opacity-80">
+        <a href={link.url} className="max-w-max flex items-center space-x-2 vw:space-x-[.41666vw] opacity-80">
 
-          <p className="font-light text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.3889] tracking-[.05em] uppercase underline">
+          <p className="font-light text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3889] tracking-[.05em] uppercase underline">
             {link.title}
           </p>
 
-          <div className="w-[25px] vw:w-[1.736vw] h-[23px] vw:h-[1.597vw]">
+          <div className="w-[25px] vw:w-[1.302vw] h-[23px] vw:h-[1.197vw]">
             <Image
               src="/images/arrowRightB.svg"
               alt="Arrow right"

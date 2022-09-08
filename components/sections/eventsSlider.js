@@ -12,11 +12,11 @@ export default function EventsSlider(props) {
 
   return (
 
-    <section className="pl-4 md:pl-5 lg:pl-[2.777%] w-full flex flex-col pb-[74px] md:pb-[95px] vw:pb-[6.59vw] relative">
+    <section className="pl-4 md:pl-5 lg:pl-[2.777%] w-full flex flex-col pb-[74px] md:pb-[95px] vw:pb-[4.947vw] relative">
 
-      <div className="flex flex-col w-full mb-8 vw:mb-[2.222vw]">
+      <div className="flex flex-col w-full mb-8 vw:mb-[1.6666vw]">
 
-        <h2 className="text-[32px] md:text-[48px] vw:text-[3.333vw] leading-11 md:leading-[66px] vw:leading-[1.375] font-light">
+        <h2 className="text-[32px] md:text-[48px] vw:text-[2.5vw] leading-11 md:leading-[66px] vw:leading-[1.375] font-light">
           {title}
         </h2>
 
@@ -24,7 +24,7 @@ export default function EventsSlider(props) {
           links && (
             <SanityLink
               {...{links}}
-              className="mt-2 vw:mt-[.5vw] text-lg vw:text-[1.25vw] leading-[25px] vw:leading-[1.38888]
+              className="mt-2 vw:mt-[.416vw] text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.38888]
               tracking-[.05em] opacity-80 uppercase underline font-light"
             >
               {links?.title}
@@ -83,9 +83,9 @@ export default function EventsSlider(props) {
 
       </Swiper>
 
-      <div className="absolute pl-[3.33%] bottom-0 left-0 flex items-center space-x-4 vw:space-x-[1.111vw]">
+      <div className="absolute pl-[3.33%] bottom-0 left-0 flex items-center space-x-4 vw:space-x-[.83333vw]">
 
-        <div className="left-arrow cursor-pointer w-[11px] vw:w-[.763vw]">
+        <div className="left-arrow cursor-pointer w-[11px] vw:w-[.5729vw]">
           <Image
             src="/images/prev.svg"
             alt="Next"
@@ -95,7 +95,7 @@ export default function EventsSlider(props) {
           />
         </div>
 
-        <div className="right-arrow cursor-pointer w-[11px] vw:w-[.763vw]">
+        <div className="right-arrow cursor-pointer w-[11px] vw:w-[.5729vw]">
           <Image
             src="/images/next.svg"
             alt="Next"
