@@ -1,10 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import SanityImage from './sanity-image'
+import { useRouter } from 'next/router'
 import Link from "next/link";
+import SanityImage from './sanity-image'
 
 export default function Header(props) {
-  
+
+  const router = useRouter()
+
   const {
     mainNav,
     menuImage,
@@ -20,6 +23,7 @@ export default function Header(props) {
   const [openModal, setOpenModal] = useState(false);
   const [activeModal, setActiveModal] = useState(false);
   const [activeMenuImage, setActiveMenuImage] = useState();
+  const [existHero, setExistHero] = useState(false);
   const [heroVisible, setHeroVisible] = useState(null)
   const [entryObserver, setEntryObserver] = useState(false)
 
@@ -36,8 +40,7 @@ export default function Header(props) {
     setActiveMenuImage(menuImage)
   }
 
-  useEffect(() => {
-
+  useEffect(() => { 
     setActiveModal(true);
 
     if(menuImage){
@@ -50,30 +53,32 @@ export default function Header(props) {
 
     const mainHero = document.getElementById("mainHero");
 
-    if(mainHero){
-
-      const observer = new IntersectionObserver(
-        entries => {
-          const entry = entries[0]
-          setEntryObserver(entry.isIntersecting)
-          if (entryObserver) {
-            setHeroVisible(true);
-            return;
-          }
-          setHeroVisible(false);
-        },
-        {
-          rootMargin: '0px 0px 0px 0px',
-          root: null,
-          threshold: .45
-        }
-      )
-
-      observer.observe(mainHero)  
-
+    if(!mainHero){
+      setExistHero(false);
+      return;
     }
 
-  }, [entryObserver]);
+    const observer = new IntersectionObserver(
+      entries => {
+        const entry = entries[0]
+        setEntryObserver(entry.isIntersecting)
+        if (entryObserver) {
+          setHeroVisible(true);
+          return;
+        }
+        setHeroVisible(false);
+      },
+      {
+        rootMargin: '0px 0px 0px 0px',
+        root: null,
+        threshold: .45
+      }
+    )
+
+    observer.observe(mainHero); 
+    setExistHero(true);
+
+  }, [router.asPath,entryObserver]);
 
   return (
 
@@ -81,7 +86,8 @@ export default function Header(props) {
 
       <header
       id="header"
-      className={` ${(heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]" :  "bg-transparent duration-[300ms]"}  transition-colors z-[100] 
+      className={` ${  existHero ? ((heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]  " : "bg-transparent duration-[300ms]") : "bg-[#C5A99C]" }
+      transition-colors z-[100] 
       ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
       top-0 px-4 md:px-[2.8%] w-full md:mx-auto flex items-center md:justify-between
       py-6 md:pt-8 vw:pt-[1.666vw] md:pb-10 vw:pb-[2.0833vw]`}
