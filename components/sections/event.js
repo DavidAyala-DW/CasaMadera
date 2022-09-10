@@ -41,9 +41,7 @@ export default function Event(props) {
   return (
 
     <section
-      className={`px-4 md:px-0 md:max-w-[94.4%] w-full mx-auto flex flex-col lg:flex-row space-y-10 lg:space-y-0  justify-between 
-        lg:items-center
-      `}
+      className={`px-4 md:px-0 md:max-w-[94.4%] w-full mx-auto flex flex-col lg:flex-row space-y-10 lg:space-y-0  justify-between lg:items-center`}
     >
 
       <div

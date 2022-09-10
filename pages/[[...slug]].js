@@ -44,26 +44,25 @@ async function fulfillSectionQueries(page,internalLinks) {
         
       }
 
-      if(section.news){
-        
-        if(Array.isArray(section.news)){
+      if(section?.locations){
+        if(Array.isArray(section.locations)){
 
-          await Promise.all(section.news.map(async (news) => {
-            const queryData = await client.fetch(groq`*[_type == "newsPT" && _id == "${news._ref}" ][0]{
-              title,description,slug,image
-            }`)
-            news.query = queryData;
+          await Promise.all(section.locations.map(async (location) => {
+            const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`)
+            const {title, image, slug, menus = null} = queryData;
+            location.title = title;
+            location.image = image;
+            location.menus = menus;
+            location.slug = slug;
+            location.query = queryData;
           }
 
           ))
 
         }else{
-          const queryData = await client.fetch(groq`*[_type == "newsPT" && _id == "${section.news._ref}" ][0]{
-            title,description,slug,image
-          }`)
-          section.news.query = queryData;
+          const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${section.locations._ref}" ][0]{...}`)
+          section.locations.query = queryData;
         }
-
       }
 
       // console.log(section._type);

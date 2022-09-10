@@ -6,7 +6,7 @@ export default function Newsletter(props) {
 
   const titleOptions = {
     "normal" : "text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] font-light mb-6 vw:mb-[1.25vw] ",
-    "large" : "text-[40px] vw:text-[2.0833vw] leading-[1.2] font-light mb-4 vw:mb-[.8333vw]",
+    "large" : "text-[48px] vw:text-[2.5vw] leading-[1.2] font-light mb-4 vw:mb-[.8333vw]",
   }
 
   const descriptionOptions = {

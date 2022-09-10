@@ -1,10 +1,11 @@
 import SanityImage from "./sanity-image";
+import SimpleBlockContent from '@/components/simple-block-content'
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Event({event}) {
 
-  const {title, image, description, date, link} = event;
+  const {title, image, description, description2, date, link} = event;
   const [showDate, setShowDate] = useState(false);
 
   const handleFormatDate = useCallback((date) => {
@@ -60,7 +61,21 @@ export default function Event({event}) {
           </p>
 
           <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
-            {description}
+
+            {
+              (description && !description2) && (
+                <p>
+                {description}
+                </p>              
+              )
+            }
+
+            {
+              (description2) && (
+                <SimpleBlockContent blocks={description2} />
+              )
+            }
+
           </div>
 
         </div>
