@@ -38,7 +38,6 @@ async function fulfillSectionQueries(page, slug) {
       if(section.locations){
 
         if(Array.isArray(section.locations)){
-          console.log("Is Array");
           await Promise.all(section.locations.map(async (location) => {
             const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`)
             const {title, image} = queryData;
@@ -50,7 +49,6 @@ async function fulfillSectionQueries(page, slug) {
           ))
 
         }else{
-          console.log("Isnt Array");
           const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${section.locations._ref}" ][0]{...}`)
           const {title, image} = queryData;
           location.title = title;

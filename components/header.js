@@ -86,7 +86,7 @@ export default function Header(props) {
 
       <header
       id="header"
-      className={` ${  existHero ? ((heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]  " : "bg-transparent duration-[300ms]") : "bg-[#C5A99C]" }
+      className={` ${  existHero ? ((heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]  " : "bg-transparent duration-[300ms]") : "" }
       transition-colors z-[100] 
       ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
       top-0 px-4 md:px-[2.8%] w-full md:mx-auto flex items-center md:justify-between
@@ -97,14 +97,14 @@ export default function Header(props) {
 
           <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.302vw]`}>
             <Image
-              src={"/images/burguer.svg"}
+              src={`/images/${existHero ? "burguer.svg" : "burguerBrown.svg" }`}
               alt="burger"
               layout="responsive"
               width={25}
               height={16}
             />
           </div>
-
+          
           <div onClick={handleClick} className={`${!openModal && "hidden"} w-[21px] vw:!w-[1.09375vw]`}>
             <Image
               src={"/images/close.svg"}
@@ -120,7 +120,7 @@ export default function Header(props) {
         <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-.83333vw] md:m-auto md:h-max select-none md:order-2`}>
           
           {
-            (!openModal) && (
+            (!openModal && existHero) && (
               <Link href="/" passHref>
                 <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
                   <Image
@@ -136,7 +136,7 @@ export default function Header(props) {
           }
 
           {
-            (openModal) && (
+            (openModal || !existHero) && (
               <Link href="/" passHref>
                 <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
                   <Image
@@ -159,7 +159,7 @@ export default function Header(props) {
 
             <Link href={reservationsButton?.link?.url}>
               <a onClick={handleClick}>
-                <p className={`font-light ${openModal ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
+                <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
                   {reservationsButton?.title}
                 </p>
               </a>

@@ -13,7 +13,7 @@ module.exports = {
         body: "#F3EDE2"
       },
       fontFamily: {
-        'libreBaskerville': ['"LibreBaskerville"', 'sans-serif'],
+        'libreBaskerville': ['"Libre Baskerville"', 'sans-serif'],
         'avenir': ['"Avenir"', 'sans-serif']
       },
     },

@@ -4,6 +4,7 @@ import client from '@/lib/sanity-client'
 import Layout from '@/components/layout'
 import RenderSections from '@/components/render-sections'
 import { getSlugVariations, slugParamToPath } from '@/lib/urls'
+import {locationQuery} from "@/lib/queries"
 
 export default function Page({props}) {
   
@@ -14,7 +15,6 @@ export default function Page({props}) {
     siteSettings,  
     menus // Crear bloque en cms para permitir links internos, externos y crear un provider donde guardar los valores del cms y luego un hook para consumirlo desde ahi con facilidad.
   } = props
-
   return (    
     <Layout menus={menus} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
@@ -35,10 +35,18 @@ async function fulfillSectionQueries(page, slug) {
 
     page.content.map(async (section) => {
 
+      if(section._type == "menusContent"){
+        const {title,menus} = await client.fetch(groq`${locationQuery(slug)}`);
+        section.title = title;
+        section.menus = menus;
+        section.slug = slug;
+        section.className && delete section.className;
+      }
+
       if(section.locations){
 
         if(Array.isArray(section.locations)){
-          console.log("Is Array");
+          
           await Promise.all(section.locations.map(async (location) => {
             const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`)
             const {title, image} = queryData;
@@ -49,13 +57,12 @@ async function fulfillSectionQueries(page, slug) {
 
           ))
 
-        }else{
-          console.log("Isnt Array");
+        }else{          
           const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${section.locations._ref}" ][0]{...}`)
           const {title, image} = queryData;
-          location.title = title;
-          location.image = image;
-          section.locations.query = queryData;
+          section.title = title;
+          section.image = image;
+          // section.locations.query = queryData;
         }
 
       }
@@ -108,11 +115,17 @@ async function getPageSections(slug){
       *[_type == "locations" && slug.current in $possibleSlugs][0]{
         _id,
         title,
-        content
+        menuPageContent
       }
     `,
     { possibleSlugs: getSlugVariations(slug) }
   )
+  
+  try {
+    request.content = [...request.menuPageContent];
+  } catch (error) {
+    request.content = [];
+  }
   
   return request
 }

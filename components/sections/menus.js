@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function Menus(props) {
 
   const {title, locations} = props;
-  console.log(locations);
   return (
 
     <>
@@ -60,7 +59,7 @@ export default function Menus(props) {
                           const {title, slug:slugMenu} = menu;
 
                           return (
-                            <Link href={`/menus/${slug?.current}?m=${slugMenu?.current}`} passHref>
+                            <Link href={`/menus/${slug?.current}?menu=${slugMenu?.current}`} passHref>
                               <a className="opacity-80 tracking-[.05em] uppercase text-lg leading-[25px] font-light underline">
                                 {title}
                               </a>
