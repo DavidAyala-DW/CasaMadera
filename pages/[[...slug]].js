@@ -40,8 +40,7 @@ async function fulfillSectionQueries(page,internalLinks) {
           const {link} = section?.links ?? null;
           const selectedLink = internalLinks.find(internalLink => internalLink._id == link._ref);
           section.links.internalLink = selectedLink.slug.current;
-        }
-        
+        }        
       }
 
       if(section?.locations){

@@ -90,12 +90,12 @@ export async function getStaticPaths() {
 }
 
 async function getMenus(){
-  const request = await client.fetch(groq`*[_type == "route"] {_id, slug {current}} `);
+  const request = await client.fetch(groq`*[_type == "routesCasaMadera"] {_id, slug {current}} `);
   return request;
 }
 
 async function getSiteConfig(){
-  const siteSettings = await client.fetch(groq`*[_type == "siteSettings"][0]{...}`);
+  const siteSettings = await client.fetch(groq`*[_type == "siteSettings" && site == "casaMadera"][0]{...}`);
   return siteSettings;
 }
 
