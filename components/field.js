@@ -25,7 +25,7 @@ export default function Field(props) {
 
         <label
           htmlFor={id}
-          className={`block opacity-80 text-lg vw:lg-[.9375vw] leading-[22px] vw:leading-[1.38888] font-normal`}
+          className={`block text-lg vw:lg-[.9375vw] leading-[22px] vw:leading-[1.38888] font-normal`}
         >
           {label}
         </label>
@@ -38,7 +38,7 @@ export default function Field(props) {
               {...register(id)}
               className={`
               outline-none bg-transparent border-[.5px] border-[#4A3419]
-              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-80 text-lg vw:text-[.1.0416vw] md:text-[20px] leading-[22px] vw:leading-[1.1] font-normal
+              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-[.85] text-lg vw:text-[.1.0416vw] md:text-[20px] leading-[22px] vw:leading-[1.1] font-normal
               placeholder:text-[#4A3419]
               `}
               type={type}
@@ -59,15 +59,13 @@ export default function Field(props) {
               {...register(id)}
               name={id}
               id={id}
+              value={placeholder}
               className={`
               outline-none bg-transparent border-[.5px] border-[#4A3419]
-              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-80 text-lg md:text-[20px]  vw:text-[1.0416vw] leading-[22px] vw:leading-[1.1] font-normal
+              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-[.85] text-lg md:text-[20px]  vw:text-[1.0416vw] leading-[22px] vw:leading-[1.1] font-normal
               placeholder:text-[#4A3419] resize-none min-h-[180px] vw:min-h-[9.375vw]
               `}
             >
-              {placeholder && (
-                placeholder
-              )}
             </textarea>
 
           )

@@ -37,7 +37,7 @@ export default function Contact(props) {
         {title}
       </h1>
 
-      <p className="opacity-[.85] md:max-w-[430px] vw:max-w-[22.39vw] md:mx-auto text-[20px] vw:text-[1.0416vw] leading-[25px] vw:leading-[1.25] text-center font-normal mb-16 md:mb-[90px] vw:mb-[4.6875vw]">
+      <p className="opacity-[.85] md:max-w-[430px] vw:max-w-[22.39vw] md:mx-auto text-[20px] md:text-[24px] vw:text-[1.25vw] leading-[25px] md:leading-[30px] vw:leading-[1.25] text-center font-normal mb-16 md:mb-[90px] vw:mb-[4.6875vw]">
         {description}
       </p>
 
@@ -92,7 +92,7 @@ export default function Contact(props) {
 
         <button 
           type="submit"
-          className="text-[10px] vw:text-[.520vw] leading-[11px] vw:leading-[1.1] tracking-[.05em] text-center uppercase opacity-80 underline"
+          className="text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] text-center uppercase opacity-80 underline"
         >
           SEND MESSAGE
         </button>

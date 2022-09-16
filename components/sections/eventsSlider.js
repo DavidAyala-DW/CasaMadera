@@ -12,7 +12,7 @@ export default function EventsSlider(props) {
 
   return (
 
-    <section className="pl-4 md:pl-5 lg:pl-[2.777%] w-full flex flex-col pb-[74px] md:pb-[95px] vw:pb-[4.947vw] relative">
+    <section className="pl-4 md:pl-5 lg:pl-[2.777%] w-full flex flex-col pb-[74px] md:pb-[56px] vw:pb-[2.91666vw] relative">
 
       <div className="flex flex-col w-full mb-8 vw:mb-[1.6666vw]">
 
@@ -25,7 +25,7 @@ export default function EventsSlider(props) {
             <SanityLink
               {...{links}}
               className="mt-2 vw:mt-[.416vw] text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.38888]
-              tracking-[.05em] opacity-80 uppercase underline font-light"
+              tracking-[.05em] opacity-80 uppercase underline font-light lg:hidden"
             >
               {links?.title}
             </SanityLink>
@@ -49,7 +49,7 @@ export default function EventsSlider(props) {
             slidesPerView: 1.05,
             spaceBetween: 12
           },
-          768: {
+          744: {
             slidesPerView: 2.05,
             spaceBetween: 24
           },
@@ -82,6 +82,18 @@ export default function EventsSlider(props) {
         })}
 
       </Swiper>
+
+      {
+          links && (
+            <SanityLink
+              {...{links}}
+              className="mt-10 vw:mt-[2.0833vw] text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.38888]
+              tracking-[.05em] opacity-80 uppercase underline font-light hidden lg:block"
+            >
+              {links?.title}
+            </SanityLink>
+          )
+        }
 
       <div className="absolute pl-[3.33%] bottom-0 left-0 flex items-center space-x-4 vw:space-x-[.83333vw]">
 

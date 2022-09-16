@@ -11,7 +11,7 @@ const Space = (props) => {
           height: ${heightMobile}px;
         }
 
-        @media(min-width: 768px){
+        @media(min-width: 744px){
           .space{
             height: ${ heightTablet ?? heightDesktop }px;
           }
@@ -23,9 +23,9 @@ const Space = (props) => {
           }
         }
 
-        @media(min-width: 1440px){
+        @media(min-width: 1920px){
           .space{
-            height: ${(heightDesktop/1440)*100}vw;
+            height: ${(heightDesktop/1920)*100}vw;
           }
         }
 

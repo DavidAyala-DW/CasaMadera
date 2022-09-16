@@ -54,8 +54,30 @@ export default function Header(props) {
     const mainHero = document.getElementById("mainHero");
 
     if(!mainHero){
+
       setExistHero(false);
+
+      if(typeof window !== 'undefined'){
+
+        function handleScroll(){
+          
+          if(window.scrollY != 0){
+            setExistHero(true);
+            setHeroVisible(false);
+          }else{
+            setExistHero(!true);
+            setHeroVisible(!false);
+          }
+
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return window.removeEventListener("scroll", handleScroll, true);
+
+      }
+
       return;
+
     }
 
     const observer = new IntersectionObserver(
@@ -88,12 +110,12 @@ export default function Header(props) {
       id="header"
       className={` ${  existHero ? ((heroVisible == false && openModal == false ) ? "bg-[#C5A99C] duration-[200ms]  " : "bg-transparent duration-[300ms]") : "" }
       transition-colors z-[100] 
-      ${ openModal ? "justify-center md:!bg-transparent right-0 fixed md:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
-      top-0 px-4 md:px-[2.8%] w-full md:mx-auto flex items-center md:justify-between
-      py-6 md:pt-8 vw:pt-[1.666vw] md:pb-10 vw:pb-[2.0833vw]`}
+      ${ openModal ? "justify-center md2:!bg-transparent right-0 fixed md2:inset-x-0" : `justify-between ${stickyHeader ? "sticky bg-body" :  "fixed inset-x-0"} `} 
+      top-0 px-4 md2:px-[2.8%] w-full md2:mx-auto flex items-center md2:justify-between
+      py-6 md2:pt-8 vw:pt-[1.666vw] md2:pb-10 vw:pb-[2.0833vw]`}
       >
 
-        <div className={`cursor-pointer order-3 md:order-1 select-none ${openModal && "absolute right-4 md:left-0 md:relative"}`}>
+        <div className={`cursor-pointer order-3 md2:order-1 select-none ${openModal && "absolute right-4 md2:left-0 md2:relative"}`}>
 
           <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.302vw]`}>
             <Image
@@ -117,7 +139,7 @@ export default function Header(props) {
           
         </div>
 
-        <div className={`order order-1 md:absolute md:inset-0 md:w-max md:-top-4 vw:top-[-.83333vw] md:m-auto md:h-max select-none md:order-2`}>
+        <div className={`order order-1 md2:absolute md2:inset-0 md2:w-max md2:-top-4 vw:top-[-.83333vw] md2:m-auto md2:h-max select-none md2:order-2`}>
           
           {
             (!openModal && existHero) && (
@@ -153,7 +175,7 @@ export default function Header(props) {
 
         </div>
 
-        <div className="hidden md:block order-3 select-none">
+        <div className="hidden md2:block order-3 select-none">
 
           {(reservationsButton && (
 
@@ -177,12 +199,12 @@ export default function Header(props) {
       >
 
         <div
-        className={`md:pl-[2.8%] w-full h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center
-        md:items-start justify-between pt-[101px] md:pt-[108px] vw:pt-[5.625vw] pb-6 vw:pb-[1.25vw]`}>
+        className={`md2:pl-[2.8%] w-full h-[calc(100%-80px)] md2:h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center
+        md2:items-start justify-between pt-[101px] md2:pt-[108px] vw:pt-[5.625vw] pb-6 vw:pb-[1.25vw]`}>
 
-          <div className="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 items-start md:space-x-16 vw:space-x-[3.333vw]">
+          <div className="w-full flex flex-col md2:flex-row space-y-2 md2:space-y-0 items-start md2:space-x-16 vw:space-x-[3.333vw]">
 
-            <div className="w-full md:w-max flex flex-col items-center md:items-start">
+            <div className="w-full md2:w-max flex flex-col items-center md2:items-start">
 
               { mainNav.map((item,index) => {
 
@@ -196,7 +218,7 @@ export default function Header(props) {
                         onMouseLeave={handleMouseDown}
                         onMouseEnter={() => handleMouseOver(image)}
                         onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                        className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                       >
                         {title}
                       </a>
@@ -209,7 +231,7 @@ export default function Header(props) {
 
             </div>
 
-            <div className="flex flex-col w-full items-center md:items-start">
+            <div className="flex flex-col w-full items-center md2:items-start">
 
               {mainNav.map((item,index) => {
 
@@ -223,7 +245,7 @@ export default function Header(props) {
                         onMouseLeave={handleMouseDown}
                         onMouseEnter={() => handleMouseOver(image)}
                         onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                        className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                       >
                         {title}
                       </a>
@@ -239,7 +261,7 @@ export default function Header(props) {
                 <Link href={reservationsButton?.link?.url}>
                   <a
                     onClick={handleClick}
-                    className="block font-light tracking-[-.04em] text-[32px] md:text-[55px] vw:text-[2.864vw] leading-[44px] md:leading-[75px] vw:leading-[1.36]"
+                    className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                   >
                     {reservationsButton?.title}
                   </a>
@@ -247,7 +269,7 @@ export default function Header(props) {
 
               ))}
               
-              <div className="pt-6 vw:pt-[1.25vw] hidden md:flex flex-col space-y-2 vw:space-y-[.416vw]">
+              <div className="pt-6 vw:pt-[1.25vw] hidden md2:flex flex-col space-y-2 vw:space-y-[.416vw]">
 
                 {secondHeaderNav && secondHeaderNav.map( (item,i)  => {
 

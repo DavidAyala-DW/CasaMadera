@@ -55,7 +55,7 @@ export default function Event(props) {
 
           <div className="w-full h-full">
             <div className="w-full h-full relative">
-              <SanityImage src={image} layout="fill" alt="Image" className="object-cover object-top" />
+              <SanityImage src={image} layout="fill" alt="Image" className="object-cover object-center" />
             </div>
           </div>
 

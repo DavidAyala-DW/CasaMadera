@@ -13,7 +13,9 @@ export default function ImageWithText(props) {
     position,
     links,
     socialMedias,
-    alignment
+    alignment,
+    imageAspectRatio,
+    isPressPage
   } = props;
 
   const socialMediasList = socialMedias?.socialMedias ?? [];
@@ -24,24 +26,51 @@ export default function ImageWithText(props) {
     bottom: "lg:items-end",
   }
 
+  const aspectRatioDesktop = {
+    "landscape": "lg:aspect-w-[1.3394] 3xl:aspect-w-[1.841]",
+    "portrait": "lg:aspect-w-[1.0652] 3xl:aspect-w-[1.431]"
+  }
+
+  const aspectRatioDesktopPressPage = {
+    "landscape": "lg:aspect-w-[1.297] 3xl:aspect-w-[1.641]",
+    "portrait": "lg:aspect-w-[1.0652] 3xl:aspect-w-[1.431]"
+  }
+
+
+  const aspectRatioObject = isPressPage && isPressPage === true  ? aspectRatioDesktopPressPage : aspectRatioDesktop;
+
+  const contentSize = {
+
+    image: {
+      "landscape" : "lg:w-[48.529%] 3xl:w-[49.239%]",
+      "portrait" : "lg:w-[49.191%] 3xl:w-[48.8586%]"
+    },
+
+    text: {
+      "landscape" : "lg:w-[51.471%] 3xl:w-[50.761%]",
+      "portrait" : "lg:w-[50.809%] 3xl:w-[51.1414%]"
+    }
+    
+  }
+
   return (
 
     <section
-      className={`pl-4 pr-[11px] md:px-0 md:max-w-[94.4%] w-full mx-auto flex flex-col lg:flex-row space-y-10 lg:space-y-0  justify-between 
+      className={`px-4 md:px-6 lg:px-0 lg:max-w-[94.4%] 3xl:max-w-[95.833%] w-full mx-auto flex flex-col lg:flex-row space-y-10 lg:space-y-0  justify-between 
         ${alignments[alignment]}
       `}
     >
 
       <div
-        className={`w-full lg:w-1/2 order-1
+        className={`w-full order-1 ${imageAspectRatio ? contentSize.image[imageAspectRatio] :  contentSize.image["landscape"]} ${ (isPressPage && isPressPage === true) && "3xl:!w-[45.32%]" }
         ${position == "firstImage" ? "lg:order-1" : "lg:order-2" }`
       }>  
 
-        <div className={`aspect-w-[1.324] md:aspect-w-[2.687] lg:aspect-w-[1.382] 3xl:aspect-w-[1.844] aspect-h-1`}>        
+        <div className={`aspect-w-[1.324] md:aspect-w-[2.687] ${imageAspectRatio ? aspectRatioObject[imageAspectRatio] : aspectRatioObject["landscape"] } aspect-h-1`}>        
 
           <div className="w-full h-full">
             <div className="w-full h-full relative">
-              <SanityImage src={image} layout="fill" alt="Image" className="object-cover object-top" />
+              <SanityImage src={image} layout="fill" alt="Image" className="object-cover object-center" />
             </div>
           </div>
 
@@ -49,16 +78,17 @@ export default function ImageWithText(props) {
 
      </div>
 
-
+      {/* 49.107 */}
+      {/* 50.893 */}
       <div
-        className={`w-full lg:w-1/2 order-2 flex flex-col 
-        ${position == "firstImage" ? "lg:order-2 lg:pl-[9.86%]" : "lg:order-1 lg:pr-[9.86%]" }
-        ${alignment == "top" && "lg:pt-[15px] vw:pt-[.78125vw]"}
+        className={`w-full  order-2 ${imageAspectRatio ? contentSize.text[imageAspectRatio] :  contentSize.text["landscape"]} flex flex-col 
+        ${position == "firstImage" ? " lg:order-2 lg:pl-[9.86%] 3xl:pl-[10.86%] " : " lg:order-1 lg:pr-[9.86%] 3xl:pr-[10.86%]" }
+        ${alignment == "top" && " lg:pt-[15px] vw:pt-[.78125vw] "}
         `
       }>        
 
         <h2
-        className="font-light md:tracking-[.05em] capitalize text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] mb-6 vw:mb-[1.25vw]"
+        className="font-light capitalize text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] mb-6 vw:mb-[1.25vw]"
         >
           {title}
         </h2>
@@ -79,7 +109,7 @@ export default function ImageWithText(props) {
         }
 
         {
-          socialMediasList && (
+          (socialMediasList && socialMediasList.length>0) && (
 
             <div className="mt-10 vw:mt-[2.08333vw] w-full flex items-center space-x-5 vw:space-x-[1.0416w]">
 
