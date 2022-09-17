@@ -35,6 +35,12 @@ async function fulfillSectionQueries(page, slug) {
 
     page.content.map(async (section) => {
 
+    
+      if(section._type === 'imageWithText' && section?.menus){
+        section.menus = page.menus;
+        section.slug = slug;
+      }
+
       if(section.locations){
 
         if(Array.isArray(section.locations)){
@@ -106,6 +112,7 @@ async function getPageSections(slug){
       *[_type == "locations" && slug.current in $possibleSlugs][0]{
         _id,
         title,
+        menus,
         content
       }
     `,

@@ -1,5 +1,6 @@
 import SanityImage from "../sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
+import Link from "next/link"
 import SanityLink from "../sanityLink"
 import { socialMediasIcons } from "@/helpers/socialMedias";
 import Image from "next/image";
@@ -15,7 +16,8 @@ export default function ImageWithText(props) {
     socialMedias,
     alignment,
     imageAspectRatio,
-    isPressPage
+    isPressPage,
+    menus
   } = props;
 
   const socialMediasList = socialMedias?.socialMedias ?? [];
@@ -78,8 +80,6 @@ export default function ImageWithText(props) {
 
      </div>
 
-      {/* 49.107 */}
-      {/* 50.893 */}
       <div
         className={`w-full  order-2 ${imageAspectRatio ? contentSize.text[imageAspectRatio] :  contentSize.text["landscape"]} flex flex-col 
         ${position == "firstImage" ? " lg:order-2 lg:pl-[9.86%] 3xl:pl-[10.86%] " : " lg:order-1 lg:pr-[9.86%] 3xl:pr-[10.86%]" }
@@ -141,6 +141,28 @@ export default function ImageWithText(props) {
                 })              
               }
 
+            </div>
+          )
+        }
+
+        {
+          menus && (
+            <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row mt-10 md:items-center md:space-x-6 vw:space-x-[1.25vw]">
+              {
+                menus.map(menu => {
+
+                  const {_key,slug:{current}, title} = menu;
+
+                  return(
+                    <Link key={_key} href={`/menus/${props.slug}?menu=${current}`} passHref>
+                      <a className="block font-light text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase opacity-80">
+                        {title}
+                      </a>
+                    </Link>
+                  )
+
+                })
+              }
             </div>
           )
         }
