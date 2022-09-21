@@ -92,7 +92,7 @@ export default function Contact(props) {
 
         <button 
           type="submit"
-          className="text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] text-center uppercase opacity-80 underline"
+          className="font-avenir text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] text-center uppercase opacity-80 underline"
         >
           SEND MESSAGE
         </button>

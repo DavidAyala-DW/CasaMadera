@@ -21,6 +21,11 @@ h1,h2,h3,h4,a,input{
   padding-left: 22px;
 }
 
+.portableText a{
+  font-family: inherit!important; 
+  text-decoration: underline;
+}
+
 @media(min-width: 1440px){
   .portableText ul{
     padding-left: 1.527vw;

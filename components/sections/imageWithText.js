@@ -17,7 +17,9 @@ export default function ImageWithText(props) {
     alignment,
     imageAspectRatio,
     isPressPage,
-    menus
+    menus,
+    imagesPosition,
+    imagePositionTablet
   } = props;
 
   const socialMediasList = socialMedias?.socialMedias ?? [];
@@ -72,7 +74,7 @@ export default function ImageWithText(props) {
 
           <div className="w-full h-full">
             <div className="w-full h-full relative">
-              <SanityImage src={image} layout="fill" alt="Image" className="object-cover object-center" />
+              <SanityImage src={image} layout="fill" alt="Image" className={`object-cover ${ (imagePositionTablet && imagePositionTablet == "bottom") && "md:object-bottom" } object-center ${ (imagesPosition && imagesPosition == "bottom")  ? "3xl:object-[0%_100%]" : "" }`} />
             </div>
           </div>
 
