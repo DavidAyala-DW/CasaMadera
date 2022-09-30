@@ -12,11 +12,13 @@ export default function Page({props}) {
     slug,
     stickyHeader,
     siteSettings,  
-    menus // Crear bloque en cms para permitir links internos,externos y crear un provider donde guardar los valores del cms y luego un hook para consumirlo desde ahi con facilidad.
+    menus,
+    locations
+
   } = props
 
   return (    
-    <Layout menus={menus} siteSettings={siteSettings} stickyHeader={stickyHeader}>
+    <Layout menus={menus} locations={locations} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
         title={title}
       />
@@ -100,6 +102,11 @@ async function getMenus(){
   return request;
 }
 
+async function getLocations(){
+  const request = await client.fetch(groq`*[_type == "locations"] {_id, slug {current}} `);
+  return request;
+}
+
 async function getSiteConfig(){
   const siteSettings = await client.fetch(groq`*[_type == "siteSettings" && site == "casaMadera"][0]{...}`);
   return siteSettings;
@@ -122,13 +129,13 @@ async function getPageSections(slug){
 export const getStaticProps = async ({ params }) => {
 
   const slug = slugParamToPath(params?.slug)
-  let [data, siteSettings, menus] = await Promise.all([getPageSections(slug), getSiteConfig(), getMenus()])
+  let [data, siteSettings, menus, locations] = await Promise.all([getPageSections(slug), getSiteConfig(), getMenus(), getLocations()])
   data = await fulfillSectionQueries(data,menus)
   data.slug = slug;
 
   return {
     props:{
-      props: { ...data, siteSettings, menus } || {},
+      props: { ...data, siteSettings, menus, locations } || {},
     }
   }
   
