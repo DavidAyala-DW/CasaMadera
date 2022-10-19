@@ -7,6 +7,7 @@ import SanityImage from './sanity-image'
 export default function Header(props) {
 
   const router = useRouter()
+  const menuButton = useRef();
 
   const {
     mainNav,
@@ -17,7 +18,8 @@ export default function Header(props) {
     spotifyHandle,
     soundCloudHandle,
     reservationsButton,
-    stickyHeader
+    stickyHeader,
+    locations
   } = props;
   
   const [openModal, setOpenModal] = useState(false);
@@ -26,6 +28,7 @@ export default function Header(props) {
   const [existHero, setExistHero] = useState(false);
   const [heroVisible, setHeroVisible] = useState(null)
   const [entryObserver, setEntryObserver] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function handleClick(){
     const updatedModalValue = !openModal;
@@ -202,30 +205,118 @@ export default function Header(props) {
         className={`md2:pl-[2.8%] w-full h-[calc(100%-80px)] md2:h-full max-w-full md2:max-w-[73.6%] 3xl:max-w-[66.666%] flex flex-col items-center
         md2:items-start justify-between pt-[101px] md2:pt-[108px] vw:pt-[5.625vw] pb-6 vw:pb-[1.25vw]`}>
 
-          <div className="w-full flex flex-col md2:flex-row space-y-2 md2:space-y-0 items-start md2:space-x-16 vw:space-x-[3.333vw]">
+          <div className="w-full flex flex-col md2:flex-row space-y-2 md2:space-y-0 items-start md2:space-x-[150px] vw:space-x-[3.333vw]">
 
-            <div className="w-full md2:w-max flex flex-col items-center md2:items-start">
+            <div className="w-full md2:w-1/2 flex flex-col items-center md2:items-start">
 
               { mainNav.map((item,index) => {
 
-                if(index < 4){
+                if(index >= 4) return;
 
-                  const {title, link, image} = item;
+                const {title, link, image} = item;
 
-                  return (
-                    <Link href={link.url} passHref key={index} >
-                      <a
-                        onMouseLeave={handleMouseDown}
-                        onMouseEnter={() => handleMouseOver(image)}
-                        onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
-                      >
-                        {title}
-                      </a>
-                    </Link>
-                  )
+                return (
 
-                }
+                  <div key={index}>
+
+                    {
+
+                      title != "Menus" ? (
+                        <Link href={link.url} passHref>
+                          <a
+                            onMouseLeave={handleMouseDown}
+                            onMouseEnter={() => handleMouseOver(image)}
+                            onClick={handleClick}
+                            className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
+                          >
+                            {title}
+                          </a>
+                        </Link>
+
+                      ) : (
+
+                        <div className="flex flex-col items-center md2:items-start">
+
+                          <div className="flex items-center w-full space-x-5 max-w-max mx-auto md2:max-w-full">
+
+                            <Link href={link.url} passHref>
+                              <a
+                                onMouseLeave={handleMouseDown}
+                                onMouseEnter={() => handleMouseOver(image)}
+                                onClick={handleClick}
+                                className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
+                              >
+                                {title.split(",")[0]}
+                              </a>
+                            </Link>
+
+                            <div onClick={ () => {setIsMenuOpen(!isMenuOpen)} }  ref={menuButton} className={`cursor-pointer relative transition-transform w-5 h-3 md2:w-7 md2:h-6 vw:w-[1.458vw] vw:h-[.8333vw] ${isMenuOpen? "rotate-180" : "rotate-0" }`}>
+                              <Image
+                                src="/images/Down.svg"
+                                alt="Down Icon"
+                                layout={"fill"}                                  
+                              />
+                            </div>
+
+                          </div>
+
+                          <div className={`flex-col items-center md2:items-start ${isMenuOpen ? "flex" : "hidden" }`}>
+
+                            {
+                              locations && (
+                                [...locations].reverse().map((location, i) => {
+
+                                  const {title, slug:{current}, comming_soon, _id} = location;
+                                  
+
+                                  return(
+
+                                    <div key={_id}>
+
+                                      {
+                                        !comming_soon && (
+                                          <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
+                                            <a
+                                            className={`
+                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light font-brandom
+                                            ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
+                                              {title.split(",")[0]}
+                                            </a>
+                                          </Link>
+                                        )
+                                      }
+                
+                                      {
+                                        comming_soon && (
+                                          <div                                           
+                                          className={`
+                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light font-brandom
+                                          ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
+                                            {title.split(",")[0]}
+                                          </div>
+                                        )
+                                      }
+                
+                                    </div>
+                                  )
+
+
+                                })
+                              )
+                            }
+                          </div>
+
+                        </div>
+
+                      )
+
+                    }
+
+
+
+                  </div>
+
+                )
 
               })}
 
@@ -247,7 +338,7 @@ export default function Header(props) {
                         onClick={handleClick}
                         className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                       >
-                        {title}
+                        {title.split(",")[0]} 
                       </a>
                     </Link>
                   )

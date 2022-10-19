@@ -11,7 +11,12 @@ export default function MenusContent(props) {
 
   useEffect(() => {
 
-    const {menu} = router.query;
+    let {menu} = router.query;
+
+    if(typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      menu = url?.searchParams?.get("menu");
+    } 
 
     if(!menu){
       setActiveMenu(menus[0]);

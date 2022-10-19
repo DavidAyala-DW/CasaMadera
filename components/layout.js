@@ -48,6 +48,11 @@ function Layout(props) {
       }
 
       menuItem.link.url = "/";
+
+      if (menuItem.externalLink) {
+        menuItem.link.url = menuItem.externalLink;
+      }
+
       return;
 
     }
@@ -85,11 +90,14 @@ function Layout(props) {
         }
 
         menu.link.url = "/";
+
+        if (menu.externalLink) {
+          menu.link.url = menu.externalLink;
+        }
+        
         return;
 
       }
-
-      console.log(slug);
 
       if(!isLocation){
         menu.link.url = slug.current != "/" ? `/${slug.current}`: "/"; 
@@ -129,7 +137,8 @@ function Layout(props) {
           soundCloudHandle,
           reservationsButton,
           menus,
-          stickyHeader
+          stickyHeader,
+          locations
         }}/>
 
         <div className="w-full min-h-screen flex flex-col relative">

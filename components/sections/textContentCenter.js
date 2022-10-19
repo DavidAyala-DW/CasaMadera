@@ -1,4 +1,5 @@
 import SimpleBlockContent from '@/components/simple-block-content'
+import Link from "next/link";
 
 export default function TextContentCenter(props) {
 
@@ -9,8 +10,11 @@ export default function TextContentCenter(props) {
     learn_more,
     mobileAlignment,
     titleSize,
-    descriptionContent
+    descriptionContent,
+    locations
   } = props;
+
+  console.log(locations);
 
   return (
 
@@ -55,15 +59,68 @@ export default function TextContentCenter(props) {
 
         {
           learn_more && (
-            <a
-            className={`
-              block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
-              max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light underline
-            `}
-            href={learn_more?.link}
-          >
-            {learn_more?.title}
-          </a>
+
+            <Link href={learn_more?.link} passHref>
+
+              <a
+                className={`
+                  block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
+                  max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light underline
+                `}                
+              >
+                {learn_more?.title}
+              </a>
+
+            </Link>
+
+          )
+        }
+
+        {
+          locations && (
+
+            <div className="flex items-center space-x-6 max-w-max mx-auto">
+
+              {
+                [...locations].reverse().map(location => {
+
+                  const {_id, slug:{current}, comming_soon, title} = location;
+
+                  return (
+                    <div key={_id}>
+
+                      {
+                          !comming_soon && (
+                            <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
+                              <a
+                              className={`
+                                block text-lg leading-[25px] tracking-[.05em] font-light underline text-[#4A3419] uppercase opacity-80
+                              `}>
+                                {title.split(",")[0]}
+                              </a>
+                            </Link>
+                          )
+                        }
+
+                        {
+                          comming_soon && (
+                            <div                          
+                            className={`
+                              block text-lg leading-[25px] tracking-[.05em] font-light underline text-[#4A3419] uppercase opacity-50 !cursor-not-allowed
+                            `}>
+                              {title.split(",")[0]}
+                            </div>
+                          )
+                        }
+
+                    </div>
+                  )
+
+                })
+              }
+
+            </div>
+
           )
         }
 

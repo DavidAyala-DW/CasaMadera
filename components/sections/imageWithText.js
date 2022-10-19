@@ -19,7 +19,8 @@ export default function ImageWithText(props) {
     isPressPage,
     menus,
     imagesPosition,
-    imagePositionTablet
+    imagePositionTablet,
+    locations
   } = props;
 
   const socialMediasList = socialMedias?.socialMedias ?? [];
@@ -161,6 +162,53 @@ export default function ImageWithText(props) {
                         {title}
                       </a>
                     </Link>
+                  )
+
+                })
+              }
+            </div>
+          )
+        }
+
+        {
+          locations && (
+
+            <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row md:flex-wrap mt-10 md:items-center md:max-w-[70%]">
+
+              {
+                [...locations].reverse().map( (location,i) => {
+
+                  const {_id, slug:{current}, comming_soon, title} = location;
+
+                  return(
+
+                    <div key={_id}>
+
+                      {
+                        !comming_soon && (
+                          <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
+                            <a
+                            className={`block font-light text-lg vw:text-[.9375vw] md:pb-[11px] vw:pb-[.5729vw] md:pr-6
+                            vw:pr-[1.25vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase
+                            ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-80"} `}>
+                              {title.split(",")[0]}
+                            </a>
+                          </Link>
+                        )
+                      }
+
+                      {
+                        comming_soon && (
+                          <div                          
+                          className={`block font-light text-lg vw:text-[.9375vw] md:pb-[11px] vw:pb-[.5729vw] md:pr-6
+                          vw:pr-[1.25vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase
+                          ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-80"} `}>
+                            {title.split(",")[0]}
+                          </div>
+                        )
+                      }
+
+                    </div>
                   )
 
                 })

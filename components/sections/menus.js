@@ -1,5 +1,6 @@
 import SanityImage from "../sanity-image";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Menus(props) {
 
@@ -40,6 +41,23 @@ export default function Menus(props) {
                           alt="Image"
                           className="object-cover"
                         />
+                        <div className="absolute bottom-6 right-[30px] flex-col justify-center items-center">
+
+                          <Link href={`/locations/${slug?.current}`} passHref> 
+
+                            <a className="relative w-2.5 vw:w-[0.520vw] h-[18px] vw:h-[.9375vw] cursor-pointer block">
+
+                              <Image
+                                src="/images/whiteRightArrow.svg"
+                                alt="White arrow"
+                                layout="fill"
+                              />
+
+                            </a>
+
+                          </Link>
+
+                        </div>
                       </div>
                     </div>
                   </div>

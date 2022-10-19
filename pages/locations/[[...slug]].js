@@ -26,7 +26,7 @@ export default function Page({props}) {
   )
 }
 
-async function fulfillSectionQueries(page, slug) {
+async function fulfillSectionQueries(page, slug, internalLinks) {
 
   if (!page.content) {
     return page
@@ -35,6 +35,15 @@ async function fulfillSectionQueries(page, slug) {
   const sectionsWithQueryData = await Promise.all(
 
     page.content.map(async (section) => {
+
+      if(section?.links){
+        const {_type} = section?.links ?? null;
+        if(_type == "links"){
+          const {link} = section?.links ?? null;
+          const selectedLink = internalLinks.find(internalLink => internalLink._id == link._ref);
+          section.links.internalLink = selectedLink.slug.current;
+        }        
+      }
 
     
       if(section._type === 'imageWithText' && section?.menus){
@@ -63,6 +72,14 @@ async function fulfillSectionQueries(page, slug) {
           section.locations.query = queryData;
         }
 
+      }
+
+      if(section._type === 'imageWithText' && section?.show_locations){
+        section.locations = page?.locations;
+      }
+
+      if(section._type === 'textContentCenter' && section?.show_locations){
+        section.locations = page?.locations;
       }
 
       if (section.query) {
@@ -107,7 +124,7 @@ async function getSiteConfig(){
 }
 
 async function getLocations(){
-  const request = await client.fetch(groq`*[_type == "locations"] {_id, slug {current}} `);
+  const request = await client.fetch(groq`*[_type == "locations"] | order(_createdAt  asc) {_id, title, comming_soon, menus, slug {current}} `);
   return request;
 }
 
@@ -131,8 +148,10 @@ async function getPageSections(slug){
 export const getStaticProps = async ({ params }) => {
 
   const slug = slugParamToPath(params?.slug)
-  let [data, siteSettings, menus, locations] = await Promise.all([getPageSections(slug), getSiteConfig(), getMenus(), getLocations()])
-  data = await fulfillSectionQueries(data, slug)
+  let [data, siteSettings, menus, locations] = await Promise.all([getPageSections(slug), getSiteConfig(), getMenus(), getLocations()]);
+  data.slug = slug;
+  data.locations = locations;
+  data = await fulfillSectionQueries(data, slug, menus)
 
   return {
     props:{
