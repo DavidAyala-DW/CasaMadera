@@ -27,7 +27,7 @@ export default function Page({props}) {
   )
 }
 
-async function fulfillSectionQueries(page,internalLinks) {
+async function fulfillSectionQueries(page, internalLinks) {
 
   if (!page.content) {
     return page
@@ -40,8 +40,10 @@ async function fulfillSectionQueries(page,internalLinks) {
         const {_type} = section?.links ?? null;
         if(_type == "links"){
           const {link} = section?.links ?? null;
-          const selectedLink = internalLinks.find(internalLink => internalLink._id == link._ref);
-          section.links.internalLink = selectedLink.slug.current;
+          const selectedLink = internalLinks.find(internalLink => internalLink?._id == link?._ref);
+          if(selectedLink){
+            section.links.internalLink = selectedLink?.slug?.current;
+          }          
         }        
       }
 
