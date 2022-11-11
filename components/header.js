@@ -182,8 +182,8 @@ export default function Header(props) {
 
           {(reservationsButton && (
 
-            <Link href={reservationsButton?.link?.url}>
-              <a onClick={handleClick}>
+            <Link passHref href={reservationsButton?.link?.url}>
+              <a>
                 <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
                   {reservationsButton?.title}
                 </p>
@@ -350,9 +350,8 @@ export default function Header(props) {
               <div className="max-w-max block md2:hidden">
                 {(reservationsButton && (
 
-                  <Link href={reservationsButton?.link?.url}>
-                    <a
-                      onClick={handleClick}
+                  <Link passHref href={reservationsButton?.link?.url}>
+                    <a                      
                       className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                     >
                       {reservationsButton?.title}
