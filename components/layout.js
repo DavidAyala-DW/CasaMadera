@@ -18,11 +18,13 @@ function Layout(props) {
       cookiesPreferencesHandle,
       spotifyHandle,
       soundCloudHandle,
-      reservationsButton
+      reservationsButton,
+      footer_noble_link
     },
     menus,
     locations
-  } = props
+  } = props;
+
 
   const globalMenus = [
     mainNav,
@@ -153,7 +155,8 @@ function Layout(props) {
           menus,
           privacyPolicyHandle,
           cookiesPreferencesHandle,
-          footerNav
+          footerNav,
+          footer_noble_link
         }}/>
 
       </div>

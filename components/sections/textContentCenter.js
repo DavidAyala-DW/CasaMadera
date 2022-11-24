@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import SimpleBlockContent from '@/components/simple-block-content'
 import Link from "next/link";
 
@@ -11,8 +12,12 @@ export default function TextContentCenter(props) {
     mobileAlignment,
     titleSize,
     descriptionContent,
-    locations
+    locations,
+    show_menu_buttton
   } = props;
+
+  const router = useRouter()
+  const {asPath} = router;
 
   return (
 
@@ -55,24 +60,44 @@ export default function TextContentCenter(props) {
 
         </div>
 
-        {
-          learn_more && (
+        <div className="flex items-center space-x-6 max-w-max mx-auto">
 
-            <Link href={learn_more?.link} passHref>
+          {
+            learn_more && (
 
-              <a
-                className={`
-                  block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
-                  max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light underline
-                `}                
-              >
-                {learn_more?.title}
-              </a>
+              <Link href={learn_more?.link} passHref>
 
-            </Link>
+                <a
+                  className={`
+                    block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
+                    max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light underline
+                  `}                
+                >
+                  {learn_more?.title}
+                </a>
 
-          )
-        }
+              </Link>
+
+            )
+          }
+
+          {
+            show_menu_buttton && (
+              <Link href={asPath.replace("locations","menus")} passHref>
+
+                <a
+                  className={`
+                    max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light
+                  `}                
+                >
+                  MENUS
+                </a>
+
+              </Link>
+            )
+          }
+
+        </div>
 
         {
           locations && (
