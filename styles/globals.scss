@@ -73,3 +73,7 @@ h1,h2,h3,h4,a,input{
     @apply text-base order-2 leading-[18px] text-[#F3EDE2] text-center font-light cursor-pointer font-avenir;
   }
 }
+
+.gallery .swiper-wrapper{
+  margin-left: -16%!important;
+}

@@ -196,7 +196,7 @@ export default function Footer(props) {
             {
               footer_noble_link && (
                 <Link passHref href={footer_noble_link} >
-                  <a className="block w-[145px] !mb-[59px] md:!mb-0 vw:w-[7.55vw]">
+                  <a className="block w-[145px] !mb-[59px] md:!mb-0 vw:w-[7.55vw] mix-blend-exclusion">
                     <Image
                       src="/images/noble.svg"
                       alt="Next"
