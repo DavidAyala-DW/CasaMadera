@@ -30,7 +30,7 @@ export default function Header(props) {
   const [entryObserver, setEntryObserver] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  function handleClick(){
+  function handleClick(e = null){
     const updatedModalValue = !openModal;
     setOpenModal(updatedModalValue);
   }
@@ -211,7 +211,7 @@ export default function Header(props) {
 
               { mainNav.map((item,index) => {
 
-                if(index >= 4) return;
+                if(index >= 3) return;
 
                 const {title, link, image} = item;
 
@@ -243,7 +243,12 @@ export default function Header(props) {
                               <a
                                 onMouseLeave={handleMouseDown}
                                 onMouseEnter={() => handleMouseOver(image)}
-                                onClick={handleClick}
+                                onClick={
+                                  e => {
+                                    e.preventDefault();
+                                    setIsMenuOpen(!isMenuOpen)
+                                  }
+                                }
                                 className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                               >
                                 {title.split(",")[0]}
@@ -278,7 +283,7 @@ export default function Header(props) {
                                           <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
                                             <a
                                             className={`
-                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light font-brandom
+                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir
                                             ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
                                               {title.split(",")[0]}
                                             </a>
@@ -290,7 +295,7 @@ export default function Header(props) {
                                         comming_soon && (
                                           <div                                           
                                           className={`
-                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light font-brandom
+                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir
                                           ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
                                             {title.split(",")[0]}
                                           </div>
@@ -326,7 +331,7 @@ export default function Header(props) {
 
               {mainNav.map((item,index) => {
 
-                if(index >= 4){
+                if(index >= 3){
 
                   const {title, link, image} = item;
 
@@ -358,7 +363,7 @@ export default function Header(props) {
                     </a>
                   </Link>
 
-                  ))}
+                ))}
               </div>
               
               <div className="pt-6 vw:pt-[1.25vw] hidden md2:flex flex-col space-y-2 vw:space-y-[.416vw]">
@@ -394,53 +399,69 @@ export default function Header(props) {
 
           <div className="flex items-center space-x-6 vw:space-x-[1.25vw]">
 
-            <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
+            {
+              facebookHandle && (
+                <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
 
-              <Image
-                src={"/images/facebook.svg"}
-                alt="facebook logo"
-                layout="responsive"
-                width={32}
-                height={32}
-              />
+                  <Image
+                    src={"/images/facebook.svg"}
+                    alt="facebook logo"
+                    layout="responsive"
+                    width={32}
+                    height={32}
+                  />
+    
+                </a>
+              )
+            }
 
-            </a>
+            {
+              instagramHandle && (
+                <a onClick={handleClick} href={instagramHandle} className="block w-8 vw:w-[1.666vw]">
 
-            <a onClick={handleClick} href={instagramHandle} className="block w-8 vw:w-[1.666vw]">
+                  <Image
+                    src={"/images/instagram.svg"}
+                    alt="instagram logo"
+                    layout="responsive"
+                    width={32}
+                    height={32}
+                  />
+    
+                </a>
+              )
+            }
 
-              <Image
-                src={"/images/instagram.svg"}
-                alt="instagram logo"
-                layout="responsive"
-                width={32}
-                height={32}
-              />
+            {
+              spotifyHandle && (
+                <a onClick={handleClick} href={spotifyHandle} className="block w-8 vw:w-[1.666vw]">
 
-            </a>
+                  <Image
+                    src={"/images/spotify.svg"}
+                    alt="instagram logo"
+                    layout="responsive"
+                    width={32}
+                    height={32}
+                  />
+    
+                </a>
+              )
+            }
 
-            <a onClick={handleClick} href={spotifyHandle} className="block w-8 vw:w-[1.666vw]">
+            {
+              soundCloudHandle && (
+                <a onClick={handleClick} href={soundCloudHandle} className="block w-8 vw:w-[1.666vw]">
 
-              <Image
-                src={"/images/spotify.svg"}
-                alt="instagram logo"
-                layout="responsive"
-                width={32}
-                height={32}
-              />
-
-            </a>
-
-            <a onClick={handleClick} href={soundCloudHandle} className="block w-8 vw:w-[1.666vw]">
-
-              <Image
-                src={"/images/soundCloud.svg"}
-                alt="instagram logo"
-                layout="responsive"
-                width={32}
-                height={32}
-              />
-
-            </a>
+                  <Image
+                    src={"/images/soundCloud.svg"}
+                    alt="instagram logo"
+                    layout="responsive"
+                    width={32}
+                    height={32}
+                  />
+    
+                </a>
+              )
+            }
 
           </div>
 

@@ -11,7 +11,8 @@ export default function Footer(props) {
     privacyPolicyHandle,
     cookiesPreferencesHandle,
     footerNav,
-    footer_noble_link
+    footer_noble_link,
+    newsletter_text
   } = props;
   
   return (
@@ -85,7 +86,7 @@ export default function Footer(props) {
           <div className="flex flex-col space-y-6 md2:space-y-8 vw:space-y-[1.666vw]">
 
             <h3 className="block text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light">
-              Newsletter
+              {newsletter_text ?? "Newsletter"}
             </h3>  
 
             <form className="w-full md:max-w-[70%] md2:max-w-full" action="">
@@ -121,53 +122,69 @@ export default function Footer(props) {
 
             <div className="flex items-center space-x-6 vw:space-x-[1.25vw]">
 
-              <a href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
+              {
+                facebookHandle && (
+                  <a href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
 
-                <Image
-                  src={"/images/facebook.svg"}
-                  alt="facebook logo"
-                  layout="responsive"
-                  width={32}
-                  height={32}
-                />
+                    <Image
+                      src={"/images/facebook.svg"}
+                      alt="facebook logo"
+                      layout="responsive"
+                      width={32}
+                      height={32}
+                    />
+    
+                  </a>
+                )
+              }
 
-              </a>
+              {
+                instagramHandle && (
+                  <a href={instagramHandle} className="block w-8 vw:w-[1.666vw]">
 
-              <a href={instagramHandle} className="block w-8 vw:w-[1.666vw]">
+                    <Image
+                      src={"/images/instagram.svg"}
+                      alt="instagram logo"
+                      layout="responsive"
+                      width={32}
+                      height={32}
+                    />
+    
+                  </a>
+                )
+              }
 
-                <Image
-                  src={"/images/instagram.svg"}
-                  alt="instagram logo"
-                  layout="responsive"
-                  width={32}
-                  height={32}
-                />
+              {
+                spotifyHandle && (
+                  <a  href={spotifyHandle} className="block w-8 vw:w-[1.666vw]">
 
-              </a>
+                    <Image
+                      src={"/images/spotify.svg"}
+                      alt="instagram logo"
+                      layout="responsive"
+                      width={32}
+                      height={32}
+                    />
+    
+                  </a>
+                )
+              }
 
-              <a  href={spotifyHandle} className="block w-8 vw:w-[1.666vw]">
+              {
+                soundCloudHandle && (
+                  <a href={soundCloudHandle} className="block w-8 vw:w-[1.666vw]">
 
-                <Image
-                  src={"/images/spotify.svg"}
-                  alt="instagram logo"
-                  layout="responsive"
-                  width={32}
-                  height={32}
-                />
-
-              </a>
-
-              <a  href={soundCloudHandle} className="block w-8 vw:w-[1.666vw]">
-
-                <Image
-                  src={"/images/soundCloud.svg"}
-                  alt="instagram logo"
-                  layout="responsive"
-                  width={32}
-                  height={32}
-                />
-
-              </a>
+                    <Image
+                      src={"/images/soundCloud.svg"}
+                      alt="instagram logo"
+                      layout="responsive"
+                      width={32}
+                      height={32}
+                    />
+    
+                  </a>
+                )
+              }
 
             </div>
 
@@ -196,9 +213,9 @@ export default function Footer(props) {
             {
               footer_noble_link && (
                 <Link passHref href={footer_noble_link} >
-                  <a className="block w-[145px] !mb-[59px] md:!mb-0 vw:w-[7.55vw] mix-blend-exclusion">
+                  <a className="block w-[145px] !mb-[59px] md:!mb-0 vw:w-[7.55vw]">
                     <Image
-                      src="/images/noble.svg"
+                      src="/images/logoFooter.png"
                       alt="Next"
                       width={145}
                       height={24}

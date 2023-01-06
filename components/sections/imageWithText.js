@@ -122,24 +122,27 @@ export default function ImageWithText(props) {
                   const {SocialMedia, link, _key} = item;
                 
                   return ( 
-                
-                    <a
-                      href={link}
-                      key={_key}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-8 vw:w-[1.666vw]"
-                    >
-                      <Image
-                        src={socialMediasIcons[SocialMedia].url}
-                        width={32}
-                        height={32}
-                        layout="responsive"
-                        alt="social media"
-                      />
-                
-                    </a>
-                    
+
+                    link && (
+                      
+                      <a
+                        href={link}
+                        key={_key}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-8 vw:w-[1.666vw]"
+                      >
+                        <Image
+                          src={socialMediasIcons[SocialMedia].url}
+                          width={32}
+                          height={32}
+                          layout="responsive"
+                          alt="social media"
+                        />
+                  
+                      </a>    
+                    )
+                                    
                   )
                 })              
               }
