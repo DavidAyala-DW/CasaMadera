@@ -41,7 +41,7 @@ export default function Footer(props) {
 
         <div className="flex flex-col mb-[86px] md2:mb-0 md2:space-y-[110px] vw:space-y-[5.729vw] justify-between md2:mr-[14.7%] 3xl:mr-0 3xl:pr-[10.8333vw] 3xl:w-[calc(19.6875vw_+_10.833vw)] w-full">
 
-          <div className="grid md:max-w-[67.5%] md2:max-w-full grid-cols-[1fr,2fr,1fr] md:grid-cols-[1fr,1.5fr,1fr] gap-x-[17px] md:gap-x-16 lg:gap-x-[42px] vw:gap-x-[2.1875vw] gap-y-8 vw:gap-y-[1.6666vw]">
+          <div className="flex md:max-w-[67.5%] md2:max-w-full gap-x-[17px] md:gap-x-16 lg:gap-x-[42px] vw:gap-x-[2.1875vw] gap-y-8 vw:gap-y-[1.6666vw] flex-wrap">
 
             {footerNav && footerNav.map( (item, i) => {
 
@@ -49,7 +49,7 @@ export default function Footer(props) {
 
               return (
                 <Link href={link?.url} passHref key={i}>
-                  <a className={`text-[18px] vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
+                  <a className={`text-[18px] min-w-[36%] vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
                     {title}
                   </a>
                 </Link>

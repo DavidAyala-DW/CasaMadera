@@ -283,8 +283,8 @@ export default function Header(props) {
                                           <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
                                             <a
                                             className={`
-                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir
-                                            ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
+                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90
+                                            `}>
                                               {title.split(",")[0]}
                                             </a>
                                           </Link>
@@ -295,8 +295,8 @@ export default function Header(props) {
                                         comming_soon && (
                                           <div                                           
                                           className={`
-                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir
-                                          ${comming_soon ? "opacity-50 !cursor-not-allowed" : "opacity-90"} `}>
+                                            text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90
+                                          `}>
                                             {title.split(",")[0]}
                                           </div>
                                         )
