@@ -278,29 +278,14 @@ export default function Header(props) {
 
                                     <div key={_id}>
 
-                                      {
-                                        !comming_soon && (
-                                          <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
-                                            <a
-                                            className={`
-                                              text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90
-                                            `}>
-                                              {title.split(",")[0]}
-                                            </a>
-                                          </Link>
-                                        )
-                                      }
-                
-                                      {
-                                        comming_soon && (
-                                          <div                                           
-                                          className={`
-                                            text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90
-                                          `}>
-                                            {title.split(",")[0]}
-                                          </div>
-                                        )
-                                      }
+                                      <Link href={`/menus/${current}${comming_soon ? "" : "?menu=dinner-menu"} `} passHref>
+                                        <a
+                                        className={`
+                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90
+                                        `}>
+                                          {title.split(",")[0]}
+                                        </a>
+                                      </Link>
                 
                                     </div>
                                   )
