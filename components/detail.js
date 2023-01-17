@@ -2,7 +2,7 @@ import SanityImage from "./sanity-image";
 
 export default function Detail({detail}) {
 
-  const {image, title, description} = detail;
+  const {image, alt_text, title, description} = detail;
 
   return (
 
@@ -12,7 +12,12 @@ export default function Detail({detail}) {
         <div className="aspect-h-1 w-full aspect-w-[1.324] md:aspect-w-[2.687] lg:aspect-w-[1.352] 3xl:aspect-w-[1.836]">
           <div className="w-full h-full">
             <div className="relative w-full h-full">
-              <SanityImage src={image} className={`object-cover  object-center ${title.toLowerCase().includes("environment") && "md:object-bottom lg:object-center"  } `} layout={"fill"}/>
+              <SanityImage
+                alt={alt_text ?? "Image"}
+                src={image}
+                className={`object-cover  object-center ${title.toLowerCase().includes("environment") && "md:object-bottom lg:object-center"  } `}
+                layout={"fill"}
+              />
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ export default function Header(props) {
   const {
     mainNav,
     menuImage,
+    alt_text : menuImage_alt_text,
     secondHeaderNav,
     facebookHandle,
     instagramHandle,
@@ -35,12 +36,12 @@ export default function Header(props) {
     setOpenModal(updatedModalValue);
   }
 
-  function handleMouseOver(image){
-    setActiveMenuImage(image)
+  function handleMouseOver(image, alt_text){
+    setActiveMenuImage({image, alt_text})
   }
 
   function handleMouseDown(){
-    setActiveMenuImage(menuImage)
+    setActiveMenuImage({image: menuImage, alt_text: menuImage_alt_text ?? "Image"})
   }
 
   useEffect(() => { 
@@ -213,7 +214,7 @@ export default function Header(props) {
 
                 if(index >= 3) return;
 
-                const {title, link, image} = item;
+                const {title, link, image, alt_text} = item;
 
                 return (
 
@@ -225,7 +226,7 @@ export default function Header(props) {
                         <Link href={link.url} passHref>
                           <a
                             onMouseLeave={handleMouseDown}
-                            onMouseEnter={() => handleMouseOver(image)}
+                            onMouseEnter={() => handleMouseOver(image, alt_text)}
                             onClick={handleClick}
                             className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                           >
@@ -319,13 +320,13 @@ export default function Header(props) {
 
                 if(index >= 3){
 
-                  const {title, link, image} = item;
+                  const {title, link, image, alt_text} = item;
 
                   return (
                     <Link href={link.url} passHref key={index} >
                       <a
                         onMouseLeave={handleMouseDown}
-                        onMouseEnter={() => handleMouseOver(image)}
+                        onMouseEnter={() => handleMouseOver(image, alt_text)}
                         onClick={handleClick}
                         className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                       >
@@ -453,11 +454,11 @@ export default function Header(props) {
 
         </div>
 
-        <div className={`hidden ${!activeMenuImage && "bg-body"} lg:flex relative w-full h-full max-w-[26.4%] 3xl:max-w-[33.3333%]`}>
+        <div className={`hidden ${!activeMenuImage?.image && "bg-body"} lg:flex relative w-full h-full max-w-[26.4%] 3xl:max-w-[33.3333%]`}>
 
           {
             activeMenuImage && (
-              <SanityImage priority={true} className="object-cover" src={activeMenuImage} layout="fill" />
+              <SanityImage priority={true} alt={activeMenuImage?.alt_text ?? "Image"} className="object-cover" src={activeMenuImage?.image} layout="fill" />
             )
           }
           

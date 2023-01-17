@@ -11,6 +11,7 @@ export default function ImageWithText(props) {
     title,
     description,
     image,
+    alt_text,
     position,
     links,
     socialMedias,
@@ -75,7 +76,12 @@ export default function ImageWithText(props) {
 
           <div className="w-full h-full">
             <div className="w-full h-full relative">
-              <SanityImage src={image} layout="fill" alt="Image" className={`object-cover ${ (imagePositionTablet && imagePositionTablet == "bottom") && "md:object-bottom" } object-center ${ (imagesPosition && imagesPosition == "bottom")  ? "3xl:object-[0%_100%]" : "" }`} />
+              <SanityImage
+                src={image}
+                layout="fill"
+                alt={alt_text ?? "Image"}
+                className={`object-cover ${ (imagePositionTablet && imagePositionTablet == "bottom") && "md:object-bottom" } object-center ${ (imagesPosition && imagesPosition == "bottom")  ? "3xl:object-[0%_100%]" : "" }`}
+              />
             </div>
           </div>
 

@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function Event({event}) {
 
-  const {title, image, description, description2, date, link} = event;
+  const {title, image, alt_text, description, description2, date, link} = event;
   const [showDate, setShowDate] = useState(false);
 
   const handleFormatDate = useCallback((date) => {
@@ -40,7 +40,7 @@ export default function Event({event}) {
               <SanityImage
                 className="object-cover"
                 src={image}
-                alt="Event image"
+                alt={alt_text ?? "Image"}
                 layout="fill"
               />
             </div>

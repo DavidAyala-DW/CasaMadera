@@ -2,7 +2,14 @@ import Image from "next/image"
 
 export default function Newsletter(props) {
 
-  const {title, titleSize, description, descriptionSize, placeholder} = props;
+  const {
+    title,
+    titleSize,
+    description,
+    descriptionSize,
+    placeholder,
+    is_h1
+  } = props;
 
   const titleOptions = {
     "normal" : "text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] font-light mb-6 vw:mb-[1.25vw] ",
@@ -18,12 +25,23 @@ export default function Newsletter(props) {
 
     <section className='px-4 md:px-0 md:max-w-[94.4%] w-full mx-auto flex flex-col text-[#4A3419]'>
 
-      <h2
-        className={`text-center 
-        ${ titleSize ? titleOptions[titleSize] : titleOptions["normal"] }`}
-      >
-        {title}
-      </h2>
+      {
+        is_h1 ? (
+          <h1
+            className={`text-center 
+            ${ titleSize ? titleOptions[titleSize] : titleOptions["normal"] }`}
+          >
+            {title}
+          </h1>
+        ): (
+          <h2
+            className={`text-center 
+            ${ titleSize ? titleOptions[titleSize] : titleOptions["normal"] }`}
+          >
+            {title}
+          </h2>
+        )
+      }
 
       <p
         className={`text-center opacity-[.85] md:mx-auto

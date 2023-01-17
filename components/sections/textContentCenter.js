@@ -13,7 +13,8 @@ export default function TextContentCenter(props) {
     titleSize,
     descriptionContent,
     locations,
-    show_menu_buttton
+    show_menu_buttton,
+    is_h1
   } = props;
 
   const router = useRouter()
@@ -25,15 +26,29 @@ export default function TextContentCenter(props) {
       
       <div className="flex flex-col">
 
-        <h2 className={`capitalize
-          ${(mobileAlignment && mobileAlignment == "left") ? "text-left md:text-center" : "text-center" }
-          ${ (titleSize && titleSize == "large") && "text-[40px] lg:text-[48px] vw:text-[2.5vw] leading-[1.2] lg:leading-[66px] vw:leading-[1.375]"}
-          ${ (titleSize && titleSize == "normal") && "text-[32px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
-          ${ (titleSize && titleSize == "small") && "text-[24px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
-          font-light mb-6 lg:mb-4 vw:mb-[.8333vw]
-        `}>
-          {title}
-        </h2>
+        {
+          is_h1 ? (
+            <h1 className={`capitalize
+              ${(mobileAlignment && mobileAlignment == "left") ? "text-left md:text-center" : "text-center" }
+              ${ (titleSize && titleSize == "large") && "text-[40px] lg:text-[48px] vw:text-[2.5vw] leading-[1.2] lg:leading-[66px] vw:leading-[1.375]"}
+              ${ (titleSize && titleSize == "normal") && "text-[32px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
+              ${ (titleSize && titleSize == "small") && "text-[24px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
+              font-light mb-6 lg:mb-4 vw:mb-[.8333vw]
+            `}>
+              {title}
+            </h1>            
+          ) : (
+            <h2 className={`capitalize
+              ${(mobileAlignment && mobileAlignment == "left") ? "text-left md:text-center" : "text-center" }
+              ${ (titleSize && titleSize == "large") && "text-[40px] lg:text-[48px] vw:text-[2.5vw] leading-[1.2] lg:leading-[66px] vw:leading-[1.375]"}
+              ${ (titleSize && titleSize == "normal") && "text-[32px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
+              ${ (titleSize && titleSize == "small") && "text-[24px] lg:text-[32px] vw:text-[1.666vw] leading-[1.2] lg:leading-[44px] vw:leading-[1.375]"}
+              font-light mb-6 lg:mb-4 vw:mb-[.8333vw]
+            `}>
+              {title}
+            </h2>
+          )
+        }
 
         <div className={`
           ${(mobileAlignment && mobileAlignment == "left") ? "text-left md:text-center" : "text-center" }

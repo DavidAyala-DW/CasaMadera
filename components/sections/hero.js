@@ -2,7 +2,7 @@ import BackgroundImage from "../backgroundImage";
 
 export default function Hero(props) {
 
-  const {backgroundImage} = props;
+  const {backgroundImage, alt_text} = props;
 
   return (
 
@@ -12,7 +12,7 @@ export default function Hero(props) {
         <div className="w-full h-full">
 
           <div className="relative w-full h-full">
-            <BackgroundImage {...{...backgroundImage}} className="object-cover" layout="fill" />
+            <BackgroundImage {...{...backgroundImage, alt_text}} className="object-cover" layout="fill" />
           </div>
 
         </div>

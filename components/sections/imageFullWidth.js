@@ -2,7 +2,7 @@ import SanityImage from "../sanity-image"
 
 export default function ImageFullWidth(props) {
 
-  const {image} = props;
+  const {image, alt_text} = props;
 
   return (
 
@@ -13,6 +13,7 @@ export default function ImageFullWidth(props) {
           <div className="w-full h-full relative">
             <SanityImage
               src={image}
+              alt={alt_text ?? "Image"}
               layout="fill"
               className="object-cover"
             />

@@ -26,7 +26,7 @@ export default function Menus(props) {
           {
             locations && locations.map(location => {
 
-              const {title, image, menus, slug} = location;
+              const {title, image, alt_text, menus, slug} = location;
 
               return ( 
 
@@ -36,9 +36,9 @@ export default function Menus(props) {
                     <div className="w-full h-full">
                       <div className="w-full h-full relative">
                         <SanityImage
+                          alt={alt_text ?? "Image"}
                           src={image}
                           layout="fill"
-                          alt="Image"
                           className="object-cover"
                         />
                         <div className="absolute bottom-6 right-[30px] flex-col justify-center items-center">
