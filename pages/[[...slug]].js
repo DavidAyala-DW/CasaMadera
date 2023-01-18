@@ -34,7 +34,7 @@ export default function Page(props) {
     <Layout menus={menus} locations={locations} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
         title={title}
-        description={description}
+        description={description ?? ""}
       />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}

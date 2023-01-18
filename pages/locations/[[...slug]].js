@@ -16,7 +16,8 @@ const ExitPreviewButton = dynamic(() =>
 export default function Page(props) {
   
   const { preview, data, siteSettings, menus, locations } = props;
-  const {page: {title}} = data;
+  const {page: {title, description_location_page}} = data;
+
   const stickyHeader = false;
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
@@ -27,12 +28,13 @@ export default function Page(props) {
     enabled: preview,
   })
 
-  const page = filterDataToSingleItem(previewData, preview)
+  const page = filterDataToSingleItem(previewData, preview);
 
   return (    
     <Layout menus={menus} locations={locations} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
         title={title}
+        description={description_location_page?? ""}
       />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}
@@ -187,6 +189,8 @@ export const getStaticProps = async ({ params, preview = false }) => {
     *[_type == "locations" && slug.current in $possibleSlugs][0]{
       _id,
       title,
+      description_location_page,
+      description_menu_page,
       menus,
       content
   }
