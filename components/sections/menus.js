@@ -33,19 +33,18 @@ export default function Menus(props) {
                 <div className="flex flex-col space-y-6">
 
                   <div className="flex flex-col w-full aspect-h-1 aspect-w-[1.324] md:aspect-w-[2.687] lg:aspect-w-[1.349] 3xl:aspect-w-[1.837]">
-                    <div className="w-full h-full">
-                      <div className="w-full h-full relative">
-                        <SanityImage
-                          alt={alt_text ?? "Image"}
-                          src={image}
-                          layout="fill"
-                          className="object-cover"
-                        />
-                        <div className="absolute bottom-6 right-[30px] flex-col justify-center items-center">
-
-                          <Link href={`/locations/${slug?.current}`} passHref> 
-
-                            <a className="relative w-2.5 vw:w-[0.520vw] h-[18px] vw:h-[.9375vw] cursor-pointer block">
+                  <Link href={`/location/${slug?.current}`} passHref> 
+                    <a className="w-full h-full">
+                      <div className="w-full h-full">
+                        <div className="w-full h-full relative">
+                          <SanityImage
+                            alt={alt_text ?? "Image"}
+                            src={image}
+                            layout="fill"
+                            className="object-cover"
+                          />
+                          <div className="absolute bottom-6 right-[30px] flex-col justify-center items-center">
+                            <div className="relative w-2.5 vw:w-[0.520vw] h-[18px] vw:h-[.9375vw] cursor-pointer block">
 
                               <Image
                                 src="/images/whiteRightArrow.svg"
@@ -53,13 +52,14 @@ export default function Menus(props) {
                                 layout="fill"
                               />
 
-                            </a>
+                            </div>
 
-                          </Link>
-
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
+                  </Link>
+
                   </div>
       
                   <div className="flex flex-col space-y-4">
