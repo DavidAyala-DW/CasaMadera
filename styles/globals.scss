@@ -77,3 +77,19 @@ h1,h2,h3,h4,a,input{
 .gallery .swiper-wrapper{
   margin-left: -16%!important;
 }
+
+.richtext-page{
+
+  ul{
+    @apply flex flex-col space-y-5;
+  }
+
+  li{
+    @apply leading-[1.5];
+  }
+
+  p{
+    @apply leading-[1.75];
+  }
+
+}
