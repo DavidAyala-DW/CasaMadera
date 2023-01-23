@@ -24,6 +24,8 @@ export default function ImageWithText(props) {
     locations
   } = props;
 
+  console.log(menus, "Menus");
+
   const socialMediasList = socialMedias?.socialMedias ?? [];
 
   const alignments = {
@@ -158,7 +160,7 @@ export default function ImageWithText(props) {
         }
 
         {
-          menus && (
+          (menus && Array.isArray(menus) ) && (
             <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row mt-10 md:items-center md:space-x-6 vw:space-x-[1.25vw]">
               {
                 menus.map(menu => {
