@@ -81,13 +81,28 @@ export default function Contact(props) {
         
 
         <Field
-          className="mb-[26px] md:mb-12 vw:mb-[2.5vw]"
+          className="mb-4 md:mb-12 vw:mb-[2.5vw]"
           type="textarea"
           placeholder="How can we help you?"
           register={register}
           label="Message"
           id="message"
         />
+
+        <div className="flex items-center w-full justify-between space-x-5 mb-16 cursor-pointer">
+
+          <div className="flex flex-col checkbox-newsletter border-2 border-primary p-[2px] cursor-pointer"> 
+
+            <input type="checkbox" className="hidden" id="checkbox_sign_up" />
+            <label className='block h-4 w-4 cursor-pointer' htmlFor="checkbox_sign_up"></label>
+            
+          </div>
+
+          <p className='text-sm md:text-lg font-normal font-libreBaskerville leading-7 cursor-pointer'>
+            Select this box to receive updates and marketing. You can change your preferences at any time as per our Privacy Policy.
+          </p>
+
+        </div>
 
         <button 
           type="submit"
