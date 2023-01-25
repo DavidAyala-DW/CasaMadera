@@ -121,7 +121,7 @@ export default function Header(props) {
 
         <div className={`cursor-pointer order-3 md2:order-1 select-none ${openModal && "absolute right-4 md2:left-0 md2:relative"}`}>
 
-          <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.302vw]`}>
+          <div onClick={handleClick} className={`${openModal && "hidden"} w-[25px] vw:!w-[1.302vw] filter-nav-icons`}>
             <Image
               src={`/images/${existHero ? "burguer.svg" : "burguerBrown.svg" }`}
               alt="burger"
@@ -148,7 +148,7 @@ export default function Header(props) {
           {
             (!openModal && existHero) && (
               <Link href="/" passHref>
-                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw] filter-nav-icons">
                   <Image
                     src={"/images/logo.svg"}
                     width={226}
@@ -164,7 +164,7 @@ export default function Header(props) {
           {
             (openModal || !existHero) && (
               <Link href="/" passHref>
-                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw]">
+                <a onClick={ () => setOpenModal(false)  } className="block cursor-pointer w-[226px] vw:w-[11.77vw] filter-nav-icons">
                   <Image
                     src={"/images/logoDark.svg"}
                     width={226}
@@ -185,7 +185,7 @@ export default function Header(props) {
 
             <Link passHref href={reservationsButton?.link?.url}>
               <a>
-                <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
+                <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} filter-nav-icons transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
                   {reservationsButton?.title}
                 </p>
               </a>

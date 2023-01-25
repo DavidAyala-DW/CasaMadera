@@ -16,6 +16,11 @@ export default function Hero(props) {
           </div>
 
         </div>
+
+        <div className="absolute w-full h-full inset-0 overlay-hero">
+
+        </div>
+
       </div>
 
     </section>

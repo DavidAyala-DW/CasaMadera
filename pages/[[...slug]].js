@@ -83,7 +83,7 @@ async function fulfillSectionQueries(page, internalLinks) {
 
           await Promise.all(section.locations.map(async (location) => {
             const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`)
-            const {title, image, alt_text, slug, menus = null} = queryData;
+            const {title, image, alt_text = "", slug, menus = null} = queryData;
             location.title = title;
             location.image = image;
             location.alt_text = alt_text;
@@ -98,6 +98,28 @@ async function fulfillSectionQueries(page, internalLinks) {
           const queryData = await client.fetch(groq`*[_type == "locations" && _id == "${section.locations._ref}" ][0]{...}`)
           section.locations.query = queryData;
         }
+      }
+
+      console.log(section);
+
+      if(section._type == "privateEventsList" && section.events){
+
+        if(Array.isArray(section.events)){
+          
+          await Promise.all(section.events.map(async (event) => {
+
+            const queryData = await client.fetch(groq`*[_type == "eventsCasaMadera" && _id == "${event._ref}" ][0]{...}`)
+            const {title, image, alt_text = "", slug, book_link} = queryData;
+            event.title = title;
+            event.image = image;
+            event.alt_text = alt_text;
+            event.book_link = book_link;
+            event.slug = slug;
+
+          }))
+
+        }
+
       }
 
       if(section._type === 'imageWithText' && section?.show_locations){
