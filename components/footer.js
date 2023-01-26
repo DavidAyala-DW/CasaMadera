@@ -69,13 +69,13 @@ export default function Footer(props) {
               </Link>
             )}
 
-            <Link href="/pages/accessibility-statement" passHref>  
+            <Link href="/accessibility-statement" passHref>  
               <a className={`text-base vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
                 Accessibility Statement
               </a>
             </Link>
 
-            <Link href="/pages/website-terms" passHref>  
+            <Link href="/website-terms" passHref>  
               <a className={`text-base vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
                 Website Terms
               </a>
@@ -202,13 +202,13 @@ export default function Footer(props) {
               </Link>
             )}
 
-            <Link href="/pages/accessibility-statement" passHref>  
+            <Link href="/accessibility-statement" passHref>  
               <a className={`text-sm vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
                 Accessibility Statement
               </a>
             </Link>
 
-            <Link href="/pages/website-terms" passHref>  
+            <Link href="/website-terms" passHref>  
               <a className={`text-sm vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`} >
                 Website Terms
               </a>
