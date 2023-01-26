@@ -21,10 +21,12 @@ export default function ImageWithText(props) {
     menus,
     imagesPosition,
     imagePositionTablet,
-    locations
+    locations,
+    show_facebook_icon,
+    facebook_link
   } = props;
 
-  console.log(menus, "Menus");
+  console.log(props);
 
   const socialMediasList = socialMedias?.socialMedias ?? [];
 
@@ -117,6 +119,25 @@ export default function ImageWithText(props) {
               {links?.title}
             </SanityLink>
           )
+        }
+
+        {
+          (facebook_link && show_facebook_icon) && (
+
+            <a href={facebook_link} className="block w-8 vw:w-[1.666vw] mt-5">
+
+              <Image
+                src={"/images/facebook.svg"}
+                alt="facebook logo"
+                layout="responsive"
+                width={32}
+                height={32}
+              />
+
+            </a>
+            
+          )
+                      
         }
 
         {

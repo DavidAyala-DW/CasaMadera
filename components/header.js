@@ -386,7 +386,7 @@ export default function Header(props) {
 
           <div className="flex items-center space-x-6 vw:space-x-[1.25vw]">
 
-            {
+            {/* {
               facebookHandle && (
                 <a onClick={handleClick} href={facebookHandle} className="block w-8 vw:w-[1.666vw]">
 
@@ -400,7 +400,7 @@ export default function Header(props) {
     
                 </a>
               )
-            }
+            } */}
 
             {
               instagramHandle && (
