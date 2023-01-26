@@ -64,11 +64,11 @@ export default function PrivateEventsList(props) {
                       </a>
                     </Link>
       
-                    <Link href={book_link } passHref>
+                    {/* <Link href={book_link } passHref>
                       <a className="!font-avenir text-lg font-light leading-6 tracking-[0.05em] underline opacity-80 text-[#4A3419] uppercase">
                         BOOK EVENT
                       </a>
-                    </Link>
+                    </Link> */}
       
                   </div>
       
