@@ -122,6 +122,7 @@ export default function ImageWithText(props) {
         }
 
         {
+          
           (facebook_link && show_facebook_icon) && (
 
             <a href={facebook_link} className="block w-8 vw:w-[1.666vw] mt-5">
