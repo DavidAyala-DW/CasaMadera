@@ -112,7 +112,7 @@ export default function MenusContent(props) {
 
                               {
                                 courses.map(course => {
-
+                                  console.log(course);
                                   const {title, description, _key, extra_text, description_size} = course;
                                   return (
 
@@ -127,9 +127,9 @@ export default function MenusContent(props) {
                                         description && (
 
                                           <div
-                                            className={`text-center text-lg vw:text-[.9375vw] leading-[22px] vw:leading-[1.222] italic font-libreBaskerville mx-auto opacity-[.85]
+                                            className={`text-center new-line text-lg vw:text-[.9375vw] leading-[22px] vw:leading-[1.222] italic font-libreBaskerville mx-auto opacity-[.85]
                                              ${ description_size ? descriptionSizes[description_size] : descriptionSizes.medium }
-                                            `}>
+                                          `}>
                                             {description}
                                           </div>
 
