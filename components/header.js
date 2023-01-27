@@ -339,7 +339,7 @@ export default function Header(props) {
 
               })}
 
-              <div className="max-w-max block md2:hidden">
+              {/* <div className="max-w-max block md2:hidden">
                 {(reservationsButton && (
 
                   <Link passHref href={reservationsButton?.link?.url}>
@@ -351,7 +351,7 @@ export default function Header(props) {
                   </Link>
 
                 ))}
-              </div>
+              </div> */}
               
               <div className="pt-6 vw:pt-[1.25vw] hidden md2:flex flex-col space-y-2 vw:space-y-[.416vw]">
 
