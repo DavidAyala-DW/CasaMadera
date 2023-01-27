@@ -219,7 +219,7 @@ export default function ImageWithText(props) {
 
                       {
                         !comming_soon && (
-                          <Link href={`/menus/${current}?menu=dinner-menu`} passHref>
+                          <Link href={`/menus/${current}?menu=cocktail-menu`} passHref>
                             <a
                             className={`block font-light text-lg vw:text-[.9375vw] md:pb-[11px] vw:pb-[.5729vw] md:pr-6
                             vw:pr-[1.25vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase
