@@ -228,7 +228,12 @@ export default function Header(props) {
                             onMouseLeave={handleMouseDown}
                             onMouseEnter={() => handleMouseOver(image, alt_text)}
                             onClick={handleClick}
-                            className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
+                            className={                              
+                              `
+                                ${ title?.toLowerCase()?.includes('reservati') ? "!hidden md2:!block" : "block" }
+                                block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]
+                              `
+                            }
                           >
                             {title}
                           </a>
@@ -238,7 +243,7 @@ export default function Header(props) {
 
                         <div className="flex flex-col items-center md2:items-start">
 
-                          <div className="flex items-center w-full space-x-5 max-w-max mx-auto md2:max-w-full">
+                          <div className={`flex items-center w-full space-x-5 max-w-max mx-auto md2:max-w-full`}>
 
                             <Link href={link.url} passHref>
                               <a
@@ -328,7 +333,9 @@ export default function Header(props) {
                         onMouseLeave={handleMouseDown}
                         onMouseEnter={() => handleMouseOver(image, alt_text)}
                         onClick={handleClick}
-                        className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
+                        className={`
+                          font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]
+                        `}
                       >
                         {title.split(",")[0]} 
                       </a>
@@ -339,7 +346,7 @@ export default function Header(props) {
 
               })}
 
-              {/* <div className="max-w-max block md2:hidden">
+              <div className="max-w-max block md2:hidden">
                 {(reservationsButton && (
 
                   <Link passHref href={reservationsButton?.link?.url}>
@@ -351,7 +358,7 @@ export default function Header(props) {
                   </Link>
 
                 ))}
-              </div> */}
+              </div>
               
               <div className="pt-6 vw:pt-[1.25vw] hidden md2:flex flex-col space-y-2 vw:space-y-[.416vw]">
 
