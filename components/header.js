@@ -185,7 +185,7 @@ export default function Header(props) {
 
             <Link passHref href={reservationsButton?.link?.url}>
               <a>
-                <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} filter-nav-icons transition-colors  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
+                <p className={`font-light ${(openModal || !existHero  ) ? "text-[#57412d]" : "text-white"} filter-nav-icons transition-colors py-2.5 px-[30px] border border-white  text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.388] tracking-[.05em] uppercase`}>
                   {reservationsButton?.title}
                 </p>
               </a>

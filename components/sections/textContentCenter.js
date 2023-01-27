@@ -17,6 +17,12 @@ export default function TextContentCenter(props) {
     is_h1
   } = props;
 
+
+  let isReservation = false;
+  if(learn_more?.title){    
+    isReservation = learn_more?.title.toLowerCase().includes("reservation");
+  }
+
   const router = useRouter()
   const {asPath} = router;
 
@@ -78,7 +84,7 @@ export default function TextContentCenter(props) {
         <div className="flex items-center space-x-6 max-w-max mx-auto">
 
           {
-            learn_more && (
+            (learn_more && !isReservation) && (
 
               <Link href={learn_more?.link} passHref>
 
@@ -87,6 +93,22 @@ export default function TextContentCenter(props) {
                     block ${(mobileAlignment && mobileAlignment == "left") ? "mr-auto md:mx-auto" : "mx-auto" }
                     max-w-max text-center uppercase opacity-80 tracking-[.05em] text-lg leading-[25px] vw:text-[.9375vw] vw:leading-[1.3888] font-light underline
                   `}                
+                >
+                  {learn_more?.title}
+                </a>
+
+              </Link>
+
+            )
+          }
+
+          {
+            (learn_more && isReservation) && (
+
+              <Link href={learn_more?.link} passHref>
+
+                <a
+                  className="text-primary font-avenir tracking-[0.05em] font-light text-lg leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary"
                 >
                   {learn_more?.title}
                 </a>
