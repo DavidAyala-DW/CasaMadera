@@ -53,7 +53,7 @@ export default function Reservations(props) {
                     </h2>
       
                     <Link href={reservation_link } passHref>
-                      <a className="!font-avenir text-lg font-light leading-6 tracking-[0.05em] underline opacity-80 text-[#4A3419] uppercase">
+                      <a className="text-primary transition-colors hover:bg-primary max-w-max block hover:text-white font-avenir tracking-[0.05em] font-light text-lg leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary">
                         Reservations
                       </a>
                     </Link>
