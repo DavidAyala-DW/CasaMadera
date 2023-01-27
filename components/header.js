@@ -350,7 +350,8 @@ export default function Header(props) {
                 {(reservationsButton && (
 
                   <Link passHref href={reservationsButton?.link?.url}>
-                    <a                      
+                    <a      
+                      onClick={handleClick}                 
                       className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
                     >
                       {reservationsButton?.title}
