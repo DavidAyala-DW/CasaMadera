@@ -108,7 +108,7 @@ export default function TextContentCenter(props) {
               <Link href={learn_more?.link} passHref>
 
                 <a
-                  className="text-primary transition-colors hover:bg-primary hover:text-white font-avenir tracking-[0.05em] font-light text-lg leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary"
+                  className="text-primary transition-colors hover:bg-primary hover:text-white font-avenir tracking-[0.05em] font-light text-base leading-[1] md2:text-lg md2:leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary"
                 >
                   {learn_more?.title}
                 </a>

@@ -9,10 +9,10 @@ export default function Reservations(props) {
     <>
 
       <section
-      className="px-6 md:px-0 md:max-w-[94.4%] 3xl:max-w-[95%] w-full mx-auto flex flex-col pt-[162px] pb-[100px]"      
+      className="px-6 md:px-0 md:max-w-[94.4%] 3xl:max-w-[95%] w-full mx-auto flex flex-col pt-20 md2:pt-[162px] pb-6 md2:pb-[100px]"      
       >
 
-        <h1 className="font-light text-center text-[48px] leading-[66px] mb-5">
+        <h1 className="font-light text-center text-[32px] md2:text-[48px] leading-[66px]">
           {title}
         </h1>
 
@@ -48,12 +48,12 @@ export default function Reservations(props) {
       
                   <div className="flex flex-col space-y-4">
 
-                    <h2 className="text-[32px] cursor-pointer font-light leading-11">
+                    <h2 className="text-2xl md2:text-[32px] cursor-pointer font-light md2:leading-11">
                       {heading}
                     </h2>
       
                     <Link href={reservation_link } passHref>
-                      <a className="text-primary transition-colors hover:bg-primary max-w-max block hover:text-white font-avenir tracking-[0.05em] font-light text-lg leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary">
+                      <a className="text-primary transition-colors hover:bg-primary max-w-max block hover:text-white font-avenir tracking-[0.05em] font-light text-base leading-[1] md2:text-lg md2:leading-[25px] uppercase opacity-80 py-2.5 px-[30px] border border-primary">
                         Reservations
                       </a>
                     </Link>
