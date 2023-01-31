@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { nopeResolver } from '@hookform/resolvers/nope'
 import Nope from 'nope-validator'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Field from '../field'
 import Checkbox from '../checkbox'
 import File from '../inputFile';
@@ -10,6 +10,8 @@ export default function Contact(props) {
 
   const {title, description} = props;
   const [activeOption, setActiveOption] = useState();
+
+  const consent = useRef(null);
   
   const schema = Nope.object().shape({
     name: Nope.string().required(),
@@ -18,16 +20,48 @@ export default function Contact(props) {
   })
 
   useEffect(() => {
-    setActiveOption("inquiry")
+    setActiveOption("general_inquiry")
   }, []);
 
   const {
     register,
     formState: { errors, isValid, isSubmitted },
+    reset,
     handleSubmit,
   } = useForm({ resolver: nopeResolver(schema) })
 
-  const onSubmit = (values) => console.log(values)
+  async function onSubmit(values) {
+
+    const object = {
+      ...values,
+      consent_emails: (consent?.current?.checked) ? "yes" : "no",
+      option: activeOption
+    }
+
+    console.log(object);
+
+    try {
+
+      const request = await fetch("/api/email",{
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },  
+        body: JSON.stringify(object),
+      });
+
+      const response = await request.json();
+      const {status, message} = response;
+      if(status == "successful"){
+        alert(message);
+        reset()
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   return (
 
@@ -42,7 +76,7 @@ export default function Contact(props) {
       </p>
 
       <div className="flex flex-col space-y-[30px] md:space-y-0 md:grid md:grid-cols-[51%_calc(49%-44px)] md:gap-x-[44px] md:gap-y-7 lg:flex lg:flex-row lg:space-x-[22px] vw:space-x-[1.1458vw] w-max mx-auto mb-20 vw:mb-[4.1666vw]">
-        <Checkbox {...{activeOption}} {...{setActiveOption}} text="General Inquiry" id="inquiry"/>
+        <Checkbox {...{activeOption}} {...{setActiveOption}} text="General Inquiry" id="general_inquiry"/>
         <Checkbox {...{activeOption}} {...{setActiveOption}} text="Careers" id="careers"/>
         <Checkbox {...{activeOption}} {...{setActiveOption}} text="Press" id="press"/>
       </div>
@@ -72,14 +106,13 @@ export default function Contact(props) {
           errors={errors}
           placeholder="Your email"
         />
-
+{/* 
         {
           activeOption == "press" && (
             <File className="mb-[18px] vw:mb-[.9375vw]" />
           )
-        }
+        } */}
         
-
         <Field
           className="mb-4 md:mb-12 vw:mb-[2.5vw]"
           type="textarea"
@@ -93,7 +126,7 @@ export default function Contact(props) {
 
           <div className="flex flex-col checkbox-newsletter border-2 border-primary p-[2px] cursor-pointer"> 
 
-            <input type="checkbox" className="hidden" id="checkbox_sign_up" />
+            <input ref={consent} type="checkbox" className="hidden" id="checkbox_sign_up" />
             <label className='block h-4 w-4 cursor-pointer' htmlFor="checkbox_sign_up"></label>
             
           </div>

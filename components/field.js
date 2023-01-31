@@ -58,11 +58,11 @@ export default function Field(props) {
             <textarea
               {...register(id)}
               name={id}
+              placeholder={placeholder}
               id={id}
-              value={placeholder}
               className={`
               outline-none bg-transparent border-[.5px] border-[#4A3419]
-              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-[.85] text-lg md:text-[20px]  vw:text-[1.0416vw] leading-[22px] vw:leading-[1.1] font-normal
+              w-full block py-3 md:py-4 vw:py-[.8333vw] px-4 md:px-5 vw:px-[1.0416vw] opacity-[.85] text-base vw:text-[.1.0416vw] md:text-[20px] leading-[22px] vw:leading-[1.1]  font-normal
               placeholder:text-[#4A3419] resize-none min-h-[180px] vw:min-h-[9.375vw]
               `}
             >

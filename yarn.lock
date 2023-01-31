@@ -2229,6 +2229,11 @@
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-2.0.6.tgz"
   "version" "2.0.6"
 
+"nodemailer@^6.9.1":
+  "integrity" "sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA=="
+  "resolved" "https://registry.npmjs.org/nodemailer/-/nodemailer-6.9.1.tgz"
+  "version" "6.9.1"
+
 "nope-validator@^1.0.4":
   "integrity" "sha512-+ooCIlPpDJbD8H9oz+izVqe28ZO+Km6WCGYJnkm+DOLkAWunhDwxV9PyZ5J2gZ/URFeX3u1Mk+yz7kIra5wayg=="
   "resolved" "https://registry.npmjs.org/nope-validator/-/nope-validator-1.0.4.tgz"
