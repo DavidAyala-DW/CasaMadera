@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { getClient } from '@/lib/sanity.server'
 
 export const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -14,24 +15,60 @@ transporter.verify().then( () => {
   console.log("Ready to send emails");
 })
 
+function makeid(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
+
 async function sendEmail(body){
 
   let html = "";
   Object.entries(body).forEach( ([key,value]) => {
-    html += `<p> <b style="text-transform: capitalize">${key.replace('_', ' ')}:</b> &nbsp; ${value} </p>`
+    html += `<p> <b style="text-transform: capitalize">${key.replace('_', ' ')}:</b> &nbsp; ${value.replace('_', ' ')} </p>`
   })
-  
-  console.log(html);
+
+  const doc = {
+    _type: 'emailsCasaMadera',
+    title: `New message from ${body?.name}`,
+    description: [
+      ...Object.entries(body).map( ([key,value]) => {
+        return{
+          "_key": makeid(12),
+          "_type": "block",
+          "children": [
+              { 
+                "_key": makeid(12),
+                "_type": "span",
+                "marks": ["strong"],
+                "text": `${ key.replace('_', ' ').replace(key[0], key[0].toUpperCase()) }`
+              },
+              { 
+                "_key": makeid(12),
+                "_type": "span",
+                "marks": [],
+                "text": ` : ${value.replace('_', ' ')}`
+              }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      })
+    ]
+  }
 
   try {
 
-    await transporter.sendMail({
-      from: '"New Message" <luis@dango.digital>', // sender address
-      to: "luis@dango.digital,luis.zanabria2@unmsm.edu.pe,emma@noble33.com", // list of receivers
-      subject: "New Message", // Subject line
-      html: html, // html body
-    });
-  
+    const client = getClient(false);
+    let data = await client.create(doc);
+    console.log(data);
+
     return {
       "status" : "successful",
       "message": "The email has been sended"
@@ -39,12 +76,30 @@ async function sendEmail(body){
 
   } catch (error) {
 
+    console.log(error);
     return {
       "status" : "failed",
       "message": "The email cannot be sended"
     }  
 
   }
+
+  // try {
+
+  //   await transporter.sendMail({
+  //     from: '"New Message" <luis@dango.digital>', // sender address
+  //     to: "luis@dango.digital", // list of receivers
+  //     subject: "New Message", // Subject line
+  //     html: html, // html body
+  //   });
+  
+
+
+  // } catch (error) {
+
+
+
+  // }
 
 }
 

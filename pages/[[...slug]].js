@@ -100,8 +100,6 @@ async function fulfillSectionQueries(page, internalLinks) {
         }
       }
 
-      console.log(section);
-
       if(section._type == "privateEventsList" && section.events){
 
         if(Array.isArray(section.events)){

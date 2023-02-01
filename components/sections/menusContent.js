@@ -112,7 +112,6 @@ export default function MenusContent(props) {
 
                               {
                                 courses.map(course => {
-                                  console.log(course);
                                   const {title, description, _key, extra_text, description_size} = course;
                                   return (
 

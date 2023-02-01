@@ -14,8 +14,6 @@ function SimpleBlockContent(props) {
     return null
   }
 
-  console.log(blocks);
-
   return (
     
     <div className="portableText flex flex-col space-y-5">
