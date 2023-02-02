@@ -66,8 +66,7 @@ async function sendEmail(body){
   try {
 
     const client = getClient(false);
-    let data = await client.create(doc);
-    console.log(data);
+    await client.create(doc);
 
     return {
       "status" : "successful",
@@ -83,23 +82,6 @@ async function sendEmail(body){
     }  
 
   }
-
-  // try {
-
-  //   await transporter.sendMail({
-  //     from: '"New Message" <luis@dango.digital>', // sender address
-  //     to: "luis@dango.digital", // list of receivers
-  //     subject: "New Message", // Subject line
-  //     html: html, // html body
-  //   });
-  
-
-
-  // } catch (error) {
-
-
-
-  // }
 
 }
 
