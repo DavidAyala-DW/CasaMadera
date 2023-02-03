@@ -60,7 +60,8 @@ async function sendEmail(body){
           "style": "normal"
         }
       })
-    ]
+    ],
+    location: body?.location
   }
 
   try {
