@@ -77,15 +77,26 @@ async function sendEmail(body){
         html: html, // html body
       });
 
-    }else{
+    }
 
+    if(body?.option == "general_inquiry" || body?.option == "reservation"){
+
+      await transporter.sendMail({
+        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        to: "luis@dango.digital,info@casamadera.com", // list of receivers
+        subject: "New Message", // Subject line
+        html: html, // html body
+      });
+
+    }
+    
+    if(body?.option == "careers"){
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
         to: "luis@dango.digital,info@noble33.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
-
     }
     
 
