@@ -68,6 +68,27 @@ async function sendEmail(body){
 
     const client = getClient(false);
     await client.create(doc);
+    if(body?.option == "press"){
+
+      await transporter.sendMail({
+        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        to: "luis@dango.digital,emma@noble33.com", // list of receivers
+        subject: "New Message", // Subject line
+        html: html, // html body
+      });
+
+    }else{
+
+      await transporter.sendMail({
+        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        to: "luis@dango.digital,info@noble33.com", // list of receivers
+        subject: "New Message", // Subject line
+        html: html, // html body
+      });
+
+    }
+    
+
 
     return {
       "status" : "successful",
