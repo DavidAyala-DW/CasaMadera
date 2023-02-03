@@ -83,7 +83,7 @@ async function sendEmail(body){
 
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
-        to: "luis@dango.digital,info@casamadera.com", // list of receivers
+        to: "luis@dango.digital,info@thecasamadera.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
