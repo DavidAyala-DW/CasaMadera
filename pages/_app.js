@@ -49,8 +49,9 @@ function MyApp({ Component, pageProps }) {
         }}
       >
 
-        We use cookies to ensure that we give you the best experience on our website.
-        visit
+      We use cookies to ensure that we give you the best experience on our website.
+
+      See
         
         <Link href="/privacy-policy" passHref>
           <a className="px-2 underline pointer ">
@@ -60,9 +61,9 @@ function MyApp({ Component, pageProps }) {
         
         and
 
-        <Link href="/cookies-preference" passHref>
+        <Link href="/website-terms" passHref>
           <a className="px-2 underline pointer ">
-            Cookies preferences
+            Website Terms
           </a>          
         </Link>
 
