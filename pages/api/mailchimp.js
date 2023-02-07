@@ -2,7 +2,7 @@ import client from "@mailchimp/mailchimp_marketing";
 import md5 from "md5";
 
 client.setConfig({
-  apiKey: "f796cbd3317a51c3628cfb41c91e5a11-us5",
+  apiKey: process.env.MAILCHIMP_API_KEY,
   server: "us5",
 });
 
