@@ -68,11 +68,12 @@ async function sendEmail(body){
 
     const client = getClient(false);
     await client.create(doc);
+
     if(body?.option == "press"){
 
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
-        to: "luis@dango.digital,emma@noble33.com", // list of receivers
+        to: "emma@noble33.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
@@ -83,7 +84,7 @@ async function sendEmail(body){
 
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
-        to: "luis@dango.digital,info@thecasamadera.com", // list of receivers
+        to: "info@thecasamadera.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
@@ -93,13 +94,20 @@ async function sendEmail(body){
     if(body?.option == "careers"){
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
-        to: "luis@dango.digital,info@noble33.com", // list of receivers
+        to: "info@noble33.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
     }
-    
 
+    if(body?.option == "events_inquiries"){
+      await transporter.sendMail({
+        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        to: "events@thecasamadera.com", // list of receivers
+        subject: "New Message", // Subject line
+        html: html, // html body
+      });
+    }  
 
     return {
       "status" : "successful",

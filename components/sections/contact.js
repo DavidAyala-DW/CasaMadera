@@ -151,6 +151,7 @@ export default function Contact(props) {
           <Checkbox {...{activeOption}} {...{setActiveOption}} text="Reservations" id="reservation"/>
           <Checkbox {...{activeOption}} {...{setActiveOption}} text="Careers" id="careers"/>
           <Checkbox {...{activeOption}} {...{setActiveOption}} text="Press" id="press"/>
+          <Checkbox {...{activeOption}} {...{setActiveOption}} text="Events Inquiries" id="events_inquiries"/>
         </div>
 
         <form
