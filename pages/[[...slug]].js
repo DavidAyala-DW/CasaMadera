@@ -1,3 +1,4 @@
+import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
 import { NextSeo } from 'next-seo'
 import client from '@/lib/sanity-client'
@@ -17,8 +18,9 @@ export default function Page(props) {
 
   const { preview, data, siteSettings, menus, locations } = props;
   const stickyHeader = false;
-  const {page: {page : {title, description}}} = data;
-  
+  const {page: {page : {title, description, openGraphImage}}} = data;
+  const builder = imageUrlBuilder(getClient(preview))
+
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
@@ -35,6 +37,21 @@ export default function Page(props) {
       <NextSeo
         title={title}
         description={description ?? ""}
+
+        {...(openGraphImage ? {openGraph: 
+          {
+            images: [
+              {
+                url: builder.image(openGraphImage).width(1200).height(630).url(),
+                width: 1200,
+                height: 630,
+                alt: title,
+              },
+            ]
+          }
+
+        } : {})}
+        
       />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}

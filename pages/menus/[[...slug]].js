@@ -1,3 +1,4 @@
+import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
 import { NextSeo } from 'next-seo'
 import client from '@/lib/sanity-client'
@@ -16,7 +17,9 @@ const ExitPreviewButton = dynamic(() =>
 export default function Page(props) {
   
   const { preview, data, siteSettings, menus, locations } = props;
-  const {page: {title, description_menu_page}} = data;
+  const {page: {title, description_menu_page, openGraphImage_menu_page }} = data;
+  const builder = imageUrlBuilder(getClient(preview))
+
   const stickyHeader = false;
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
@@ -35,6 +38,19 @@ export default function Page(props) {
       <NextSeo
         title={title}
         description={description_menu_page ?? ""}
+        {...(openGraphImage_menu_page ? {openGraph: 
+          {
+            images: [
+              {
+                url: builder.image(openGraphImage_menu_page).width(1200).height(630).url(),
+                width: 1200,
+                height: 630,
+                alt: title,
+              },
+            ]
+          }
+
+        } : {})}
       />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}
@@ -196,11 +212,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const client = getClient(preview)
   const query =  groq`
   *[_type == "locations" && slug.current in $possibleSlugs][0]{
-    _id,
-    title,
-    description_location_page,
-    description_menu_page,
-    menuPageContent
+    ...
   }
   `
   const queryParams = { possibleSlugs: getSlugVariations(slug) }

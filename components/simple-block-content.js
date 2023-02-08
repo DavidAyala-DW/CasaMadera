@@ -10,7 +10,6 @@ function SimpleBlockContent(props) {
   
   const { blocks } = props
   if (!blocks) {
-    console.error('Missing blocks')
     return null
   }
 
