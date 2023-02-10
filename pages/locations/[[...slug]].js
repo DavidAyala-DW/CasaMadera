@@ -17,7 +17,12 @@ const ExitPreviewButton = dynamic(() =>
 export default function Page(props) {
   
   const { preview, data, siteSettings, menus, locations } = props;
-  const {page: {title, description_location_page, openGraphImage_location_page}} = data;
+  const {page: {
+    title,
+    seo_title_location_page,
+    description_location_page,
+    openGraphImage_location_page
+  }} = data;
   
   const builder = imageUrlBuilder(getClient(preview))
 
@@ -31,12 +36,15 @@ export default function Page(props) {
     enabled: preview,
   })
 
+  let seo_title_value = seo_title_location_page ?? title;
+  seo_title_value = `${seo_title_value} | Casa Madera`
+
   const page = filterDataToSingleItem(previewData, preview);
 
   return (    
     <Layout menus={menus} locations={locations} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
-        title={title}
+        title={seo_title_value}
         description={description_location_page ?? ""}
         {...(openGraphImage_location_page ? {openGraph: 
           {

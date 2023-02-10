@@ -18,7 +18,7 @@ export default function Page(props) {
 
   const { preview, data, siteSettings, menus, locations } = props;
   const stickyHeader = false;
-  const {page: {page : {title, description, openGraphImage}}} = data;
+  const {page: {page : {title, seo_title, description, openGraphImage}}} = data;
   const builder = imageUrlBuilder(getClient(preview))
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
@@ -30,12 +30,15 @@ export default function Page(props) {
     enabled: preview,
   })
 
+  let seo_title_value = seo_title ?? title;
+  seo_title_value = `${seo_title_value} | Casa Madera`
+
   const page = filterDataToSingleItem(previewData?.page, preview)
 
   return (    
     <Layout menus={menus} locations={locations} siteSettings={siteSettings} stickyHeader={stickyHeader}>
       <NextSeo
-        title={title}
+        title={seo_title_value}
         description={description ?? ""}
 
         {...(openGraphImage ? {openGraph: 
