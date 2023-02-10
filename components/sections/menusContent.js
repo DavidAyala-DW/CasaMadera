@@ -101,9 +101,13 @@ export default function MenusContent(props) {
                         className="flex flex-col items-center"
                       >
 
-                        <h2 className="text-[24px] vw:text-[1.25vw] leading-[33px] vw:leading-[.75] font-light text-center">
-                          {title}
-                        </h2>                    
+                        {
+                          title && (
+                            <h2 className="text-[24px] vw:text-[1.25vw] leading-[33px] vw:leading-[.75] font-light text-center">
+                              {title}
+                            </h2>                    
+                          )
+                        }
 
                         {
                           courses && (
