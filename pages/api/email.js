@@ -100,7 +100,7 @@ async function sendEmail(body){
       });
     }
 
-    if(body?.option == "events_inquiries"){
+    if(body?.option == "events_inquiry"){
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
         to: "events@thecasamadera.com", // list of receivers
