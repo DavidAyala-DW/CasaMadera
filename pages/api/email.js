@@ -6,8 +6,8 @@ export const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // upgrade later with STARTTLS
   auth: {
-    user: "luis@dango.digital",
-    pass: "ibqudfdyjkpazbku",
+    user: process.env.NODEMAILER_USER,
+    pass: process.env.NODEMAILER_TOKEN,
   },
 });
 
@@ -72,7 +72,7 @@ async function sendEmail(body){
     if(body?.option == "press"){
 
       await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
         to: "emma@noble33.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
@@ -83,7 +83,7 @@ async function sendEmail(body){
     if(body?.option == "general_inquiry" || body?.option == "reservation"){
 
       await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
         to: "info@thecasamadera.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
@@ -93,7 +93,7 @@ async function sendEmail(body){
     
     if(body?.option == "careers"){
       await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
         to: "info@noble33.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
@@ -102,7 +102,7 @@ async function sendEmail(body){
 
     if(body?.option == "events_inquiry"){
       await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <luis@dango.digital>`, // sender address
+        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
         to: "events@thecasamadera.com", // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
