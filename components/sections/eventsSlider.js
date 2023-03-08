@@ -5,6 +5,7 @@ import SanityLink from "../sanityLink"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation } from "swiper";
+import Link from "next/link";
 
 export default function EventsSlider(props) {
 
@@ -95,7 +96,7 @@ export default function EventsSlider(props) {
           )
         }
 
-      <div className="absolute pl-[3.33%] bottom-0 left-0 flex items-center space-x-4 vw:space-x-[.83333vw]">
+      <div className="absolute pl-[3.33%] bottom-0 left-0 flex items-center gap-4 vw:gap-[.83333vw]">
 
         <div className="left-arrow cursor-pointer w-[11px] vw:w-[.5729vw]">
           <Image
@@ -117,8 +118,11 @@ export default function EventsSlider(props) {
           />
         </div>
 
+        <Link href="/events">
+          <a className="ml-2 text-lg vw:text-[.9375vw] tracking-[.05em] opacity-80 uppercase font-light">See All</a>
+        </Link>
       </div>
-
+      
     </section>
 
   )
