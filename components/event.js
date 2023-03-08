@@ -49,7 +49,7 @@ export default function Event({event}) {
           </h3>
 
           <p className="font-normal text-base vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
-            {formatDate(date)}
+            {date ? formatDate(date) : null}
           </p>
 
           <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
