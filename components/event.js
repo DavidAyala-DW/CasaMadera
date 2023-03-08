@@ -1,33 +1,25 @@
 import SanityImage from "./sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+
+const formatDate = (date) => {
+
+  const options = {
+    year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
+    hour: 'numeric', minute: 'numeric',
+    hour12: true,
+  };
+
+  const dateObject = new Date(date);  
+  const formatedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+
+  return formatedDate;
+
+};
 
 export default function Event({event}) {
 
   const {title, image, alt_text, description, description2, date, link} = event;
-  const [showDate, setShowDate] = useState(false);
-
-  const handleFormatDate = useCallback((date) => {
-
-    const options = {
-      year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
-      hour: 'numeric', minute: 'numeric',
-      hour12: true,
-    };
-
-    const dateObject = new Date(date);  
-    const formatedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
-
-    return formatedDate;
-
-  }, []);
-  
-  
-  useEffect(() => {
-    setShowDate(true)
-  }, []);
-
 
   return (
     
@@ -57,7 +49,7 @@ export default function Event({event}) {
           </h3>
 
           <p className="font-normal text-base vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
-            {showDate && handleFormatDate(date)}
+            {formatDate(date)}
           </p>
 
           <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
