@@ -72,22 +72,8 @@ export default function Event({event}) {
 
         </div>
 
-        <a href={link.url} className="max-w-max flex items-center space-x-2 vw:space-x-[.41666vw] opacity-80">
-
-          <p className="font-light text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3889] tracking-[.05em] uppercase underline">
-            {link.title}
-          </p>
-
-          <div className="w-[25px] vw:w-[1.302vw] h-[23px] vw:h-[1.197vw]">
-            <Image
-              src="/images/arrowRightB.svg"
-              alt="Arrow right"
-              width={25}
-              height={23}
-              layout="responsive"
-            />
-          </div>
-
+        <a href={link.url} className="w-fit font-avenir text-base vw:text-[.85vw] tracking-[.05em] opacity-80 uppercase text-primary transition-colors hover:bg-primary hover:text-white font-light py-2 px-4 border border-primary">
+          {link.title}
         </a>
 
       </div>
