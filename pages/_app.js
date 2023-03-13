@@ -5,6 +5,7 @@ import GTM from "@/components/GTM";
 import Cookies from 'js-cookie'
 import { useEffect } from 'react';
 import Head from 'next/head';
+import AccessiBe from '@/components/accessibe';
  
 function MyApp({ Component, pageProps }) {
 
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <GTM/>
+      <AccessiBe />
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>

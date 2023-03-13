@@ -121,7 +121,7 @@ export default function ImageWithText(props) {
               {...{links}}
               className={`
                 ${!isReservation ? 'mt-10 text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.38888] tracking-[.05em] opacity-80 uppercase underline font-light vw:mt-[2.08333vw]' : ''}
-                ${isReservation ? 'mt-10 text-base leading-[1]  md2:text-lg vw:text-[.9375vw] md2:leading-[25px] vw:leading-[1.38888] tracking-[.05em] opacity-80 uppercase text-primary transition-colors hover:bg-primary hover:text-white font-avenir font-light py-2.5 px-[30px] border border-primary max-w-max' : ''}
+                ${isReservation ? 'mt-10 text-base vw:text-[.85vw] tracking-[.05em] opacity-80 uppercase text-primary transition-colors hover:bg-primary hover:text-white font-light py-2 px-4 border border-primary max-w-max' : ''}
               `}
             >
               {links?.title}
