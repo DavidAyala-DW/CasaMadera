@@ -93,6 +93,39 @@ async function fulfillSectionQueries(page, slug, internalLinks) {
 
     page.content.map(async (section) => {
 
+      if(section?.events){
+
+        if(Array.isArray(section?.events)){
+
+          await Promise.all(section?.events.map(async (event) => {
+            const queryData = await client.fetch(groq`*[_type == "eventsCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
+            const {
+              active,
+              title,
+              description,
+              image,
+              alt_text,
+              date,
+              book_button_text,
+              book_button_link
+            } = queryData;
+
+            event.layout = section?._type;
+            event.active = active;
+            event.title = title;
+            event.image = image;
+            event.alt_text = alt_text;
+            event.description = description;
+            event.date = date;
+            event.book_button_text = book_button_text;
+            event.book_button_link = book_button_link;
+            event.query = queryData;
+          }))
+
+        }
+
+      }
+
       if(section?.links){
         const {_type} = section?.links ?? null;
         if(_type == "links"){
