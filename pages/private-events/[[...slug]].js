@@ -98,7 +98,11 @@ async function fulfillSectionQueries(page, slug, internalLinks) {
         if(Array.isArray(section?.events)){
 
           await Promise.all(section?.events.map(async (event) => {
-            const queryData = await client.fetch(groq`*[_type == "eventsCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
+            
+            const queryData = await client.fetch(groq`*[_type == "eventCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
+
+            if(!queryData) return;
+
             const {
               active,
               title,
