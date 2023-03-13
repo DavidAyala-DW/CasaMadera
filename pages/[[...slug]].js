@@ -94,8 +94,6 @@ async function fulfillSectionQueries(page, internalLinks) {
           await Promise.all(section?.events.map(async (event) => {
             const queryData = await client.fetch(groq`*[_type == "eventCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
 
-            console.log(queryData);
-
             const {
               active,
               title,
