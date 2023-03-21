@@ -1,22 +1,5 @@
 import SanityImage from "./sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
-import { useState } from "react";
-import { useEffect } from "react";
-
-const formatDate = (date) => {
-
-  const options = {
-    year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
-    hour: 'numeric', minute: 'numeric',
-    hour12: true,
-  };
-
-  const dateObject = new Date(date);  
-  const formatedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
-
-  return formatedDate;
-
-};
 
 export default function EventListItem({event}) {
 
@@ -26,15 +9,10 @@ export default function EventListItem({event}) {
     image,
     alt_text,
     date,
+    location = "West Hollywood, California",
     book_button_text,
     book_button_link
   } = event;
-
-  const [parsedDate, setParsedDate] = useState("");
-
-  useEffect( () => {
-    setParsedDate(formatDate(date))
-  }, [])
 
   return (
     
@@ -57,6 +35,10 @@ export default function EventListItem({event}) {
 
       <div className="w-full order-2 lg:w-[51.471%] 3xl:w-[50.761%] flex flex-col  lg:order-2 lg:pl-[9.86%] 3xl:pl-[10.86%]">
 
+        <div className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-[5px]">
+          {location}
+        </div>
+
         <h2
           className="font-light capitalize text-[32px] vw:text-[1.666vw] leading-[44px] vw:leading-[1.375] mb-6 vw:mb-[1.25vw]"
         >
@@ -64,7 +46,7 @@ export default function EventListItem({event}) {
         </h2>
 
         <div className="font-normal italic text-base vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
-          {parsedDate}
+          {date}
         </div>
 
         <div className="opacity-[.85] text-base vw:text-[.8333vw] leading-[1.5] font-normal md:max-w-[500px] lg:max-w-[507px] vw:max-w-[26.40625vw] w-full">

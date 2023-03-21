@@ -1,22 +1,5 @@
 import SanityImage from "./sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
-import { useState } from "react";
-import { useEffect } from "react";
-
-const formatDate = (date) => {
-
-  const options = {
-    year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
-    hour: 'numeric', minute: 'numeric',
-    hour12: true,
-  };
-
-  const dateObject = new Date(date);  
-  const formatedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
-
-  return formatedDate;
-
-};
 
 export default function Event({event}) {
 
@@ -26,15 +9,10 @@ export default function Event({event}) {
     image,
     alt_text,
     date,
+    location = "West Hollywood, California",
     book_button_text,
     book_button_link
   } = event;
-
-  const [parsedDate, setParsedDate] = useState("");
-
-  useEffect( () => {
-    setParsedDate(formatDate(date))
-  }, [])
 
   return (
     
@@ -59,12 +37,16 @@ export default function Event({event}) {
 
         <div className="flex flex-col w-full mb-11 vw:mb-[2.291vw]">
 
+          <div className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
+            {location}
+          </div>
+
           <h3 className="text-[24px] lg:text-[32px] vw:text-[1.6666vw] leading-[33px] lg:leading-11 vw:leading-[1.375] font-light mb-2 vw:mb-[.41666vw]">
             {title}
           </h3>
 
           <div className="font-normal text-base vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
-            {parsedDate}
+            {date}
           </div>
 
           <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
