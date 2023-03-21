@@ -8,7 +8,7 @@ export default function Event({event}) {
     description,
     image,
     alt_text,
-    date,
+    date = "",
     location = "West Hollywood, California",
     book_button_text,
     book_button_link

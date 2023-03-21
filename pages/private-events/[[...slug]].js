@@ -104,14 +104,14 @@ async function fulfillSectionQueries(page, slug, internalLinks) {
             if(!queryData) return;
 
             const {
-              active,
-              title,
-              description,
-              image,
-              alt_text,
-              date,
-              book_button_text,
-              book_button_link
+              active = false,
+              title = "",
+              description = "",
+              image = "",
+              alt_text = "",
+              date = "",
+              book_button_text = "",
+              book_button_link = ""
             } = queryData;
 
             event.layout = section?._type;
