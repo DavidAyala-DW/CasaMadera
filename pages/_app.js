@@ -6,6 +6,8 @@ import Cookies from 'js-cookie'
 import { useEffect } from 'react';
 import Head from 'next/head';
 import AccessiBe from '@/components/accessibe';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
  
 function MyApp({ Component, pageProps }) {
 
@@ -22,10 +24,16 @@ function MyApp({ Component, pageProps }) {
 
   }, []);
 
+  const router = useRouter()
+
   return (
     <>
       <GTM/>
       <AccessiBe />
+      {/* TODO: Move this to GTM once we have access */}
+      {router.asPath === '/locations/west-hollywood-california' ? (
+        <Script src="https://inkindscript.com/inkind.js" />
+      ): null}
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>
