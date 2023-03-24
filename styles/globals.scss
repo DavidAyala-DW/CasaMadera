@@ -111,3 +111,7 @@ h1,h2,h3,h4,a,input{
 .new-line {
   white-space: pre-line;
 }
+
+.hide-empty-paragraphs p:empty{
+  display: none!important;
+}

@@ -49,7 +49,7 @@ export default function EventListItem({event}) {
           {date}
         </div>
 
-        <div className="opacity-[.85] text-base vw:text-[.8333vw] leading-[1.5] font-normal md:max-w-[500px] lg:max-w-[507px] vw:max-w-[26.40625vw] w-full">
+        <div className="opacity-[.85] text-base vw:text-[.8333vw] leading-[1.5] font-normal md:max-w-[500px] lg:max-w-[507px] vw:max-w-[26.40625vw] w-full hide-empty-paragraphs">
           <SimpleBlockContent blocks={description} />
         </div>
 

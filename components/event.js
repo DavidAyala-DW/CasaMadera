@@ -49,7 +49,7 @@ export default function Event({event}) {
             {date}
           </div>
 
-          <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw]">
+          <div className="font-normal text-base vw:text-[.8333vw] leading-[1.5] opacity-[.85] lg:max-w-[46.3vw] hide-empty-paragraphs">
 
             {
               (description) && (
