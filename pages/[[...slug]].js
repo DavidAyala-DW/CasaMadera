@@ -105,7 +105,8 @@ async function fulfillSectionQueries(page, internalLinks) {
               alt_text = "",
               date = "",
               book_button_text = "",
-              book_button_link = ""
+              book_button_link = "",
+              locations = []
             } = queryData;
 
             event.layout = section?._type;
@@ -117,7 +118,9 @@ async function fulfillSectionQueries(page, internalLinks) {
             event.date = date;
             event.book_button_text = book_button_text;
             event.book_button_link = book_button_link;
+            event.locations = locations;
             event.query = queryData;
+            
           }))
 
         }

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import SanityImage from "./sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
 
@@ -9,7 +11,7 @@ export default function Event({event}) {
     image,
     alt_text,
     date = "",
-    location = "West Hollywood, California",
+    locations = [],
     book_button_text,
     book_button_link
   } = event;
@@ -37,9 +39,21 @@ export default function Event({event}) {
 
         <div className="flex flex-col w-full mb-11 vw:mb-[2.291vw]">
 
-          <div className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] mb-5 vw:mb-[1.0416vw]">
-            {location}
-          </div>
+          {
+            locations?.length > 0 && (
+              <div className="flex flex-col mb-5 gap-1">
+                {
+                  locations.map((location) => {                    
+                    return (
+                      <div key={uuidv4()} className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] vw:mb-[1.0416vw]">
+                        {location}
+                      </div>
+                    )
+                  })
+                }
+              </div>   
+            )
+          }
 
           <h3 className="text-[24px] lg:text-[32px] vw:text-[1.6666vw] leading-[33px] lg:leading-11 vw:leading-[1.375] font-light mb-2 vw:mb-[.41666vw]">
             {title}
