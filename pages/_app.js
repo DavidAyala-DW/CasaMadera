@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <AccessiBe />
+      <GTM />
       {/* TODO: Move this to GTM once we have access */}
       {router.asPath === '/locations/west-hollywood-california' ? (
         <Script src="https://inkindscript.com/inkind.js" />
