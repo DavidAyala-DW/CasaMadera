@@ -81,10 +81,14 @@ async function sendEmail(body){
     }
 
     if(body?.option == "general_inquiry" || body?.option == "reservation"){
+      const to =
+        body?.location === 'West Hollywood'
+          ? 'info@thecasamadera.com'
+          : 'infotor@thecasamadera.com';
 
       await transporter.sendMail({
         from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
-        to: "info@thecasamadera.com", // list of receivers
+        to, // list of receivers
         subject: "New Message", // Subject line
         html: html, // html body
       });
