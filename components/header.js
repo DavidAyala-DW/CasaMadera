@@ -212,7 +212,7 @@ export default function Header(props) {
 
               { mainNav.map((item,index) => {
 
-                if(index >= 4) return;
+                if(index >= 5) return;
 
                 const {title, link, image, alt_text} = item;
 
@@ -323,7 +323,7 @@ export default function Header(props) {
 
               {mainNav.map((item,index) => {
 
-                if(index >= 4){
+                if(index >= 5){
 
                   const {title, link, image, alt_text} = item;
 
