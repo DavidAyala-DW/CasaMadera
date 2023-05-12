@@ -250,7 +250,7 @@ export default function Header(props) {
 
                       {
                         
-                          locations?.reverse().map((location) => {
+                          locations && [...locations].reverse().map((location) => {
 
                             const { slug:{current}, comming_soon} = location;
 
