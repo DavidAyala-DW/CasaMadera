@@ -1,52 +1,70 @@
+@import './fonts';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "./fonts";
-
-body, *{
-  font-family: "Libre Baskerville";
-  color: #4A3419;
-}
-
-h1,h2,h3,h4,a,input{
-  p{
-    font-family: "Avenir";  
+@layer base {
+  body,
+  * {
+    font-family: 'Libre Baskerville';
+    color: #4a3419;
   }
-  font-family: "Avenir";
+
+  h1,
+  h2,
+  h3,
+  h4,
+  a,
+  input {
+    p {
+      font-family: 'Avenir';
+    }
+    font-family: 'Avenir';
+  }
 }
 
-.portableText ul{
+@layer utilities {
+  .new-line {
+    white-space: pre-line;
+  }
+
+  .hide-empty-paragraphs p:empty {
+    display: none !important;
+  }
+}
+
+.portableText ul {
   list-style: disc;
   padding-left: 22px;
 }
 
-.portableText a{
-  font-family: inherit!important; 
+.portableText a {
+  font-family: inherit !important;
   text-decoration: underline;
 }
 
-@media(min-width: 1440px){
-  .portableText ul{
+@media (min-width: 1440px) {
+  .portableText ul {
     padding-left: 1.527vw;
   }
 }
 
-.swiper-button-disabled{
-  opacity: 0.5!important;
+.swiper-button-disabled {
+  opacity: 0.5 !important;
 }
 
-.cookie{
-  font-family: "Avenir"!important;
+.cookie {
+  font-family: 'Avenir' !important;
   position: fixed;
   z-index: 99999;
-  background-color: #0C0A06;
+  background-color: #0c0a06;
   width: 100%;
-  color: #0C0A06;
+  color: #0c0a06;
   display: flex;
   flex-direction: column;
   @apply space-y-5;
-  @media(min-width:768px){
+  @media (min-width: 768px) {
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
@@ -57,61 +75,56 @@ h1,h2,h3,h4,a,input{
   padding-bottom: 20px;
 
   @apply px-4 md:px-[3.35%] font-avenir;
-  .cookieContent{
+  .cookieContent {
     @apply text-base text-[#F3EDE2] font-light font-avenir;
   }
-  .cookieContent p, .cookieContent a{
+  .cookieContent p,
+  .cookieContent a {
     @apply text-base text-[#F3EDE2] font-light font-avenir;
   }
-  .CookitButtonsWrapper{
+  .CookitButtonsWrapper {
     @apply flex space-x-reverse space-x-5 items-center text-[#F3EDE2] font-avenir;
   }
-  .cookieButton{
+  .cookieButton {
     @apply text-base order-1 leading-[18px] text-[#F3EDE2] text-center font-light cursor-pointer font-avenir;
   }
-  .cookieDeclineButton{
+  .cookieDeclineButton {
     @apply text-base order-2 leading-[18px] text-[#F3EDE2] text-center font-light cursor-pointer font-avenir;
   }
 }
 
-.gallery .swiper-wrapper{
-  margin-left: -16%!important;
+.gallery .swiper-wrapper {
+  margin-left: -16% !important;
 }
 
-.richtext-page{
-
-  ul{
+.richtext-page {
+  ul {
     @apply flex flex-col space-y-5;
   }
 
-  li{
+  li {
     @apply leading-[1.5];
   }
 
-  p{
+  p {
     @apply leading-[1.75];
   }
-
 }
 
-.checkbox-newsletter{
-  input:checked + label{
+.checkbox-newsletter {
+  input:checked + label {
     @apply bg-primary;
   }
 }
 
-.overlay-hero{
-  background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+.overlay-hero {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
 }
 
-.filter-nav-icons{
+.filter-nav-icons {
   filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.25));
-}
-
-.new-line {
-  white-space: pre-line;
-}
-
-.hide-empty-paragraphs p:empty{
-  display: none!important;
 }
