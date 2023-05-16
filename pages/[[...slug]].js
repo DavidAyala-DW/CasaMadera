@@ -8,7 +8,7 @@ import RenderSections from '@/components/render-sections'
 import { getSlugVariations, slugParamToPath } from '@/lib/urls'
 import { getClient } from '@/lib/sanity.server'
 import { usePreviewSubscription } from '@/lib/sanity'
-import { pageContentQuery } from '@/lib/queries'
+import { pageQueryPart } from '@/lib/queries'
 
 const ExitPreviewButton = dynamic(() =>
   import('@/components/exit-preview-button')
@@ -86,47 +86,6 @@ async function fulfillSectionQueries(page, internalLinks) {
 
   const sectionsWithQueryData = await Promise.all(
     page.page.content.map(async (section) => {
-      
-      if(section?.events){
-
-        if(Array.isArray(section?.events)){
-
-          await Promise.all(section?.events.map(async (event) => {
-            
-            const queryData = await client.fetch(groq`*[_type == "eventCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
-
-            if(!queryData) return;
-
-            const {
-              active = false,
-              title = "",
-              description = "",
-              image = "",
-              alt_text = "",
-              date = "",
-              book_button_text = "",
-              book_button_link = "",
-              locations = []
-            } = queryData;
-
-            event.layout = section?._type;
-            event.active = active;
-            event.title = title;
-            event.image = image;
-            event.alt_text = alt_text;
-            event.description = description;
-            event.date = date;
-            event.book_button_text = book_button_text;
-            event.book_button_link = book_button_link;
-            event.locations = locations;
-            event.query = queryData;
-            
-          }))
-
-        }
-
-      }
-
       if(section?.links){
         const {_type} = section?.links ?? null;
         if(_type == "links"){
@@ -252,7 +211,9 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const client = getClient(preview)
   const query =  groq`
     *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0]{
-      page -> {...}
+      page -> {
+        ${pageQueryPart}
+      }
     }
   ` 
   const queryParams = { possibleSlugs: getSlugVariations(slug) }
