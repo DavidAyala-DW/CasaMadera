@@ -9,6 +9,7 @@ export default function ArticleCard(props) {
   const {
     article,
     size = 'normal', // 'normal' | 'large'
+    imageSizes,
   } = props;
 
   return (
@@ -21,6 +22,7 @@ export default function ArticleCard(props) {
                 src={article.image}
                 layout="fill"
                 objectFit="cover"
+                sizes={imageSizes}
               />
             </figure>
           </div>

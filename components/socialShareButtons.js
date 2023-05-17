@@ -16,14 +16,17 @@ import {
 const siteBaseUrl = 'https://thecasamadera.com'
 
 const iconSize = '20px'
-const buttonClassName = 'flex justify-center items-center w-[40px] h-[40px] !bg-primary !text-body !rounded-full'
+const buttonClassName = `
+  flex justify-center items-center w-[40px] h-[40px] !bg-primary !text-body !rounded-full
+  lg:scale-[0.8] lg:opacity-30 lg:hover:opacity-100
+`
 
 export default function SocialShareButtons() {
   const router = useRouter()
   const url = new URL(router.asPath, siteBaseUrl).href
 
   return (
-    <div className="grid grid-flow-col gap-x-3 justify-center">
+    <div className="grid grid-flow-col gap-3 justify-center lg:grid-flow-row">
       <TwitterShareButton url={url} className={buttonClassName}>
         <FaTwitter size={iconSize} title="Share on Twitter" />
       </TwitterShareButton>

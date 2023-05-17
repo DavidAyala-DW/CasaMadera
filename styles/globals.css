@@ -47,10 +47,10 @@
 
 @media screen(lg) {
   .prose blockquote {
-    @apply text-2xl;
+    @apply gap-6 max-w-[24em] pt-6 text-2xl;
 
     &::before {
-      @apply text-[86px];
+      @apply text-[86px] leading-[1.1];
     }
   }
 }

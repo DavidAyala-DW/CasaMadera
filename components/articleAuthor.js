@@ -4,8 +4,8 @@ export default function ArticleAuthor(props) {
   const { author } = props;
 
   return (
-    <address className="flex items-center gap-2 not-italic">
-      <div className="max-lg:w-[24px] max-lg:h-[24px]">
+    <address className="flex items-center gap-2 not-italic lg:gap-3">
+      <div className="flex max-lg:w-[24px] max-lg:h-[24px]">
         <SanityImage
           src={author.image}
           width={38}
