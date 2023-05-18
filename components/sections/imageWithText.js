@@ -191,7 +191,7 @@ export default function ImageWithText(props) {
 
         {
           (menus && Array.isArray(menus) ) && (
-            <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row mt-10 md:items-center md:space-x-6 vw:space-x-[1.25vw]">
+            <div className="flex flex-col gap-y-6 md:gap-y-4 md:flex-row md:flex-wrap mt-10 md:items-center md:gap-x-6 vw:gap-x-[1.25vw]">
               {
                 menus.map(menu => {
 
@@ -199,7 +199,7 @@ export default function ImageWithText(props) {
 
                   return(
                     <Link key={_key} href={`/menus/${props.slug}?menu=${current}`} passHref>
-                      <a className="block font-light text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase opacity-80">
+                      <a className="block font-light text-lg vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[.05em] underline uppercase opacity-80 whitespace-nowrap">
                         {title}
                       </a>
                     </Link>

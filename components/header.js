@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router'
 import Link from "next/link";
 import SanityImage from './sanity-image'
+import clsx from "clsx";
 
 export default function Header(props) {
 
@@ -32,15 +33,16 @@ export default function Header(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function handleClick(e = null){
-    const updatedModalValue = !openModal;
-    setOpenModal(updatedModalValue);
+    setOpenModal((value) => !value);
   }
 
-  function handleMouseOver(image, alt_text){
-    setActiveMenuImage({image, alt_text})
+  function handleMouseEnter(image, alt_text){
+    if (image) {
+      setActiveMenuImage({image, alt_text})
+    }
   }
 
-  function handleMouseDown(){
+  function handleMouseLeave(){
     setActiveMenuImage({image: menuImage, alt_text: menuImage_alt_text ?? "Image"})
   }
 
@@ -48,7 +50,7 @@ export default function Header(props) {
     setActiveModal(true);
 
     if(menuImage){
-      handleMouseDown()
+      handleMouseLeave()
     }
     
   }, []);
@@ -210,181 +212,96 @@ export default function Header(props) {
 
             <div className="w-full md2:w-1/2 flex flex-col items-center md2:items-start">
 
-              { mainNav.map((item,index) => {
+              {mainNav.slice(0, 5).map((item, index) => {
 
-                if(index >= 4) return;
+                const {title, link, image} = item;
 
-                const {title, link, image, alt_text} = item;
+                return title !== "Menus" ? (
+                  <NavLink
+                    key={item._key} 
+                    item={item} 
+                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={() => handleMouseEnter(item.image, item.alt_text)}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <div key={item._key} className="flex flex-col items-center md2:items-start">
 
-                return (
+                    <div className={`flex items-center w-full space-x-5 max-w-max mx-auto md2:max-w-full`}>
+                      <NavLink
+                        item={item} 
+                        onMouseLeave={handleMouseLeave}
+                        onMouseEnter={() => handleMouseEnter(item.image, item.alt_text)}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          setIsMenuOpen((value) => !value)
+                        }}
+                      />
+                      <div onClick={ () => {setIsMenuOpen((value) => !value)} } ref={menuButton} className={`cursor-pointer relative transition-transform w-5 h-3 md2:w-7 md2:h-6 vw:w-[1.458vw] vw:h-[.8333vw] ${isMenuOpen? "rotate-180" : "rotate-0" }`}>
+                        <Image
+                          src="/images/Down.svg"
+                          alt="Down Icon"
+                          layout={"fill"}                                  
+                        />
+                      </div>
+                    </div>
 
-                  <div key={index}>
+                    <div className={`flex-col items-center md2:items-start ${isMenuOpen ? "flex" : "hidden" }`}>
 
-                    {
+                      {
+                        
+                          locations && [...locations].reverse().map((location) => {
 
-                      title != "Menus" ? (
-                        <Link href={link.url} passHref>
-                          <a
-                            onMouseLeave={handleMouseDown}
-                            onMouseEnter={() => handleMouseOver(image, alt_text)}
-                            onClick={handleClick}
-                            className={                              
-                              `
-                                ${ title?.toLowerCase()?.includes('reservati') ? "!hidden md2:!block" : "block" }
-                                block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]
-                              `
-                            }
-                          >
-                            {title}
-                          </a>
-                        </Link>
+                            const { slug:{current}, comming_soon} = location;
 
-                      ) : (
+                            return(
 
-                        <div className="flex flex-col items-center md2:items-start">
-
-                          <div className={`flex items-center w-full space-x-5 max-w-max mx-auto md2:max-w-full`}>
-
-                            <Link href={link.url} passHref>
-                              <a
-                                onMouseLeave={handleMouseDown}
-                                onMouseEnter={() => handleMouseOver(image)}
-                                onClick={
-                                  e => {
-                                    e.preventDefault();
-                                    setIsMenuOpen(!isMenuOpen)
-                                  }
-                                }
-                                className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
+                              <NavLink
+                                key={location._id} 
+                                item={location}
+                                secondary
+                                href={`/menus/${current}${comming_soon ? "" : "?menu=dinner-menu"}`}
+                                onClick={handleClick}
                               >
-                                {title.split(",")[0]}
-                              </a>
-                            </Link>
+                                {location.title.split(',')[0]}
+                              </NavLink>
 
-                            <div onClick={ () => {setIsMenuOpen(!isMenuOpen)} }  ref={menuButton} className={`cursor-pointer relative transition-transform w-5 h-3 md2:w-7 md2:h-6 vw:w-[1.458vw] vw:h-[.8333vw] ${isMenuOpen? "rotate-180" : "rotate-0" }`}>
-                              <Image
-                                src="/images/Down.svg"
-                                alt="Down Icon"
-                                layout={"fill"}                                  
-                              />
-                            </div>
-
-                          </div>
-
-                          <div className={`flex-col items-center md2:items-start ${isMenuOpen ? "flex" : "hidden" }`}>
-
-                            {
-                              locations && (
-                                [...locations].reverse().map((location, i) => {
-
-                                  const {title, slug:{current}, comming_soon, _id} = location;
-                                  
-
-                                  return(
-
-                                    <div key={_id}>
-
-                                      <Link href={`/menus/${current}${comming_soon ? "" : "?menu=dinner-menu"} `} passHref>
-                                        <a
-                                        onClick={handleClick}
-                                        className={`
-                                          text-[#57412d] text-lg md2:text-[24px] leading-[1.6] tracking-[-.02em] font-light !font-avenir opacity-90 transition-[opacity] hover:opacity-50
-                                        `}>
-                                          {title.split(",")[0]}
-                                        </a>
-                                      </Link>
-                
-                                    </div>
-                                  )
+                            )
 
 
-                                })
-                              )
-                            }
-                          </div>
-
-                        </div>
-
-                      )
-
-                    }
-
-
+                          })
+                        
+                      }
+                    </div>
 
                   </div>
-
                 )
-
               })}
-
             </div>
 
             <div className="flex flex-col w-full items-center md2:items-start">
+              {mainNav.slice(5).map((item) => (
+                <NavLink
+                  key={item._key} 
+                  item={item} 
+                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouseEnter(item.image, item.alt_text)}
+                  onClick={handleClick}
+                />
+              ))}
 
-              {mainNav.map((item,index) => {
-
-                if(index >= 4){
-
-                  const {title, link, image, alt_text} = item;
-
-                  return (
-                    <Link href={link.url} passHref key={index} >
-                      <a
-                        onMouseLeave={handleMouseDown}
-                        onMouseEnter={() => handleMouseOver(image, alt_text)}
-                        onClick={handleClick}
-                        className={`
-                          font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]
-                        `}
-                      >
-                        {title.split(",")[0]} 
-                      </a>
-                    </Link>
-                  )
-
-                }
-
-              })}
-
-              <div className="max-w-max block md2:hidden">
-                {(reservationsButton && (
-
-                  <Link passHref href={reservationsButton?.link?.url}>
-                    <a      
-                      onClick={handleClick}                 
-                      className="block font-light tracking-[-.04em] text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36]"
-                    >
-                      {reservationsButton?.title}
-                    </a>
-                  </Link>
-
-                ))}
-              </div>
-              
               <div className="pt-6 vw:pt-[1.25vw] hidden md2:flex flex-col space-y-2 vw:space-y-[.416vw]">
 
-                {secondHeaderNav && secondHeaderNav.map( (item,i)  => {
-
-                  const {title,link} = item;
-                  if(!link || !title) return;
-
-                  return (
-
-                    <Link
-                      href={link?.url}
-                      passHref key={i}
-                    >
-                      <a
-                        onClick={handleClick}
-                        className="block text-[24px] vw:text-[1.25vw] leading-[1.6] font-light opacity-90"
-                      >
-                        {title}
-                      </a>
-                    </Link>
-
+                {secondHeaderNav?.map( (item) => (
+                    <NavLink
+                      key={item._key} 
+                      item={item}
+                      secondary
+                      onClick={handleClick}
+                    />
                   )
 
-                })}
+                )}
 
               </div>
 
@@ -478,4 +395,37 @@ export default function Header(props) {
 
   )
 
+}
+
+function NavLink(props) {
+  const { item, href, secondary = false, children, onClick, ...rest } = props
+
+  if (!item) {
+    return null
+  }
+
+  const anchorTag = (
+    <a
+      href={item.externalLink}
+      onClick={!item.isDisabled ? onClick : (e) => e.preventDefault()}
+      className={clsx(           
+        'block font-light',
+        item.isDisabled && 'opacity-50 cursor-default',
+        secondary
+          ? 'text-[24px] vw:text-[1.25vw] leading-[1.6] opacity-90'
+          : 'text-[32px] md2:text-[55px] vw:text-[2.864vw] leading-[44px] md2:leading-[75px] vw:leading-[1.36] tracking-[-.04em]'
+      )}
+      tabIndex={item.isDisabled ? -1 : 0}
+      aria-disabled={item.isDisabled}
+      {...rest}
+    >
+      {children ?? item.title}
+    </a>
+  )
+
+  return item.externalLink ? anchorTag : ( 
+    <Link href={!item.isDisabled ? href ?? item.link.url : '#'} passHref>
+      {anchorTag}
+    </Link>
+  )
 }
