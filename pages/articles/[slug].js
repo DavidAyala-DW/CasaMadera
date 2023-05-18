@@ -15,7 +15,6 @@ const ExitPreviewButton = dynamic(() =>
 
 export default function ArticlePage(props) {
   const { isPreview, data, query } = props;
-  console.log(props.data);
   const builder = imageUrlBuilder(getClient(isPreview));
 
   /**

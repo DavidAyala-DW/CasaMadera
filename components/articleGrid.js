@@ -9,7 +9,7 @@ export default function ArticleGrid(props) {
 
   return (
     <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-      {articles.concat(articles).map((article) => (
+      {articles.map((article) => (
         <li key={article._id}>
           <ArticleCard
             article={article}

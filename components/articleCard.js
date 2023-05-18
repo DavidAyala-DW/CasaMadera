@@ -14,9 +14,14 @@ export default function ArticleCard(props) {
 
   return (
     <Link href={article.url}>
-      <a>
-        <article className={clsx('flex flex-col items-start gap-3')}>
-          <div className="w-full aspect-w-[1.7] aspect-h-1">
+      <a className="font-libreBaskerville">
+        <article className="flex flex-col items-start gap-3">
+          <div
+            className={clsx(
+              'w-full aspect-w-[1.7] aspect-h-1',
+              size === 'large' && 'lg:mb-3'
+            )}
+          >
             <figure>
               <SanityImage
                 src={article.image}
@@ -29,12 +34,17 @@ export default function ArticleCard(props) {
           <ArticleMeta article={article} />
           <h3
             className={clsx(
-              size === 'normal' ? 'text-heading-sm' : 'text-heading-md'
+              'text-heading-sm',
+              size === 'large' && 'lg:text-heading-md'
             )}
           >
             {article.title}
           </h3>
-          {size === 'large' ? <ArticleAuthor author={article.author} /> : null}
+          {size === 'large' ? (
+            <div className="font-avenir max-lg:hidden">
+              <ArticleAuthor author={article.author} />
+            </div>
+          ) : null}
         </article>
       </a>
     </Link>

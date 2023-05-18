@@ -8,7 +8,7 @@ import RenderSections from '@/components/render-sections'
 import { getSlugVariations, slugParamToPath } from '@/lib/urls'
 import { getClient } from '@/lib/sanity.server'
 import { usePreviewSubscription } from '@/lib/sanity'
-import { pageContentQuery } from '@/lib/queries'
+import { pageQueryPart } from '@/lib/queries'
 
 const ExitPreviewButton = dynamic(() =>
   import('@/components/exit-preview-button')
@@ -236,8 +236,11 @@ async function getPageSections(slug){
 
   const request = await client.fetch(
     groq`
-      *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0]{
-        {... page -> {...}} 
+      *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0] {
+        ...,
+        page -> {
+          ${pageQueryPart}
+        }
       }
     `,
     { possibleSlugs: getSlugVariations(slug) }
@@ -251,8 +254,10 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const slug = slugParamToPath(params?.slug);
   const client = getClient(preview)
   const query =  groq`
-    *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0]{
-      page -> {...}
+    *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0] {
+      page -> {
+        ${pageQueryPart}
+      }
     }
   ` 
   const queryParams = { possibleSlugs: getSlugVariations(slug) }

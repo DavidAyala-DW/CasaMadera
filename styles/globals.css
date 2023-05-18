@@ -16,9 +16,6 @@
   h4,
   a,
   input {
-    & p {
-      @apply font-avenir;
-    }
     @apply font-avenir;
   }
 }
