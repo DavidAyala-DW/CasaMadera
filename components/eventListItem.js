@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import SanityImage from "./sanity-image";
 import SimpleBlockContent from '@/components/simple-block-content'
 
@@ -42,7 +41,7 @@ export default function EventListItem({event}) {
                 {
                   locations.map((location) => {                    
                     return (
-                      <div key={uuidv4()} className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] vw:mb-[1.0416vw]">
+                      <div key={location} className="font-normal text-sm vw:text-[.83333vw] leading-[1.5] opacity-[.85] vw:mb-[1.0416vw]">
                         {location}
                       </div>
                     )

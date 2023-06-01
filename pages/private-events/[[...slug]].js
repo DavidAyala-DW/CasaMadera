@@ -8,7 +8,7 @@ import RenderSections from '@/components/render-sections'
 import { getSlugVariations, slugParamToPath } from '@/lib/urls'
 import { getClient } from '@/lib/sanity.server'
 import { usePreviewSubscription } from '@/lib/sanity'
-import {locationQuery} from "@/lib/queries"
+import {locationQuery, pageQueryPart} from "@/lib/queries"
 
 const ExitPreviewButton = dynamic(() =>
   import('@/components/exit-preview-button')
@@ -92,47 +92,6 @@ async function fulfillSectionQueries(page, slug, internalLinks) {
   const sectionsWithQueryData = await Promise.all(
 
     page.content.map(async (section) => {
-
-      if(section?.events){
-
-        if(Array.isArray(section?.events)){
-
-          await Promise.all(section?.events.map(async (event) => {
-            
-            const queryData = await client.fetch(groq`*[_type == "eventCasaMadera" && _id == "${event?._ref}" ][0]{...}`)
-
-            if(!queryData) return;
-
-            const {
-              active = false,
-              title = "",
-              description = "",
-              image = "",
-              alt_text = "",
-              date = "",
-              book_button_text = "",
-              book_button_link = "",
-              locations = []
-            } = queryData;
-
-            event.layout = section?._type;
-            event.active = active;
-            event.title = title;
-            event.image = image;
-            event.alt_text = alt_text;
-            event.description = description;
-            event.date = date;
-            event.book_button_text = book_button_text;
-            event.book_button_link = book_button_link;
-            event.locations = locations;
-            event.query = queryData;
-            
-          }))
-
-        }
-
-      }
-
       if(section?.links){
         const {_type} = section?.links ?? null;
         if(_type == "links"){
@@ -234,11 +193,11 @@ export const getStaticProps = async ({ params, preview = false }) => {
   
   const slug = slugParamToPath(params?.slug);
   const client = getClient(preview)
-  const query =  groq`
+  const query = groq`
     *[_type == "eventsCasaMadera" && slug.current in $possibleSlugs][0]{
-      ...
+      ${pageQueryPart}
     }
-  `
+  `;
   const queryParams = { possibleSlugs: getSlugVariations(slug) }
   let data = await client.fetch(query, queryParams);
   let [siteSettings, menus, locations] = await Promise.all([getSiteConfig(), getMenus(), getLocations()])

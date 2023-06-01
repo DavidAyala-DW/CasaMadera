@@ -69,54 +69,33 @@ async function sendEmail(body){
     const client = getClient(false);
     await client.create(doc);
 
-    if(body?.option == "press"){
+    let to;
 
-      await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
-        to: "emma@noble33.com", // list of receivers
-        subject: "New Message", // Subject line
-        html: html, // html body
-      });
-
-    }
-
-    if(body?.option == "general_inquiry" || body?.option == "reservation"){
-      const to =
+    if (body?.option == 'press') {
+      to = 'emma@noble33.com';
+    } else if (body?.option == 'general_inquiry' || body?.option == 'reservation') {
+      to =
         body?.location === 'West Hollywood'
           ? 'info@thecasamadera.com'
           : 'infotor@thecasamadera.com';
-
-      await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
-        to, // list of receivers
-        subject: "New Message", // Subject line
-        html: html, // html body
-      });
-
-    }
-    
-    if(body?.option == "careers"){
-      await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
-        to: "info@noble33.com", // list of receivers
-        subject: "New Message", // Subject line
-        html: html, // html body
-      });
+    } else if (body?.option == 'careers') {
+      to = 'info@noble33.com';
+    } else if (body?.option == 'events_inquiry') {
+      to = 'events@thecasamadera.com';
     }
 
-    if(body?.option == "events_inquiry"){
-      await transporter.sendMail({
-        from: `"New Message from ${body?.name}" <${process.env.NODEMAILER_USER}>`, // sender address
-        to: "events@thecasamadera.com", // list of receivers
-        subject: "New Message", // Subject line
-        html: html, // html body
-      });
-    }  
+    await transporter.sendMail({
+      from: `"Messages (Casa Madera - ${body.location})" <${process.env.NODEMAILER_USER}>`, // sender address
+      replyTo: body.email,
+      to, // list of receivers
+      subject: `Message from ${body.name}`, // Subject line
+      html, // html body
+    });
 
     return {
-      "status" : "successful",
-      "message": "The email has been sended"
-    }
+      status: 'successful',
+      message: 'The email was sent.',
+    };
 
   } catch (error) {
 
