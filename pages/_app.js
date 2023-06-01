@@ -1,4 +1,4 @@
-import '../styles/globals.scss'
+import '../styles/globals.css'
 import Link from "next/link";
 import CookieConsent from "react-cookie-consent";
 import GTM from "@/components/GTM";

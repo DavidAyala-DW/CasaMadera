@@ -1,0 +1,140 @@
+@import './fonts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply font-libreBaskerville text-primary;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  a,
+  input {
+    @apply font-avenir;
+  }
+}
+
+@layer utilities {
+  .new-line {
+    white-space: pre-line;
+  }
+
+  .hide-empty-paragraphs p:empty {
+    display: none !important;
+  }
+}
+
+.portableText {
+  & a {
+    font-family: inherit !important;
+    text-decoration: underline;
+  }
+
+  & ul {
+    list-style: disc;
+    padding-left: 22px;
+  }
+}
+
+@media screen(lg) {
+  .prose blockquote {
+    @apply gap-6 max-w-[24em] pt-6 text-2xl;
+
+    &::before {
+      @apply text-[86px] leading-[1.1];
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .portableText ul {
+    padding-left: 1.527vw;
+  }
+}
+
+.swiper-button-disabled {
+  opacity: 0.5 !important;
+}
+
+.cookie {
+  position: fixed;
+  z-index: 99999;
+  background-color: #0c0a06;
+  width: 100%;
+  color: #0c0a06;
+  display: flex;
+  flex-direction: column;
+  @apply !font-avenir space-y-5;
+
+  padding: 20px;
+  padding-bottom: 20px;
+
+  @apply px-4 md:px-[3.35%] font-avenir;
+  & .cookieContent {
+    @apply text-base text-body font-light font-avenir;
+  }
+  & .cookieContent p,
+  & .cookieContent a {
+    @apply text-base text-body font-light font-avenir;
+  }
+  & .CookitButtonsWrapper {
+    @apply flex space-x-reverse space-x-5 items-center text-body font-avenir;
+  }
+  & .cookieButton {
+    @apply text-base order-1 leading-[18px] text-body text-center font-light cursor-pointer font-avenir;
+  }
+  & .cookieDeclineButton {
+    @apply text-base order-2 leading-[18px] text-body text-center font-light cursor-pointer font-avenir;
+  }
+}
+
+@media (min-width: 768px) {
+  .cookie {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    @apply space-y-0 font-avenir;
+  }
+}
+
+.gallery .swiper-wrapper {
+  margin-left: -16% !important;
+}
+
+.richtext-page {
+  & ul {
+    @apply flex flex-col space-y-5;
+  }
+
+  & li {
+    @apply leading-[1.5];
+  }
+
+  & p {
+    @apply leading-[1.75];
+  }
+}
+
+.checkbox-newsletter {
+  & input:checked + label {
+    @apply bg-primary;
+  }
+}
+
+.overlay-hero {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+.filter-nav-icons {
+  filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.25));
+}
