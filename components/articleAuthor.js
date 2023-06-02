@@ -1,7 +1,7 @@
-import SanityImage from './sanity-image';
+import SanityImage from './sanity-image'
 
 export default function ArticleAuthor(props) {
-  const { author } = props;
+  const { author } = props
 
   return (
     <address className="flex items-center gap-2 not-italic lg:gap-2.5">
@@ -15,5 +15,5 @@ export default function ArticleAuthor(props) {
       </div>
       <span className="text-xs lg:text-base">{author.name}</span>
     </address>
-  );
+  )
 }

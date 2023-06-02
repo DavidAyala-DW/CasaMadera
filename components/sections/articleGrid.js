@@ -1,7 +1,7 @@
-import ArticleGrid from '../articleGrid';
+import ArticleGrid from '../articleGrid'
 
 export default function ArticleGridSection(props) {
-  const { title, articles } = props;
+  const { title, articles } = props
 
   return (
     <div className="container mx-auto px-4">
@@ -10,5 +10,5 @@ export default function ArticleGridSection(props) {
       </h2>
       <ArticleGrid articles={articles} />
     </div>
-  );
+  )
 }

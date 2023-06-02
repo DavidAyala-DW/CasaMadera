@@ -1,10 +1,10 @@
-import ArticleCard from './articleCard';
+import ArticleCard from './articleCard'
 
 export default function ArticleGrid(props) {
-  const { articles } = props;
+  const { articles } = props
 
   if (!articles?.length) {
-    return null;
+    return null
   }
 
   return (
@@ -18,5 +18,5 @@ export default function ArticleGrid(props) {
         </li>
       ))}
     </ol>
-  );
+  )
 }

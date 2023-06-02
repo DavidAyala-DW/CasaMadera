@@ -1,8 +1,8 @@
-import EventListItem from '../eventListItem'
 import React from 'react'
+import EventListItem from '../eventListItem'
 
 export default function EventList(props) {
-  const { events } = props;
+  const { events } = props
 
   return (
     <section className="w-full flex flex-col gap-10 md:gap-20">

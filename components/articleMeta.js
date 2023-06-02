@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 export default function ArticleMeta(props) {
-  const { article } = props;
+  const { article } = props
 
   return (
     <div className="flex flex-wrap items-center gap-6 lg:gap-10">
@@ -20,5 +20,5 @@ export default function ArticleMeta(props) {
         <p>{article.readTimeMinutes} min read</p>
       </div>
     </div>
-  );
+  )
 }

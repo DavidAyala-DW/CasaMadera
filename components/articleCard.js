@@ -1,16 +1,15 @@
-import clsx from 'clsx';
-import Link from 'next/link';
-
-import ArticleMeta from './articleMeta';
-import SanityImage from './sanity-image';
-import ArticleAuthor from './articleAuthor';
+import clsx from 'clsx'
+import Link from 'next/link'
+import ArticleAuthor from './articleAuthor'
+import ArticleMeta from './articleMeta'
+import SanityImage from './sanity-image'
 
 export default function ArticleCard(props) {
   const {
     article,
     size = 'normal', // 'normal' | 'large'
     imageSizes,
-  } = props;
+  } = props
 
   return (
     <Link href={article.url}>
@@ -48,5 +47,5 @@ export default function ArticleCard(props) {
         </article>
       </a>
     </Link>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-import dynamic from 'next/dynamic';
-import imageUrlBuilder from '@sanity/image-url';
-import { pathToSlugParam } from '@/lib/urls';
-import { ARTICLE_TYPE, articleQueryPart } from '@/lib/queries';
-import { usePreviewSubscription } from '@/lib/sanity';
-import { getClient } from '@/lib/sanity.server';
-import Layout from '@/components/layout';
-import { NextSeo } from 'next-seo';
-import groq from 'groq';
-import { ArticleLayout } from '@/components/layouts/articleLayout';
+import imageUrlBuilder from '@sanity/image-url'
+import groq from 'groq'
+import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
+import Layout from '@/components/layout'
+import { ArticleLayout } from '@/components/layouts/articleLayout'
+import { ARTICLE_TYPE, articleQueryPart } from '@/lib/queries'
+import { usePreviewSubscription } from '@/lib/sanity'
+import { getClient } from '@/lib/sanity.server'
+import { pathToSlugParam } from '@/lib/urls'
 
 const ExitPreviewButton = dynamic(() =>
   import('@/components/exit-preview-button')
-);
+)
 
 export default function ArticlePage(props) {
-  const { isPreview, data, query } = props;
-  const builder = imageUrlBuilder(getClient(isPreview));
+  const { isPreview, data, query } = props
+  const builder = imageUrlBuilder(getClient(isPreview))
 
   /**
    * This hook handles live-updating data in preview mode.
@@ -26,10 +26,10 @@ export default function ArticlePage(props) {
     // This is why it's important to fetch *draft* content server-side!
     initialData: data.article,
     enabled: isPreview,
-  });
+  })
 
   // Client-side uses the same query, so we may need to filter it down again
-  const article = filterDataToSingleItem(previewData, isPreview);
+  const article = filterDataToSingleItem(previewData, isPreview)
 
   return (
     <Layout
@@ -62,7 +62,7 @@ export default function ArticlePage(props) {
       <ArticleLayout article={article} />
       {isPreview && <ExitPreviewButton />}
     </Layout>
-  );
+  )
 }
 
 /**
@@ -71,85 +71,85 @@ export default function ArticlePage(props) {
  */
 function filterDataToSingleItem(data, isPreview) {
   if (!Array.isArray(data)) {
-    return data;
+    return data
   }
 
   if (data.length === 1) {
-    return data[0];
+    return data[0]
   }
 
   if (isPreview) {
-    return data.find((item) => item._id.startsWith(`drafts.`)) || data[0];
+    return data.find((item) => item._id.startsWith(`drafts.`)) || data[0]
   }
 
-  return data[0];
+  return data[0]
 }
 
 export async function getStaticProps({ params, preview: isPreview = false }) {
-  const client = getClient(isPreview);
+  const client = getClient(isPreview)
 
   const query = groq`
     *[_type == '${ARTICLE_TYPE}' && slug.current == '${params.slug}'] {
       ${articleQueryPart}
     }
-  `;
+  `
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query)
 
   // Escape hatch, if our query failed to return data
   if (!data?.length) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
   // Helper function to reduce all returned documents down to just one
-  const article = filterDataToSingleItem(data, isPreview);
+  const article = filterDataToSingleItem(data, isPreview)
 
   const [siteSettings, menus, locations] = await Promise.all([
     getSiteConfig(),
     getMenus(),
     getLocations(),
-  ]);
+  ])
 
   return {
     props: {
       isPreview,
       data: { article, siteSettings, menus, locations, query },
     },
-  };
+  }
 }
 
 export async function getStaticPaths() {
   const articlePaths = await getClient().fetch(
     groq`*[_type == '${ARTICLE_TYPE}'].slug.current`
-  );
+  )
 
   const paths = articlePaths
     .filter(Boolean)
-    .map((path) => ({ params: { slug: pathToSlugParam(path) } }));
+    .map((path) => ({ params: { slug: pathToSlugParam(path) } }))
 
   return {
     paths,
     fallback: false,
-  };
+  }
 }
 
 async function getMenus() {
   const request = await getClient().fetch(
     groq`*[_type == "routesCasaMadera"] {_id, slug {current}} `
-  );
-  return request;
+  )
+  return request
 }
 
 async function getLocations() {
   const request = await getClient().fetch(
     groq`*[_type == "locations"] | order(_createdAt  asc) {_id, title, comming_soon, menus, slug {current}} `
-  );
-  return request;
+  )
+  return request
 }
 
 async function getSiteConfig() {
   const siteSettings = await getClient().fetch(
     groq`*[_type == "siteSettings" && site == "casaMadera"][0]{...}`
-  );
-  return siteSettings;
+  )
+  return siteSettings
 }

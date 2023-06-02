@@ -1,13 +1,13 @@
-import 'swiper/css';
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-import ArticleCard from '../articleCard';
+import Image from 'next/image'
+import { Navigation } from 'swiper'
+import 'swiper/css'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import ArticleCard from '../articleCard'
 
-const containerClassName = 'container mx-auto px-4';
+const containerClassName = 'container mx-auto px-4'
 
 export default function ArticleSlider(props) {
-  const { title, articles } = props;
+  const { title, articles } = props
 
   return (
     <section className="overflow-hidden">
@@ -64,11 +64,11 @@ export default function ArticleSlider(props) {
                 <SwiperSlide key={article._id}>
                   <ArticleCard article={article} size="large" />
                 </SwiperSlide>
-              );
+              )
             })}
           </Swiper>
         </div>
       </div>
     </section>
-  );
+  )
 }

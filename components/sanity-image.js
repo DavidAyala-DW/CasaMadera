@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import { useNextSanityImage } from '@fevernova90/next-sanity-image'
 import clsx from 'clsx'
-
+import Image from 'next/image'
 import client from '@/lib/sanity-client'
 
 export default function SanityImage(props) {

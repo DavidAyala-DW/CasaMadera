@@ -1,28 +1,25 @@
-import '../styles/globals.css'
-import Link from "next/link";
-import CookieConsent from "react-cookie-consent";
-import GTM from "@/components/GTM";
 import Cookies from 'js-cookie'
-import { useEffect } from 'react';
-import Head from 'next/head';
-import AccessiBe from '@/components/accessibe';
-import { useRouter } from 'next/router';
-import Script from 'next/script';
- 
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import { useEffect } from 'react'
+import CookieConsent from 'react-cookie-consent'
+import GTM from '@/components/GTM'
+import AccessiBe from '@/components/accessibe'
+import '../styles/globals.css'
+
 function MyApp({ Component, pageProps }) {
-
   useEffect(() => {
+    const allCookies = Cookies.get('_gtm_all_cookies')
 
-    const allCookies =Cookies.get("_gtm_all_cookies");
-    
-    if(allCookies && allCookies == true){
-      const dataLayer = window.dataLayer;
-      if(typeof dataLayer !== 'undefined'){
-        dataLayer.push({event: "all-cookies"});
+    if (allCookies && allCookies == true) {
+      const dataLayer = window.dataLayer
+      if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({ event: 'all-cookies' })
       }
     }
-
-  }, []);
+  }, [])
 
   const router = useRouter()
 
@@ -33,7 +30,7 @@ function MyApp({ Component, pageProps }) {
       {/* TODO: Move this to GTM once we have access */}
       {router.asPath === '/locations/west-hollywood-california' ? (
         <Script src="https://inkindscript.com/inkind.js" />
-      ): null}
+      ) : null}
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>
@@ -52,31 +49,21 @@ function MyApp({ Component, pageProps }) {
         cookieName="_gtm_all_cookies"
         expires={150}
         onAccept={() => {
-          const dataLayer = window.dataLayer;
-          if(typeof dataLayer !== 'undefined'){
-            dataLayer.push({event: "all-cookies"});
+          const dataLayer = window.dataLayer
+          if (typeof dataLayer !== 'undefined') {
+            dataLayer.push({ event: 'all-cookies' })
           }
         }}
       >
-
-      We use cookies to ensure that we give you the best experience on our website.
-
-      See
-        
+        We use cookies to ensure that we give you the best experience on our
+        website. See
         <Link href="/privacy-policy" passHref>
-          <a className="px-2 underline pointer ">
-            Privacy policy
-          </a>            
+          <a className="px-2 underline pointer ">Privacy policy</a>
         </Link>
-        
         and
-
         <Link href="/website-terms" passHref>
-          <a className="px-2 underline pointer ">
-            Website Terms
-          </a>          
+          <a className="px-2 underline pointer ">Website Terms</a>
         </Link>
-
       </CookieConsent>
     </>
   )

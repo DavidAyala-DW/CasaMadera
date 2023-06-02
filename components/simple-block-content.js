@@ -1,13 +1,12 @@
-import PropTypes from 'prop-types';
-import { PortableText } from '@portabletext/react';
-
-import CenterText from './center-text';
-import SanityImage from './sanity-image';
+import { PortableText } from '@portabletext/react'
+import PropTypes from 'prop-types'
+import CenterText from './center-text'
+import SanityImage from './sanity-image'
 
 function SimpleBlockContent(props) {
-  const { blocks } = props;
+  const { blocks } = props
   if (!blocks) {
-    return null;
+    return null
   }
 
   return (
@@ -28,11 +27,11 @@ function SimpleBlockContent(props) {
         }}
       />
     </div>
-  );
+  )
 }
 
 SimpleBlockContent.propTypes = {
   blocks: PropTypes.arrayOf(PropTypes.object),
-};
+}
 
-export default SimpleBlockContent;
+export default SimpleBlockContent

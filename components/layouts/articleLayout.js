@@ -1,13 +1,13 @@
-import clsx from 'clsx';
-import ArticleGrid from '../articleGrid';
-import ArticleMeta from '../articleMeta';
-import SimpleBlockContent from '../simple-block-content';
-import SanityImage from '../sanity-image';
-import ArticleAuthor from '../articleAuthor';
-import SocialShareButtons from '../socialShareButtons';
+import clsx from 'clsx'
+import ArticleAuthor from '../articleAuthor'
+import ArticleGrid from '../articleGrid'
+import ArticleMeta from '../articleMeta'
+import SanityImage from '../sanity-image'
+import SimpleBlockContent from '../simple-block-content'
+import SocialShareButtons from '../socialShareButtons'
 
 export function ArticleLayout(props) {
-  const { article } = props;
+  const { article } = props
 
   return (
     <div className="px-4 pb-20">
@@ -64,5 +64,5 @@ export function ArticleLayout(props) {
         </section>
       ) : null}
     </div>
-  );
+  )
 }
