@@ -21,7 +21,7 @@ export default function Menus(props) {
               const { title, image, alt_text, menus, slug } = location
 
               return (
-                <div className="flex flex-col space-y-6">
+                <div key={location._key} className="flex flex-col space-y-6">
                   <div className="flex flex-col w-full aspect-h-1 aspect-w-[1.324] md:aspect-w-[2.687] lg:aspect-w-[1.349] 3xl:aspect-w-[1.837]">
                     <Link href={`/locations/${slug?.current}`} passHref>
                       <a className="w-full h-full">
@@ -60,6 +60,7 @@ export default function Menus(props) {
 
                           return (
                             <Link
+                              key={menu._key}
                               href={`/menus/${slug?.current}?menu=${slugMenu?.current}`}
                               passHref
                             >
