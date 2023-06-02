@@ -56,7 +56,7 @@ export default function Footer(props) {
 
   return (
     <footer className="3xl:justify-between px-4 md:px-0 pb-[22px] md:pb-[36px] md2:pb-[50px] vw:pb-[2.604vw] md:max-w-[94.4%] w-full md:mx-auto flex flex-col md2:flex-row items-stretch">
-      <div className="mb-[42px] md2:mb-0 md2:mr-[4.558%] w-max">
+      <div className="mb-[42px] md2:mb-0 md2:mr-[7%] w-max">
         <Link href="/" passHref>
           <a className="block w-[196px] vw:w-[10.208vw]">
             <Image
@@ -72,7 +72,7 @@ export default function Footer(props) {
 
       <div className="flex flex-col lg:flex-row lg:items-stretch w-full 3xl:max-w-max">
         <div className="flex flex-col mb-[86px] md2:mb-0 md2:space-y-[110px] vw:space-y-[5.729vw] justify-between md2:mr-[14.7%] 3xl:mr-0 3xl:pr-[10.8333vw] 3xl:w-[calc(19.6875vw_+_10.833vw)] w-full">
-          <div className="flex md:max-w-[67.5%] md2:max-w-full gap-x-[17px] md:gap-x-16 lg:gap-x-[42px] vw:gap-x-[2.1875vw] gap-y-8 vw:gap-y-[1.6666vw] flex-wrap">
+          <div className="grid grid-cols-2 gap-x-[17px] 2xl:max-w-[70%] vw:max-w-none md:gap-x-16 lg:gap-x-[42px] vw:gap-x-[2.1875vw] gap-y-6 vw:gap-y-[1.4vw] whitespace-nowrap">
             {footerNav &&
               footerNav.map((item, i) => {
                 const { title, link } = item
@@ -80,7 +80,7 @@ export default function Footer(props) {
                 return (
                   <Link href={link?.url} passHref key={i}>
                     <a
-                      className={`text-[18px] min-w-[36%] vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`}
+                      className={`text-[18px] vw:text-[.9375vw] leading-[25px] vw:leading-[1.3888] tracking-[-.04em] font-light`}
                     >
                       {title}
                     </a>
@@ -89,7 +89,7 @@ export default function Footer(props) {
               })}
           </div>
 
-          <div className="hidden md2:flex items-center space-x-[20px] vw:space-x-[2.1875vw]">
+          <div className="hidden md2:flex items-center space-x-[20px] vw:space-x-[2.1875vw] whitespace-nowrap">
             {privacyPolicyHandle && (
               <Link href={privacyPolicyHandle?.link?.url} passHref>
                 <a
