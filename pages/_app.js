@@ -28,9 +28,7 @@ function MyApp({ Component, pageProps }) {
       <AccessiBe />
       <GTM />
       {/* TODO: Move this to GTM once we have access */}
-      {router.asPath === '/locations/west-hollywood-california' ? (
-        <Script src="https://inkindscript.com/inkind.js" />
-      ) : null}
+      <Script src="https://inkindscript.com/inkind.js" />
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>
