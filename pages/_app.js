@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
       <AccessiBe />
       <GTM />
       {/* TODO: Move this to GTM once we have access */}
-      <Script src="https://inkindscript.com/inkind.js" />
+      {/* <Script src="https://inkindscript.com/inkind.js" /> */}
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>
