@@ -33,8 +33,10 @@ export default function Page(props) {
     enabled: preview,
   })
 
-  let seo_title_value = seo_title ?? title
-  seo_title_value = `${seo_title_value} | Casa Madera`
+  let seo_title_value = seo_title ?? title;
+  if(title != "Home"){
+    seo_title_value = `${seo_title_value} | Casa Madera`
+  }
 
   const page = filterDataToSingleItem(previewData?.page, preview)
 
