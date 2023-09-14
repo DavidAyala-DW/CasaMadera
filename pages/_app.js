@@ -1,15 +1,12 @@
 import Cookies from 'js-cookie'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import Script from 'next/script'
 import { useEffect } from 'react'
 import CookieConsent from 'react-cookie-consent'
 import GTM from '@/components/GTM'
-import AccessiBe from '@/components/accessibe'
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   useEffect(() => {
     const allCookies = Cookies.get('_gtm_all_cookies')
 
@@ -21,12 +18,11 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
-  const router = useRouter()
-
   return (
     <>
-      <AccessiBe />
-      <GTM />
+      {process.env.NODE_ENV !== 'development' && (
+        <GTM id={process.env.NEXT_PUBLIC_GTM_ID} />
+      )}
       <Head>
         <link rel="shortcut icon" href="/images/Casa Madera Favicon.png" />
       </Head>
@@ -64,5 +60,3 @@ function MyApp({ Component, pageProps }) {
     </>
   )
 }
-
-export default MyApp
