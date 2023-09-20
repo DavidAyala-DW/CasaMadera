@@ -1,6 +1,4 @@
-import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
-import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Layout from '@/components/layout'
 import RenderSections from '@/components/render-sections'
@@ -17,13 +15,6 @@ const ExitPreviewButton = dynamic(() =>
 export default function Page(props) {
   const { preview, data, siteSettings, menus, locations } = props
   const stickyHeader = false
-  const {
-    page: {
-      page: { title, seo_title, description, openGraphImage },
-    },
-  } = data
-  const builder = imageUrlBuilder(getClient(preview))
-
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
@@ -32,43 +23,17 @@ export default function Page(props) {
     // The passed-down preview context determines whether this function does anything
     enabled: preview,
   })
-
-  let seo_title_value = seo_title ?? title;
-  if(title != "Home"){
-    seo_title_value = `${seo_title_value} | Casa Madera`
-  }
-
   const page = filterDataToSingleItem(previewData?.page, preview)
 
   return (
     <Layout
+      isPreview={preview}
+      page={page}
       menus={menus}
       locations={locations}
       siteSettings={siteSettings}
       stickyHeader={stickyHeader}
     >
-      <NextSeo
-        title={seo_title_value}
-        description={description ?? ''}
-        {...(openGraphImage
-          ? {
-              openGraph: {
-                images: [
-                  {
-                    url: builder
-                      .image(openGraphImage)
-                      .width(1200)
-                      .height(630)
-                      .url(),
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                  },
-                ],
-              },
-            }
-          : {})}
-      />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}
     </Layout>

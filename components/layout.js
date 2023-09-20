@@ -1,12 +1,17 @@
+import ImageUrlBuilder from '@sanity/image-url'
+import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import Link from 'next/link'
+import { getClient } from '@/lib/sanity.server'
 import Footer from './footer'
 import Header from './header'
 
 function Layout(props) {
   const {
     children,
+    isPreview,
     stickyHeader,
+    siteSettings,
     siteSettings: {
       mainNav,
       menuImage,
@@ -22,6 +27,7 @@ function Layout(props) {
       footer_noble_link,
       newsletter_text,
     },
+    page,
     menus,
     locations,
   } = props
@@ -104,6 +110,9 @@ function Layout(props) {
     })
   })
 
+  const imageBuilder = ImageUrlBuilder(getClient(isPreview))
+  const openGraphImage = page.seo?.image ?? siteSettings.openGraphImage
+
   return (
     <>
       <Head>
@@ -128,6 +137,29 @@ function Layout(props) {
             stickyHeader,
             locations,
           }}
+        />
+
+        <NextSeo
+          title={page.seo?.title}
+          defaultTitle={`${page.title} | ${siteSettings.venue}`}
+          description={page.seo?.description}
+          openGraph={
+            openGraphImage && {
+              images: [
+                {
+                  url: imageBuilder
+                    .image(openGraphImage)
+                    .width(1200)
+                    .height(630)
+                    .url(),
+                  width: 1200,
+                  height: 630,
+                },
+              ],
+            }
+          }
+          noindex={page.seo?.isHidden}
+          nofollow={page.seo?.isHidden}
         />
 
         <div className="w-full min-h-screen flex flex-col relative">

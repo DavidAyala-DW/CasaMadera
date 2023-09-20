@@ -1,10 +1,7 @@
-import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
-import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Layout from '@/components/layout'
 import RenderSections from '@/components/render-sections'
-import { locationQuery } from '@/lib/queries'
 import { usePreviewSubscription } from '@/lib/sanity'
 import client from '@/lib/sanity-client'
 import { getClient } from '@/lib/sanity.server'
@@ -16,17 +13,6 @@ const ExitPreviewButton = dynamic(() =>
 
 export default function Page(props) {
   const { preview, data, siteSettings, menus, locations } = props
-  const {
-    page: {
-      title,
-      seo_title_location_page,
-      description_location_page,
-      openGraphImage_location_page,
-    },
-  } = data
-
-  const builder = imageUrlBuilder(getClient(preview))
-
   const stickyHeader = false
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
@@ -36,41 +22,17 @@ export default function Page(props) {
     // The passed-down preview context determines whether this function does anything
     enabled: preview,
   })
-
-  let seo_title_value = seo_title_location_page ?? title
-  seo_title_value = `${seo_title_value} | Casa Madera`
-
   const page = filterDataToSingleItem(previewData, preview)
 
   return (
     <Layout
+      isPreview={preview}
+      page={page}
       menus={menus}
       locations={locations}
       siteSettings={siteSettings}
       stickyHeader={stickyHeader}
     >
-      <NextSeo
-        title={seo_title_value}
-        description={description_location_page ?? ''}
-        {...(openGraphImage_location_page
-          ? {
-              openGraph: {
-                images: [
-                  {
-                    url: builder
-                      .image(openGraphImage_location_page)
-                      .width(1200)
-                      .height(630)
-                      .url(),
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                  },
-                ],
-              },
-            }
-          : {})}
-      />
       {page?.content && <RenderSections sections={page?.content} />}
       {preview && <ExitPreviewButton />}
     </Layout>
@@ -258,8 +220,9 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const client = getClient(preview)
   const query = groq`
     *[_type == "locations" && slug.current in $possibleSlugs][0]{
-      ...
-  }
+      ...,
+      'seo': locationPageSeo,
+    }
   `
   const queryParams = { possibleSlugs: getSlugVariations(slug) }
   let data = await client.fetch(query, queryParams)
