@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/api/sitemap"
+  status = 301
