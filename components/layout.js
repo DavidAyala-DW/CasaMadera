@@ -122,6 +122,29 @@ function Layout(props) {
         />
       </Head>
 
+      <NextSeo
+        title={page.seo?.title}
+        defaultTitle={`${page.title} | ${siteSettings.venue}`}
+        description={page.seo?.description}
+        openGraph={
+          openGraphImage && {
+            images: [
+              {
+                url: imageBuilder
+                  .image(openGraphImage)
+                  .width(1200)
+                  .height(630)
+                  .url(),
+                width: 1200,
+                height: 630,
+              },
+            ],
+          }
+        }
+        noindex={page.seo?.isHidden}
+        nofollow={page.seo?.isHidden}
+      />
+
       <div className="bg-body flex flex-col">
         <Header
           {...{
@@ -137,29 +160,6 @@ function Layout(props) {
             stickyHeader,
             locations,
           }}
-        />
-
-        <NextSeo
-          title={page.seo?.title}
-          defaultTitle={`${page.title} | ${siteSettings.venue}`}
-          description={page.seo?.description}
-          openGraph={
-            openGraphImage && {
-              images: [
-                {
-                  url: imageBuilder
-                    .image(openGraphImage)
-                    .width(1200)
-                    .height(630)
-                    .url(),
-                  width: 1200,
-                  height: 630,
-                },
-              ],
-            }
-          }
-          noindex={page.seo?.isHidden}
-          nofollow={page.seo?.isHidden}
         />
 
         <div className="w-full min-h-screen flex flex-col relative">
