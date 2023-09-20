@@ -1,6 +1,4 @@
-import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
-import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Layout from '@/components/layout'
 import { ArticleLayout } from '@/components/layouts/articleLayout'
@@ -15,7 +13,6 @@ const ExitPreviewButton = dynamic(() =>
 
 export default function ArticlePage(props) {
   const { isPreview, data, query } = props
-  const builder = imageUrlBuilder(getClient(isPreview))
 
   /**
    * This hook handles live-updating data in preview mode.
@@ -30,35 +27,20 @@ export default function ArticlePage(props) {
 
   // Client-side uses the same query, so we may need to filter it down again
   const article = filterDataToSingleItem(previewData, isPreview)
+  const seo = {
+    title: article.title,
+    description: article.excerpt,
+    image: article.image,
+  }
 
   return (
     <Layout
+      isPreview={isPreview}
+      page={{ seo }}
       menus={data.menus}
       locations={data.locations}
       siteSettings={data.siteSettings}
     >
-      <NextSeo
-        title={`${article.title} | Casa Madera`}
-        description={article.excerpt}
-        {...(article.image
-          ? {
-              openGraph: {
-                images: [
-                  {
-                    url: builder
-                      .image(article.image)
-                      .width(1200)
-                      .height(630)
-                      .url(),
-                    width: 1200,
-                    height: 630,
-                    alt: article.image.altText,
-                  },
-                ],
-              },
-            }
-          : {})}
-      />
       <ArticleLayout article={article} />
       {isPreview && <ExitPreviewButton />}
     </Layout>
