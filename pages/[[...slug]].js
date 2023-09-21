@@ -15,15 +15,15 @@ const ExitPreviewButton = dynamic(() =>
 export default function Page(props) {
   const { preview, data, siteSettings, menus, locations } = props
   const stickyHeader = false
-  const { data: previewData } = usePreviewSubscription(data?.query, {
+  const { data: previewData } = usePreviewSubscription(data.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
     // This is why it's important to fetch *draft* content server-side!
-    initialData: data?.page,
+    initialData: data.page,
     // The passed-down preview context determines whether this function does anything
     enabled: preview,
   })
-  const page = filterDataToSingleItem(previewData?.page, preview)
+  const page = filterDataToSingleItem(previewData, preview)
 
   return (
     <Layout
@@ -34,7 +34,7 @@ export default function Page(props) {
       siteSettings={siteSettings}
       stickyHeader={stickyHeader}
     >
-      {page?.content && <RenderSections sections={page?.content} />}
+      {page?.content && <RenderSections sections={page.content} />}
       {preview && <ExitPreviewButton />}
     </Layout>
   )
@@ -57,12 +57,12 @@ function filterDataToSingleItem(data, preview) {
 }
 
 async function fulfillSectionQueries(page, internalLinks) {
-  if (!page?.page?.content) {
+  if (!page?.content) {
     return page
   }
 
   const sectionsWithQueryData = await Promise.all(
-    page.page.content.map(async (section) => {
+    page.content.map(async (section) => {
       if (section?.links) {
         const { _type } = section?.links ?? null
         if (_type == 'links') {
@@ -143,7 +143,9 @@ async function fulfillSectionQueries(page, internalLinks) {
     })
   )
 
-  return { ...page, content: sectionsWithQueryData }
+  page.content = sectionsWithQueryData
+
+  return page
 }
 
 export async function getStaticPaths() {
@@ -202,24 +204,21 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const client = getClient(preview)
   const query = groq`
     *[_type == "routesCasaMadera" && slug.current in $possibleSlugs][0] {
-      page -> {
+      ...(page -> {
         ${pageQueryPart}
-      }
+      })
     }
   `
   const queryParams = { possibleSlugs: getSlugVariations(slug) }
-  let data = await client.fetch(query, queryParams)
+  const data = await client.fetch(query, queryParams)
   let [siteSettings, menus, locations] = await Promise.all([
     getSiteConfig(),
     getMenus(),
     getLocations(),
   ])
   let page = filterDataToSingleItem(data, preview)
-  page.slug = slug
   page.locations = locations
-  page = await fulfillSectionQueries(data, menus)
-  page.query = query
-  page.queryParams = queryParams
+  page = await fulfillSectionQueries(page, menus)
 
   return {
     props: {
