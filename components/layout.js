@@ -31,6 +31,7 @@ function Layout(props) {
     menus,
     locations,
   } = props
+  // console.log(page)
 
   const globalMenus = [mainNav, secondHeaderNav, footerNav]
 

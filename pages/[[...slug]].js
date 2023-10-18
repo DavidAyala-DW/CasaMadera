@@ -78,26 +78,29 @@ async function fulfillSectionQueries(page, internalLinks) {
 
       if (section?.locations) {
         if (Array.isArray(section.locations)) {
-          await Promise.all(
-            section.locations.map(async (location) => {
-              const queryData = await client.fetch(
-                groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`
-              )
-              const {
-                title,
-                image,
-                alt_text = '',
-                slug,
-                menus = null,
-              } = queryData
-              location.title = title
-              location.image = image
-              location.alt_text = alt_text
-              location.menus = menus
-              location.slug = slug
-              location.query = queryData
-            })
-          )
+          // Check if this array has refs
+          if (section.locations[0]?._ref) {
+            await Promise.all(
+              section.locations.map(async (location) => {
+                const queryData = await client.fetch(
+                  groq`*[_type == "locations" && _id == "${location._ref}" ][0]{...}`
+                )
+                const {
+                  title,
+                  image,
+                  alt_text = '',
+                  slug,
+                  menus = null,
+                } = queryData
+                location.title = title
+                location.image = image
+                location.alt_text = alt_text
+                location.menus = menus
+                location.slug = slug
+                location.query = queryData
+              })
+            )
+          }
         } else {
           const queryData = await client.fetch(
             groq`*[_type == "locations" && _id == "${section.locations._ref}" ][0]{...}`
