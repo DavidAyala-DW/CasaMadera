@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.js\" \"!.next/**\" \"!node_modules/**\""
@@ -27,6 +28,7 @@
     "next": "12.2.5",
     "next-sanity": "^0.8.2",
     "next-seo": "^5.4.0",
+    "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.1",
     "nope-validator": "^1.0.4",
     "prop-types": "^15.8.1",
