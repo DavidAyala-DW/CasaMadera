@@ -10,7 +10,7 @@ function Layout(props) {
   const {
     children,
     isPreview,
-    stickyHeader,
+    stickyHeader = false,
     siteSettings,
     siteSettings: {
       mainNav,
@@ -31,7 +31,6 @@ function Layout(props) {
     menus,
     locations,
   } = props
-  // console.log(page)
 
   const globalMenus = [mainNav, secondHeaderNav, footerNav]
 

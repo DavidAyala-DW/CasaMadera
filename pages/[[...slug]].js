@@ -14,7 +14,6 @@ const ExitPreviewButton = dynamic(() =>
 
 export default function Page(props) {
   const { preview, data, siteSettings, menus, locations } = props
-  const stickyHeader = false
   const { data: previewData } = usePreviewSubscription(data.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
@@ -32,7 +31,6 @@ export default function Page(props) {
       menus={menus}
       locations={locations}
       siteSettings={siteSettings}
-      stickyHeader={stickyHeader}
     >
       {page?.content && <RenderSections sections={page.content} />}
       {preview && <ExitPreviewButton />}
@@ -229,7 +227,6 @@ export const getStaticProps = async ({ params, preview = false }) => {
       siteSettings,
       menus,
       locations,
-      menus,
       preview,
     },
   }

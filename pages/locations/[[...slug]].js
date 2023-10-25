@@ -13,12 +13,11 @@ const ExitPreviewButton = dynamic(() =>
 
 export default function Page(props) {
   const { preview, data, siteSettings, menus, locations } = props
-  const stickyHeader = false
-  const { data: previewData } = usePreviewSubscription(data?.query, {
+  const { data: previewData } = usePreviewSubscription(data.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
     // This is why it's important to fetch *draft* content server-side!
-    initialData: data?.page,
+    initialData: data.page,
     // The passed-down preview context determines whether this function does anything
     enabled: preview,
   })
@@ -31,9 +30,8 @@ export default function Page(props) {
       menus={menus}
       locations={locations}
       siteSettings={siteSettings}
-      stickyHeader={stickyHeader}
     >
-      {page?.content && <RenderSections sections={page?.content} />}
+      {page?.content && <RenderSections sections={page.content} />}
       {preview && <ExitPreviewButton />}
     </Layout>
   )
@@ -232,11 +230,8 @@ export const getStaticProps = async ({ params, preview = false }) => {
     getLocations(),
   ])
   let page = filterDataToSingleItem(data, preview)
-  page.slug = slug
   page.locations = locations
   page = await fulfillSectionQueries(data, slug, menus)
-  page.query = query
-  page.queryParams = queryParams
 
   return {
     props: {
@@ -244,7 +239,6 @@ export const getStaticProps = async ({ params, preview = false }) => {
       siteSettings,
       menus,
       locations,
-      menus,
       preview,
     },
   }
